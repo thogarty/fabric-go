@@ -14,6 +14,6 @@ type ConnectionChangeOperation struct {
 	// Handy shortcut for operation name
 	Op string `json:"op"`
 	// path inside document leading to updated parameter
-	Path  string       `json:"path"`
-	Value *UpdateValue `json:"value"`
+	Path  string      `json:"path"`
+	Value interface{} `json:"value"`
 }

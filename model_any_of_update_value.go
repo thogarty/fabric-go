@@ -11,7 +11,7 @@ package swagger
 
 type AnyOfUpdateValue struct {
 	UpdateValueObject
-	UpdateValueString
-	UpdateValueInteger
-	UpdateValueArray
+	//UpdateValueString
+	//UpdateValueInteger
+	//UpdateValueArray
 }
