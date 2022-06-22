@@ -9,7 +9,7 @@ SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
 
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
-IMAGE=swaggerapi/swagger-codegen-cli-v3
+IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
 GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
 PACKAGE_PREFIX=fabric
@@ -18,7 +18,7 @@ PACKAGE_MAJOR=v4
 SWAGGER=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${IMAGE}
 GOLANGCI_LINT=golangci-lint
 
-all: pull fetch patch clean gen mod docs move-other patch-post test stage
+all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
 
 pull:
 	docker pull ${IMAGE}
@@ -120,7 +120,10 @@ remove-dupe-requests: ## Removes duplicate Request structs from the generated co
 	  done \
 	done
 lint:
-	@$(GOLANGCI_LINT) run -v --no-config --fast=false --fix --disable-all --enable goimports $(PACKAGE_MAJOR)
+	@$(GOLANGCI_LINT) run -v --no-config --fast=false --fix --disable-all --enable goimports $(PACKAGE_PREFIX)
+
+fmt:
+	go run mvdan.cc/gofumpt@v0.3.1 -l -w $(PACKAGE_PREFIX)
 
 stage:
 	test -d .git && git add --intent-to-add README.md docs ${PACKAGE_PREFIX} go.mod go.sum
