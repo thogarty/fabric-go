@@ -1677,10 +1677,10 @@ paths:
         explode: true
         schema:
           type: string
+          default: aSide
           enum:
           - aSide
           - zSide
-          default: aSide
       responses:
         "200":
           description: Successful operation
@@ -1873,10 +1873,10 @@ paths:
         explode: true
         schema:
           type: string
+          default: aSide
           enum:
           - aSide
           - zSide
-          default: aSide
       responses:
         "200":
           description: Successful operation
@@ -5533,9 +5533,9 @@ components:
           description: description
           type: VIRTUAL_CONNECTION_PRODUCT
           charges:
-          - price: 0.080082819046101150206595775671303272247314453125
+          - price: 0.08008281904610115
             type: MONTHLY_RECURRING
-          - price: 0.080082819046101150206595775671303272247314453125
+          - price: 0.08008281904610115
             type: MONTHLY_RECURRING
           termLength: 6
           port:
@@ -5605,9 +5605,9 @@ components:
           description: description
           type: VIRTUAL_CONNECTION_PRODUCT
           charges:
-          - price: 0.080082819046101150206595775671303272247314453125
+          - price: 0.08008281904610115
             type: MONTHLY_RECURRING
-          - price: 0.080082819046101150206595775671303272247314453125
+          - price: 0.08008281904610115
             type: MONTHLY_RECURRING
           termLength: 6
           port:
@@ -5849,9 +5849,9 @@ components:
       description: Key or set of keys that organizes the search payload by property
         (such as createdDate or metroCode) or by direction. Ascending (ASC) is the
         default value. The "?" prefix indicates descending (DESC) order.
+      default: -bandwidthUtilization
       enum:
       - -bandwidthUtilization
-      default: -bandwidthUtilization
     top:
       type: integer
       description: "Filter returning only the specified number of most heavily trafficked\
@@ -5860,24 +5860,24 @@ components:
     duration:
       type: string
       description: Duration of the statistical analysis interval.
+      default: P7D
       enum:
       - P7D
       - P1M
       - P3M
-      default: P7D
     query_direction:
       type: string
       description: Direction of traffic from the requester's viewpoint.
+      default: outbound
       enum:
       - inbound
       - outbound
-      default: outbound
     metricInterval:
       type: string
       description: metric interval
+      default: P7D
       enum:
       - P7D
-      default: P7D
     metros:
       type: array
       description: Two-letter prefix indicating the metropolitan area in which a specified
@@ -6958,19 +6958,19 @@ components:
     ServiceProfileSortDirection:
       type: string
       description: Sorting direction
+      default: DESC
       enum:
       - DESC
       - ASC
-      default: DESC
     ServiceProfileSortBy:
       type: string
       description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
       enum:
       - /name
       - /state
       - /changeLog/createdDateTime
       - /changeLog/updatedDateTime
-      default: /changeLog/updatedDateTime
     ServiceProfileId:
       type: string
       description: Service Profile UUID
@@ -7346,30 +7346,30 @@ components:
           name: name
           connectedMetros:
           - code: code
-            avgLatency: 1.46581298050294517310021547018550336360931396484375
+            avgLatency: 1.4658129805029452
             href: href
           - code: code
-            avgLatency: 1.46581298050294517310021547018550336360931396484375
+            avgLatency: 1.4658129805029452
             href: href
           href: href
           geoCoordinates:
-            latitude: 0.80082819046101150206595775671303272247314453125
-            longitude: 6.02745618307040320615897144307382404804229736328125
+            latitude: 0.8008281904610115
+            longitude: 6.027456183070403
           type: type
           region: region
         - code: code
           name: name
           connectedMetros:
           - code: code
-            avgLatency: 1.46581298050294517310021547018550336360931396484375
+            avgLatency: 1.4658129805029452
             href: href
           - code: code
-            avgLatency: 1.46581298050294517310021547018550336360931396484375
+            avgLatency: 1.4658129805029452
             href: href
           href: href
           geoCoordinates:
-            latitude: 0.80082819046101150206595775671303272247314453125
-            longitude: 6.02745618307040320615897144307382404804229736328125
+            latitude: 0.8008281904610115
+            longitude: 6.027456183070403
           type: type
           region: region
     Metro:
@@ -7406,15 +7406,15 @@ components:
         name: name
         connectedMetros:
         - code: code
-          avgLatency: 1.46581298050294517310021547018550336360931396484375
+          avgLatency: 1.4658129805029452
           href: href
         - code: code
-          avgLatency: 1.46581298050294517310021547018550336360931396484375
+          avgLatency: 1.4658129805029452
           href: href
         href: href
         geoCoordinates:
-          latitude: 0.80082819046101150206595775671303272247314453125
-          longitude: 6.02745618307040320615897144307382404804229736328125
+          latitude: 0.8008281904610115
+          longitude: 6.027456183070403
         type: type
         region: region
     GeoCoordinates:
@@ -7430,8 +7430,8 @@ components:
           format: double
       description: Geographic location data of Fabric Metro
       example:
-        latitude: 0.80082819046101150206595775671303272247314453125
-        longitude: 6.02745618307040320615897144307382404804229736328125
+        latitude: 0.8008281904610115
+        longitude: 6.027456183070403
     ConnectedMetro:
       type: object
       properties:
@@ -7449,7 +7449,7 @@ components:
       description: Arrays of objects containing latency data for the specified metros
       example:
         code: code
-        avgLatency: 1.46581298050294517310021547018550336360931396484375
+        avgLatency: 1.4658129805029452
         href: href
     MetroErrorList:
       type: array
@@ -7688,13 +7688,14 @@ components:
     RouteTableEntrySortDirection:
       type: string
       description: Sorting direction
+      default: DESC
       enum:
       - DESC
       - ASC
-      default: DESC
     RouteTableEntrySortBy:
       type: string
       description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
       enum:
       - /changeLog/createdDateTime
       - /changeLog/updatedDateTime
@@ -7702,7 +7703,6 @@ components:
       - /nextHop
       - /connection/name
       - /type
-      default: /changeLog/updatedDateTime
     RouteTableEntrySearchResponse:
       type: object
       properties:
@@ -7802,13 +7802,14 @@ components:
     VirtualGatewaySortDirection:
       type: string
       description: Sorting direction
+      default: DESC
       enum:
       - DESC
       - ASC
-      default: DESC
     VirtualGatewaySortBy:
       type: string
       description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
       enum:
       - /name
       - /uuid
@@ -7818,7 +7819,6 @@ components:
       - /package/code
       - /changeLog/createdDateTime
       - /changeLog/updatedDateTime
-      default: /changeLog/updatedDateTime
     SearchResponse:
       type: object
       properties:
@@ -9391,13 +9391,14 @@ components:
     SortDirection:
       type: string
       description: Sorting direction
+      default: DESC
       enum:
       - DESC
       - ASC
-      default: DESC
     SortBy:
       type: string
       description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
       enum:
       - /name
       - /direction
@@ -9423,7 +9424,6 @@ components:
       - /operation/equinixStatus
       - /operation/providerStatus
       - /redundancy/priority
-      default: /changeLog/updatedDateTime
     SortCriteriaResponse:
       type: object
       properties:
@@ -9489,9 +9489,9 @@ components:
         description: description
         type: VIRTUAL_CONNECTION_PRODUCT
         charges:
-        - price: 0.080082819046101150206595775671303272247314453125
+        - price: 0.08008281904610115
           type: MONTHLY_RECURRING
-        - price: 0.080082819046101150206595775671303272247314453125
+        - price: 0.08008281904610115
           type: MONTHLY_RECURRING
         termLength: 6
         port:
@@ -10587,7 +10587,7 @@ components:
           format: double
       description: Price  Charge
       example:
-        price: 0.080082819046101150206595775671303272247314453125
+        price: 0.08008281904610115
         type: MONTHLY_RECURRING
     PriceCategory:
       type: string
@@ -11005,10 +11005,10 @@ components:
     VirtualPortServiceType:
       type: string
       description: Port service type. The default is managed-service provider (MSP).
+      default: MSP
       enum:
       - MSP
       - EPL
-      default: MSP
     VirtualPortConfiguration:
       type: object
       properties:
@@ -11050,11 +11050,11 @@ components:
         \ room. The default is COLO. <br> A building meet-me room (BMMR) is a room\
         \ within the same building where an Equinix IBX customer can connect with\
         \ a non-Equinix IBX customer."
+      default: COLO
       enum:
       - COLO
       - BMMR
       - REMOTE
-      default: COLO
     PriceError_additionalInfo:
       type: object
       properties:
