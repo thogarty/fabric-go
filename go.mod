@@ -1,4 +1,4 @@
-module github.com/equinix/fabric
+module github.com/equinix-labs/fabric-go
 
 go 1.17
 
