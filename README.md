@@ -1,4 +1,4 @@
-# Go API client for swagger
+# Go API client for v4
 
 Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br>
 
@@ -13,7 +13,7 @@ For more information, please visit [https://equinix.com/about/](https://equinix.
 ## Installation
 Put the package under your project folder and add the following in import:
 ```golang
-import "./swagger"
+import "github.com/equinix-labs/fabric-go/fabric/v4"
 ```
 
 ## Documentation for API Endpoints
