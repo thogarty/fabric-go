@@ -10,5 +10,4 @@
 package v4
 
 // Fabric Gateway Package
-type VirtualGatewayPackage struct {
-}
+type VirtualGatewayPackage struct{}

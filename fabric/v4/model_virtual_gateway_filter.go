@@ -9,5 +9,4 @@
  */
 package v4
 
-type VirtualGatewayFilter struct {
-}
+type VirtualGatewayFilter struct{}

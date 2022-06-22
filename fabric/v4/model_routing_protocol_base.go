@@ -9,5 +9,4 @@
  */
 package v4
 
-type RoutingProtocolBase struct {
-}
+type RoutingProtocolBase struct{}

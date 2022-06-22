@@ -11,7 +11,7 @@ package v4
 
 type AnyOfUpdateValue struct {
 	UpdateValueObject
-	//UpdateValueString
-	//UpdateValueInteger
-	//UpdateValueArray
+	// UpdateValueString
+	// UpdateValueInteger
+	// UpdateValueArray
 }

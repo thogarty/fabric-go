@@ -12,12 +12,13 @@ package v4
 import (
 	"context"
 	"fmt"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please

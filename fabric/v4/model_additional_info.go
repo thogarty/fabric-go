@@ -10,5 +10,4 @@
 package v4
 
 // Additional information
-type AdditionalInfo struct {
-}
+type AdditionalInfo struct{}

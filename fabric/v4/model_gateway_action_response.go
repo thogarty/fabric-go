@@ -10,5 +10,4 @@
 package v4
 
 // Gateway actions response object
-type GatewayActionResponse struct {
-}
+type GatewayActionResponse struct{}

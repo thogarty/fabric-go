@@ -10,5 +10,4 @@
 package v4
 
 // Route table entry object
-type RouteTableEntry struct {
-}
+type RouteTableEntry struct{}
