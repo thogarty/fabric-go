@@ -85,6 +85,10 @@ validate:
 		--recommend \
 		-i /local/${SPEC_PATCHED_FILE}
 
+spectral:
+	spectral --help > /dev/null 2>&1 || echo "Spectral is not installed"
+	spectral lint $(SPEC_PATCHED_FILE)
+
 mod:
 	rm -f go.mod go.sum
 	go mod init github.com/${GIT_ORG}/${GIT_REPO}
