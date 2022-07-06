@@ -47,8 +47,8 @@ patch-post:
 		patch --no-backup-if-mismatch -N -t -p1 -i $$diff; \
 	done
 
-clean:
-	rm -rf v1/
+clean: clean-docs
+	rm -rf ${PACKAGE_PREFIX}
 
 gen-openapitools:
 	${SWAGGER} generate -g go \
@@ -57,7 +57,7 @@ gen-openapitools:
 		--api-package models \
 		--git-user-id ${GIT_ORG} \
 		--git-repo-id ${GIT_REPO} \
-		-o /local/${PACKAGE_MAJOR} \
+		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i /local/${SPEC_PATCHED_FILE}
 
 gen-swagger:
