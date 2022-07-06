@@ -38,4 +38,5 @@ type Connection struct {
 	ZSide     *ConnectionSide      `json:"zSide"`
 	// Connection additional information
 	AdditionalInfo []ConnectionSideAdditionalInfo `json:"additionalInfo,omitempty"`
+	Project        *Project                       `json:"project,omitempty"`
 }

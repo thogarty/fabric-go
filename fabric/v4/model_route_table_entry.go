@@ -10,4 +10,16 @@
 package v4
 
 // Route table entry object
-type RouteTableEntry struct{}
+type RouteTableEntry struct {
+	Type_           *RouteTableEntryType         `json:"type"`
+	ProtocolType    *RouteTableEntryProtocolType `json:"protocolType,omitempty"`
+	State           *RouteTableEntryState        `json:"state"`
+	Age             string                       `json:"age,omitempty"`
+	Prefix          string                       `json:"prefix,omitempty"`
+	NextHop         string                       `json:"nextHop,omitempty"`
+	Metric          int32                        `json:"metric,omitempty"`
+	LocalPreference int32                        `json:"localPreference,omitempty"`
+	AsPath          []int32                      `json:"asPath,omitempty"`
+	Connection      *RouteTableEntryConnection   `json:"connection,omitempty"`
+	ChangeLog       *Changelog                   `json:"changeLog"`
+}

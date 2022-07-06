@@ -11,5 +11,5 @@ package v4
 
 // Create bulk connection post request
 type ConnectionBulkPostRequest struct {
-	Data []Connection `json:"data,omitempty"`
+	Data []ConnectionPostRequest `json:"data,omitempty"`
 }

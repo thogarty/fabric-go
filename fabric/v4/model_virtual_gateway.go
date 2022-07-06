@@ -21,4 +21,12 @@ type VirtualGateway struct {
 	Account  *SimplifiedAccount            `json:"account"`
 	// Preferences for notifications on connection configuration or status changes
 	Notifications []SimplifiedNotification `json:"notifications"`
+	// Fabric Gateway URI
+	Href string `json:"href"`
+	// Equinix-assigned access point identifier
+	Uuid      string                          `json:"uuid"`
+	State     *VirtualGatewayAccessPointState `json:"state"`
+	Operation *VirtualGatewayOperation        `json:"operation"`
+	ChangeLog *Changelog                      `json:"changeLog"`
+	Change    *GatewayChange                  `json:"change,omitempty"`
 }

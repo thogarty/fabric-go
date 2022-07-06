@@ -22,4 +22,5 @@ type ConnectionPostRequest struct {
 	Redundancy *ConnectionRedundancy `json:"redundancy,omitempty"`
 	ASide      *ConnectionSide       `json:"aSide"`
 	ZSide      *ConnectionSide       `json:"zSide"`
+	Project    *Project              `json:"project,omitempty"`
 }
