@@ -596,15 +596,15 @@ paths:
                     createdBy: string
                     createdByFullName: string
                     createdByEmail: string
-                    createdDateTime: 2021-10-30T07:21:39.000Z
+                    createdDateTime: 2021-10-30T07:21:39Z
                     updatedBy: string
                     updatedByFullName: string
                     updatedByEmail: string
-                    updatedDateTime: 2021-10-30T07:21:39.000Z
+                    updatedDateTime: 2021-10-30T07:21:39Z
                     deletedBy: string
                     deletedByFullName: string
                     deletedByEmail: string
-                    deletedDateTime: 2021-10-30T07:21:39.000Z
+                    deletedDateTime: 2021-10-30T07:21:39Z
                   type: BGP
                   bgpIpv4:
                     customerPeerIp: 10.1.1.2
@@ -625,15 +625,15 @@ paths:
                     createdBy: string
                     createdByFullName: string
                     createdByEmail: string
-                    createdDateTime: 2021-10-30T07:21:39.000Z
+                    createdDateTime: 2021-10-30T07:21:39Z
                     updatedBy: string
                     updatedByFullName: string
                     updatedByEmail: string
-                    updatedDateTime: 2021-10-30T07:21:39.000Z
+                    updatedDateTime: 2021-10-30T07:21:39Z
                     deletedBy: string
                     deletedByFullName: string
                     deletedByEmail: string
-                    deletedDateTime: 2021-10-30T07:21:39.000Z
+                    deletedDateTime: 2021-10-30T07:21:39Z
                   type: DIRECT
                   directIpv4:
                     equinixIfaceIp: 192.168.100.1/30
@@ -812,15 +812,15 @@ paths:
                     createdBy: string
                     createdByFullName: string
                     createdByEmail: string
-                    createdDateTime: 2021-10-30T07:21:39.000Z
+                    createdDateTime: 2021-10-30T07:21:39Z
                     updatedBy: string
                     updatedByFullName: string
                     updatedByEmail: string
-                    updatedDateTime: 2021-10-30T07:21:39.000Z
+                    updatedDateTime: 2021-10-30T07:21:39Z
                     deletedBy: string
                     deletedByFullName: string
                     deletedByEmail: string
-                    deletedDateTime: 2021-10-30T07:21:39.000Z
+                    deletedDateTime: 2021-10-30T07:21:39Z
                   type: BGP
                   bgpIpv4:
                     customerPeerIp: 10.1.1.2
@@ -841,15 +841,15 @@ paths:
                     createdBy: string
                     createdByFullName: string
                     createdByEmail: string
-                    createdDateTime: 2021-10-30T07:21:39.000Z
+                    createdDateTime: 2021-10-30T07:21:39Z
                     updatedBy: string
                     updatedByFullName: string
                     updatedByEmail: string
-                    updatedDateTime: 2021-10-30T07:21:39.000Z
+                    updatedDateTime: 2021-10-30T07:21:39Z
                     deletedBy: string
                     deletedByFullName: string
                     deletedByEmail: string
-                    deletedDateTime: 2021-10-30T07:21:39.000Z
+                    deletedDateTime: 2021-10-30T07:21:39Z
                   type: DIRECT
                   directIpv4:
                     equinixIfaceIp: 192.168.100.1/30
@@ -1284,8 +1284,8 @@ paths:
                   providerStatus: PROVISIONING
                   equinixStatus: PROVISIONED
                 changeLog:
-                  createdDateTime: 2020-05-21T10:30:00.000Z
-                  updatedDateTime: 2020-05-21T10:30:00.000Z
+                  createdDateTime: 2020-05-21T10:30:00Z
+                  updatedDateTime: 2020-05-21T10:30:00Z
         "400":
           description: Bad request
           content:
@@ -1419,7 +1419,7 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/startDateTime'
-        example: 2020-11-06T07:00:00.000Z
+        example: 2020-11-06T07:00:00Z
       - name: endDateTime
         in: query
         description: endDateTime
@@ -1428,7 +1428,7 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/endDateTime'
-        example: 2020-11-10T07:00:00.000Z
+        example: 2020-11-10T07:00:00Z
       responses:
         "200":
           description: Successful operation
@@ -1595,7 +1595,7 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/startDateTime'
-        example: 2020-11-06T07:00:00.000Z
+        example: 2020-11-06T07:00:00Z
       - name: endDateTime
         in: query
         description: endDateTime
@@ -1604,7 +1604,7 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/endDateTime'
-        example: 2020-11-10T07:00:00.000Z
+        example: 2020-11-10T07:00:00Z
       - name: viewPoint
         in: query
         description: viewPoint
@@ -3397,6 +3397,8 @@ components:
           $ref: '#/components/schemas/ConnectionSide'
         zSide:
           $ref: '#/components/schemas/ConnectionSide'
+        project:
+          $ref: '#/components/schemas/Project'
       description: Create connection post request
     Connection:
       required:
@@ -3462,6 +3464,8 @@ components:
           description: Connection additional information
           items:
             $ref: '#/components/schemas/ConnectionSideAdditionalInfo'
+        project:
+          $ref: '#/components/schemas/Project'
       description: Connection specification
       example:
         bandwidth: 1465
@@ -3617,7 +3621,7 @@ components:
             authenticationKey: authenticationKey
             type: VD
             interface:
-              id: 5
+              id: 3
               type: CLOUD
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             routingProtocols:
@@ -3690,16 +3694,39 @@ components:
               region: "AMER, APAC, EMEA"
               ibx: AM1
             account: null
-            gateway: ""
+            gateway:
+              change:
+                data:
+                  op: replace
+                  path: path
+                  value: {}
+                createdDateTime: 2020-11-06T07:00:00Z
+                information: information
+                type: GATEWAY_UPDATE
+                uuid: uuid
+                status: COMPLETED
+                updatedDateTime: 2020-11-06T07:00:00Z
+              changeLog: null
+              href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+              state: PROVISIONED
+              uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+              operation:
+                aclRulesUsage: 0
+                bgpIpv6RoutesUsage: 0
+                bgpIpv4RoutesUsage: 0
+                connectionCount: 0
+                staticIpv4RoutesUsage: 0
+                aclsUsage: 0
+                staticIpv6RoutesUsage: 0
             peeringType: PRIVATE
             linkProtocol:
-              vni: 1
-              unit: 3052
-              vlanTag: 421
-              vlanCTag: 2802
+              vni: 9
+              unit: 3585
+              vlanTag: 4078
+              vlanCTag: 2735
               type: null
-              vlanSTag: 611
-              intUnit: 4
+              vlanSTag: 3834
+              intUnit: 6
             sellerRegion: sellerRegion
         change:
           data:
@@ -3727,6 +3754,9 @@ components:
           deletedBy: deletedBy
           deletedByEmail: deletedByEmail
           updatedDateTime: 2020-11-06T07:00:00Z
+        project:
+          href: http://example.com/aeiou
+          projectId: "1234567"
         type: VG_VC
         uuid: uuid
         zSide: null
@@ -3803,7 +3833,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Connection'
+            $ref: '#/components/schemas/ConnectionPostRequest'
       description: Create bulk connection post request
     ConnectionBulk:
       type: object
@@ -3968,7 +3998,7 @@ components:
               authenticationKey: authenticationKey
               type: VD
               interface:
-                id: 5
+                id: 3
                 type: CLOUD
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               routingProtocols:
@@ -4041,16 +4071,39 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway: ""
+              gateway:
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: GATEWAY_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                operation:
+                  aclRulesUsage: 0
+                  bgpIpv6RoutesUsage: 0
+                  bgpIpv4RoutesUsage: 0
+                  connectionCount: 0
+                  staticIpv4RoutesUsage: 0
+                  aclsUsage: 0
+                  staticIpv6RoutesUsage: 0
               peeringType: PRIVATE
               linkProtocol:
-                vni: 1
-                unit: 3052
-                vlanTag: 421
-                vlanCTag: 2802
+                vni: 9
+                unit: 3585
+                vlanTag: 4078
+                vlanCTag: 2735
                 type: null
-                vlanSTag: 611
-                intUnit: 4
+                vlanSTag: 3834
+                intUnit: 6
               sellerRegion: sellerRegion
           change:
             data:
@@ -4078,6 +4131,9 @@ components:
             deletedBy: deletedBy
             deletedByEmail: deletedByEmail
             updatedDateTime: 2020-11-06T07:00:00Z
+          project:
+            href: http://example.com/aeiou
+            projectId: "1234567"
           type: VG_VC
           uuid: uuid
           zSide: null
@@ -4295,7 +4351,7 @@ components:
               authenticationKey: authenticationKey
               type: VD
               interface:
-                id: 5
+                id: 3
                 type: CLOUD
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               routingProtocols:
@@ -4368,16 +4424,39 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway: ""
+              gateway:
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: GATEWAY_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                operation:
+                  aclRulesUsage: 0
+                  bgpIpv6RoutesUsage: 0
+                  bgpIpv4RoutesUsage: 0
+                  connectionCount: 0
+                  staticIpv4RoutesUsage: 0
+                  aclsUsage: 0
+                  staticIpv6RoutesUsage: 0
               peeringType: PRIVATE
               linkProtocol:
-                vni: 1
-                unit: 3052
-                vlanTag: 421
-                vlanCTag: 2802
+                vni: 9
+                unit: 3585
+                vlanTag: 4078
+                vlanCTag: 2735
                 type: null
-                vlanSTag: 611
-                intUnit: 4
+                vlanSTag: 3834
+                intUnit: 6
               sellerRegion: sellerRegion
           change:
             data:
@@ -4405,6 +4484,9 @@ components:
             deletedBy: deletedBy
             deletedByEmail: deletedByEmail
             updatedDateTime: 2020-11-06T07:00:00Z
+          project:
+            href: http://example.com/aeiou
+            projectId: "1234567"
           type: VG_VC
           uuid: uuid
           zSide: null
@@ -4959,7 +5041,7 @@ components:
               authenticationKey: authenticationKey
               type: VD
               interface:
-                id: 5
+                id: 3
                 type: CLOUD
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               routingProtocols:
@@ -5032,16 +5114,39 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway: ""
+              gateway:
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: GATEWAY_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                operation:
+                  aclRulesUsage: 0
+                  bgpIpv6RoutesUsage: 0
+                  bgpIpv4RoutesUsage: 0
+                  connectionCount: 0
+                  staticIpv4RoutesUsage: 0
+                  aclsUsage: 0
+                  staticIpv6RoutesUsage: 0
               peeringType: PRIVATE
               linkProtocol:
-                vni: 1
-                unit: 3052
-                vlanTag: 421
-                vlanCTag: 2802
+                vni: 9
+                unit: 3585
+                vlanTag: 4078
+                vlanCTag: 2735
                 type: null
-                vlanSTag: 611
-                intUnit: 4
+                vlanSTag: 3834
+                intUnit: 6
               sellerRegion: sellerRegion
           change:
             data:
@@ -5069,6 +5174,9 @@ components:
             deletedBy: deletedBy
             deletedByEmail: deletedByEmail
             updatedDateTime: 2020-11-06T07:00:00Z
+          project:
+            href: http://example.com/aeiou
+            projectId: "1234567"
           type: VG_VC
           uuid: uuid
           zSide: null
@@ -5286,7 +5394,7 @@ components:
               authenticationKey: authenticationKey
               type: VD
               interface:
-                id: 5
+                id: 3
                 type: CLOUD
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               routingProtocols:
@@ -5359,16 +5467,39 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway: ""
+              gateway:
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: GATEWAY_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                operation:
+                  aclRulesUsage: 0
+                  bgpIpv6RoutesUsage: 0
+                  bgpIpv4RoutesUsage: 0
+                  connectionCount: 0
+                  staticIpv4RoutesUsage: 0
+                  aclsUsage: 0
+                  staticIpv6RoutesUsage: 0
               peeringType: PRIVATE
               linkProtocol:
-                vni: 1
-                unit: 3052
-                vlanTag: 421
-                vlanCTag: 2802
+                vni: 9
+                unit: 3585
+                vlanTag: 4078
+                vlanCTag: 2735
                 type: null
-                vlanSTag: 611
-                intUnit: 4
+                vlanSTag: 3834
+                intUnit: 6
               sellerRegion: sellerRegion
           change:
             data:
@@ -5396,6 +5527,9 @@ components:
             deletedBy: deletedBy
             deletedByEmail: deletedByEmail
             updatedDateTime: 2020-11-06T07:00:00Z
+          project:
+            href: http://example.com/aeiou
+            projectId: "1234567"
           type: VG_VC
           uuid: uuid
           zSide: null
@@ -7529,36 +7663,59 @@ components:
             $ref: '#/components/schemas/SimplifiedNotification'
       description: Create Fabric Gateway
     VirtualGateway:
+      required:
+      - changeLog
+      - href
+      - operation
+      - state
+      - uuid
       type: object
+      properties:
+        href:
+          type: string
+          description: Fabric Gateway URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state:
+          $ref: '#/components/schemas/VirtualGatewayAccessPointState'
+        operation:
+          $ref: '#/components/schemas/VirtualGatewayOperation'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        change:
+          $ref: '#/components/schemas/GatewayChange'
       description: Fabric Gateway Access point object
+      example:
+        change:
+          data:
+            op: replace
+            path: path
+            value: {}
+          createdDateTime: 2020-11-06T07:00:00Z
+          information: information
+          type: GATEWAY_UPDATE
+          uuid: uuid
+          status: COMPLETED
+          updatedDateTime: 2020-11-06T07:00:00Z
+        changeLog: null
+        href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: PROVISIONED
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        operation:
+          aclRulesUsage: 0
+          bgpIpv6RoutesUsage: 0
+          bgpIpv4RoutesUsage: 0
+          connectionCount: 0
+          staticIpv4RoutesUsage: 0
+          aclsUsage: 0
+          staticIpv6RoutesUsage: 0
       allOf:
-      - required:
-        - changeLog
-        - href
-        - operation
-        - state
-        - uuid
-        type: object
-        properties:
-          href:
-            type: string
-            description: Fabric Gateway URI
-            format: uri
-            readOnly: true
-            example: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-          uuid:
-            type: string
-            description: Equinix-assigned access point identifier
-            format: uuid
-            example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-          state:
-            $ref: '#/components/schemas/VirtualGatewayAccessPointState'
-          operation:
-            $ref: '#/components/schemas/VirtualGatewayOperation'
-          changeLog:
-            $ref: '#/components/schemas/Changelog'
-          change:
-            $ref: '#/components/schemas/GatewayChange'
       - $ref: '#/components/schemas/VirtualGatewayPostRequest'
     GatewayId:
       type: string
@@ -7581,29 +7738,45 @@ components:
       - FAILED
       - PENDING
     GatewayActionResponse:
+      required:
+      - changeLog
+      - state
+      - type
+      - uuid
       type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GatewayActionType'
+        uuid:
+          type: string
+          format: uuid
+          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        description:
+          type: string
+          example: description
+        state:
+          $ref: '#/components/schemas/GatewayActionState'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
       description: Gateway actions response object
-      allOf:
-      - required:
-        - changeLog
-        - state
-        - type
-        - uuid
-        type: object
-        properties:
-          type:
-            $ref: '#/components/schemas/GatewayActionType'
-          uuid:
-            type: string
-            format: uuid
-            example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-          description:
-            type: string
-            example: description
-          state:
-            $ref: '#/components/schemas/GatewayActionState'
-          changeLog:
-            $ref: '#/components/schemas/Changelog'
+      example:
+        description: description
+        changeLog:
+          createdByEmail: createdByEmail
+          deletedByFullName: deletedByFullName
+          updatedBy: updatedBy
+          createdBy: createdBy
+          updatedByEmail: updatedByEmail
+          createdByFullName: createdByFullName
+          createdDateTime: 2020-11-06T07:00:00Z
+          deletedDateTime: 2020-11-06T07:00:00Z
+          updatedByFullName: updatedByFullName
+          deletedBy: deletedBy
+          deletedByEmail: deletedByEmail
+          updatedDateTime: 2020-11-06T07:00:00Z
+        state: DONE
+        type: BGP_SESSION_STATUS_UPDATE
+        uuid: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
     GatewayActionRequest:
       required:
       - type
@@ -7721,8 +7894,60 @@ components:
           previous: previous
           limit: 0
         data:
-        - ""
-        - ""
+        - nextHop: 10.10.10.5
+          metric: 5
+          prefix: 192.168.10.0/24
+          localPreference: 200
+          asPath:
+          - 0
+          - 0
+          changeLog:
+            createdByEmail: createdByEmail
+            deletedByFullName: deletedByFullName
+            updatedBy: updatedBy
+            createdBy: createdBy
+            updatedByEmail: updatedByEmail
+            createdByFullName: createdByFullName
+            createdDateTime: 2020-11-06T07:00:00Z
+            deletedDateTime: 2020-11-06T07:00:00Z
+            updatedByFullName: updatedByFullName
+            deletedBy: deletedBy
+            deletedByEmail: deletedByEmail
+            updatedDateTime: 2020-11-06T07:00:00Z
+          connection:
+            name: connection_1
+            uuid: 81331c52-04c0-4656-a4a7-18c52669348f
+          protocolType: BGP
+          state: ACTIVE
+          type: IPv4_BGP_ROUTE
+          age: PT5M30S
+        - nextHop: 10.10.10.5
+          metric: 5
+          prefix: 192.168.10.0/24
+          localPreference: 200
+          asPath:
+          - 0
+          - 0
+          changeLog:
+            createdByEmail: createdByEmail
+            deletedByFullName: deletedByFullName
+            updatedBy: updatedBy
+            createdBy: createdBy
+            updatedByEmail: updatedByEmail
+            createdByFullName: createdByFullName
+            createdDateTime: 2020-11-06T07:00:00Z
+            deletedDateTime: 2020-11-06T07:00:00Z
+            updatedByFullName: updatedByFullName
+            deletedBy: deletedBy
+            deletedByEmail: deletedByEmail
+            updatedDateTime: 2020-11-06T07:00:00Z
+          connection:
+            name: connection_1
+            uuid: 81331c52-04c0-4656-a4a7-18c52669348f
+          protocolType: BGP
+          state: ACTIVE
+          type: IPv4_BGP_ROUTE
+          age: PT5M30S
     VirtualGatewaySearchRequest:
       type: object
       properties:
@@ -7837,8 +8062,52 @@ components:
           previous: previous
           limit: 0
         data:
-        - ""
-        - ""
+        - change:
+            data:
+              op: replace
+              path: path
+              value: {}
+            createdDateTime: 2020-11-06T07:00:00Z
+            information: information
+            type: GATEWAY_UPDATE
+            uuid: uuid
+            status: COMPLETED
+            updatedDateTime: 2020-11-06T07:00:00Z
+          changeLog: null
+          href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          state: PROVISIONED
+          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          operation:
+            aclRulesUsage: 0
+            bgpIpv6RoutesUsage: 0
+            bgpIpv4RoutesUsage: 0
+            connectionCount: 0
+            staticIpv4RoutesUsage: 0
+            aclsUsage: 0
+            staticIpv6RoutesUsage: 0
+        - change:
+            data:
+              op: replace
+              path: path
+              value: {}
+            createdDateTime: 2020-11-06T07:00:00Z
+            information: information
+            type: GATEWAY_UPDATE
+            uuid: uuid
+            status: COMPLETED
+            updatedDateTime: 2020-11-06T07:00:00Z
+          changeLog: null
+          href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          state: PROVISIONED
+          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          operation:
+            aclRulesUsage: 0
+            bgpIpv6RoutesUsage: 0
+            bgpIpv4RoutesUsage: 0
+            connectionCount: 0
+            staticIpv4RoutesUsage: 0
+            aclsUsage: 0
+            staticIpv6RoutesUsage: 0
     PackageResponse:
       type: object
       properties:
@@ -7857,8 +8126,42 @@ components:
           previous: previous
           limit: 0
         data:
-        - ""
-        - ""
+        - nat:
+            name: name
+            type: STATIC_NAT
+          staticIPv6RoutesMax: 0
+          code: LIMITED
+          description: description
+          changeLog:
+            createdDateTime: 2020-11-06T07:00:00Z
+            updatedDateTime: 2020-11-06T07:00:00Z
+          type: GATEWAY_PACKAGE
+          aclRuleMax: 0
+          isRouteFilterSupported: true
+          aclMax: 0
+          totalIPv4RoutesMax: 0
+          staticIPv4RoutesMax: 0
+          totalIPv6RoutesMax: 0
+          href: https://api.equinix.com/fabric/v4/gatewayPackages/LIMITED
+          isHaSupported: true
+        - nat:
+            name: name
+            type: STATIC_NAT
+          staticIPv6RoutesMax: 0
+          code: LIMITED
+          description: description
+          changeLog:
+            createdDateTime: 2020-11-06T07:00:00Z
+            updatedDateTime: 2020-11-06T07:00:00Z
+          type: GATEWAY_PACKAGE
+          aclRuleMax: 0
+          isRouteFilterSupported: true
+          aclMax: 0
+          totalIPv4RoutesMax: 0
+          staticIPv4RoutesMax: 0
+          totalIPv6RoutesMax: 0
+          href: https://api.equinix.com/fabric/v4/gatewayPackages/LIMITED
+          isHaSupported: true
     GatewayPackageCode:
       type: string
       description: Gateway package code
@@ -7869,60 +8172,77 @@ components:
       - PREMIUM
     VirtualGatewayPackage:
       type: object
+      properties:
+        href:
+          type: string
+          description: Gateway package URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/gatewayPackages/LIMITED
+        type:
+          type: string
+          description: Type of Gateway package
+          enum:
+          - GATEWAY_PACKAGE
+        code:
+          $ref: '#/components/schemas/code'
+        description:
+          type: string
+          description: Fabric Gateway Package description
+        totalIPv4RoutesMax:
+          minimum: 0
+          type: integer
+          description: Gateway package BGP IPv4 routes limit
+        totalIPv6RoutesMax:
+          minimum: 0
+          type: integer
+          description: Gateway package BGP IPv6 routes limit
+        staticIPv4RoutesMax:
+          minimum: 0
+          type: integer
+          description: Gateway package static IPv4 routes limit
+        staticIPv6RoutesMax:
+          minimum: 0
+          type: integer
+          description: Gateway package static IPv6 routes limit
+        aclMax:
+          minimum: 0
+          type: integer
+          description: Gateway package ACLs limit
+        aclRuleMax:
+          minimum: 0
+          type: integer
+          description: Gateway package ACL rules limit
+        isHaSupported:
+          type: boolean
+          description: Gateway package high-available configuration support
+        isRouteFilterSupported:
+          type: boolean
+          description: Gateway package route filter support
+        nat:
+          $ref: '#/components/schemas/Nat'
+        changeLog:
+          $ref: '#/components/schemas/PackageChangeLog'
       description: Fabric Gateway Package
-      allOf:
-      - type: object
-        properties:
-          href:
-            type: string
-            description: Gateway package URI
-            format: uri
-            readOnly: true
-            example: https://api.equinix.com/fabric/v4/gatewayPackages/LIMITED
-          type:
-            type: string
-            description: Type of Gateway package
-            enum:
-            - GATEWAY_PACKAGE
-          code:
-            $ref: '#/components/schemas/code'
-          description:
-            type: string
-            description: Fabric Gateway Package description
-          totalIPv4RoutesMax:
-            minimum: 0
-            type: integer
-            description: Gateway package BGP IPv4 routes limit
-          totalIPv6RoutesMax:
-            minimum: 0
-            type: integer
-            description: Gateway package BGP IPv6 routes limit
-          staticIPv4RoutesMax:
-            minimum: 0
-            type: integer
-            description: Gateway package static IPv4 routes limit
-          staticIPv6RoutesMax:
-            minimum: 0
-            type: integer
-            description: Gateway package static IPv6 routes limit
-          aclMax:
-            minimum: 0
-            type: integer
-            description: Gateway package ACLs limit
-          aclRuleMax:
-            minimum: 0
-            type: integer
-            description: Gateway package ACL rules limit
-          isHaSupported:
-            type: boolean
-            description: Gateway package high-available configuration support
-          isRouteFilterSupported:
-            type: boolean
-            description: Gateway package route filter support
-          nat:
-            $ref: '#/components/schemas/Nat'
-          changeLog:
-            $ref: '#/components/schemas/PackageChangeLog'
+      example:
+        nat:
+          name: name
+          type: STATIC_NAT
+        staticIPv6RoutesMax: 0
+        code: LIMITED
+        description: description
+        changeLog:
+          createdDateTime: 2020-11-06T07:00:00Z
+          updatedDateTime: 2020-11-06T07:00:00Z
+        type: GATEWAY_PACKAGE
+        aclRuleMax: 0
+        isRouteFilterSupported: true
+        aclMax: 0
+        totalIPv4RoutesMax: 0
+        staticIPv4RoutesMax: 0
+        totalIPv6RoutesMax: 0
+        href: https://api.equinix.com/fabric/v4/gatewayPackages/LIMITED
+        isHaSupported: true
     ValidateByAuthKeyPostRequest:
       type: object
       properties:
@@ -8105,7 +8425,7 @@ components:
               authenticationKey: authenticationKey
               type: VD
               interface:
-                id: 5
+                id: 3
                 type: CLOUD
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               routingProtocols:
@@ -8178,16 +8498,39 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway: ""
+              gateway:
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: GATEWAY_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                operation:
+                  aclRulesUsage: 0
+                  bgpIpv6RoutesUsage: 0
+                  bgpIpv4RoutesUsage: 0
+                  connectionCount: 0
+                  staticIpv4RoutesUsage: 0
+                  aclsUsage: 0
+                  staticIpv6RoutesUsage: 0
               peeringType: PRIVATE
               linkProtocol:
-                vni: 1
-                unit: 3052
-                vlanTag: 421
-                vlanCTag: 2802
+                vni: 9
+                unit: 3585
+                vlanTag: 4078
+                vlanCTag: 2735
                 type: null
-                vlanSTag: 611
-                intUnit: 4
+                vlanSTag: 3834
+                intUnit: 6
               sellerRegion: sellerRegion
           change:
             data:
@@ -8215,6 +8558,9 @@ components:
             deletedBy: deletedBy
             deletedByEmail: deletedByEmail
             updatedDateTime: 2020-11-06T07:00:00Z
+          project:
+            href: http://example.com/aeiou
+            projectId: "1234567"
           type: VG_VC
           uuid: uuid
           zSide: null
@@ -8432,7 +8778,7 @@ components:
               authenticationKey: authenticationKey
               type: VD
               interface:
-                id: 5
+                id: 3
                 type: CLOUD
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               routingProtocols:
@@ -8505,16 +8851,39 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway: ""
+              gateway:
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: GATEWAY_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                operation:
+                  aclRulesUsage: 0
+                  bgpIpv6RoutesUsage: 0
+                  bgpIpv4RoutesUsage: 0
+                  connectionCount: 0
+                  staticIpv4RoutesUsage: 0
+                  aclsUsage: 0
+                  staticIpv6RoutesUsage: 0
               peeringType: PRIVATE
               linkProtocol:
-                vni: 1
-                unit: 3052
-                vlanTag: 421
-                vlanCTag: 2802
+                vni: 9
+                unit: 3585
+                vlanTag: 4078
+                vlanCTag: 2735
                 type: null
-                vlanSTag: 611
-                intUnit: 4
+                vlanSTag: 3834
+                intUnit: 6
               sellerRegion: sellerRegion
           change:
             data:
@@ -8542,6 +8911,9 @@ components:
             deletedBy: deletedBy
             deletedByEmail: deletedByEmail
             updatedDateTime: 2020-11-06T07:00:00Z
+          project:
+            href: http://example.com/aeiou
+            projectId: "1234567"
           type: VG_VC
           uuid: uuid
           zSide: null
@@ -8853,7 +9225,7 @@ components:
           authenticationKey: authenticationKey
           type: VD
           interface:
-            id: 5
+            id: 3
             type: CLOUD
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           routingProtocols:
@@ -8926,16 +9298,39 @@ components:
             region: "AMER, APAC, EMEA"
             ibx: AM1
           account: null
-          gateway: ""
+          gateway:
+            change:
+              data:
+                op: replace
+                path: path
+                value: {}
+              createdDateTime: 2020-11-06T07:00:00Z
+              information: information
+              type: GATEWAY_UPDATE
+              uuid: uuid
+              status: COMPLETED
+              updatedDateTime: 2020-11-06T07:00:00Z
+            changeLog: null
+            href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            state: PROVISIONED
+            uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            operation:
+              aclRulesUsage: 0
+              bgpIpv6RoutesUsage: 0
+              bgpIpv4RoutesUsage: 0
+              connectionCount: 0
+              staticIpv4RoutesUsage: 0
+              aclsUsage: 0
+              staticIpv6RoutesUsage: 0
           peeringType: PRIVATE
           linkProtocol:
-            vni: 1
-            unit: 3052
-            vlanTag: 421
-            vlanCTag: 2802
+            vni: 9
+            unit: 3585
+            vlanTag: 4078
+            vlanCTag: 2735
             type: null
-            vlanSTag: 611
-            intUnit: 4
+            vlanSTag: 3834
+            intUnit: 6
           sellerRegion: sellerRegion
     ConnectionState:
       type: string
@@ -10005,6 +10400,14 @@ components:
           type: integer
           description: Number of connections associated with this Access point
       description: Fabric Gateway Access point operational data
+      example:
+        aclRulesUsage: 0
+        bgpIpv6RoutesUsage: 0
+        bgpIpv4RoutesUsage: 0
+        connectionCount: 0
+        staticIpv4RoutesUsage: 0
+        aclsUsage: 0
+        staticIpv6RoutesUsage: 0
     GatewayChange:
       required:
       - createdDateTime
@@ -10042,6 +10445,17 @@ components:
         data:
           $ref: '#/components/schemas/VirtualGatewayChangeOperation'
       description: Current state of latest gateway change
+      example:
+        data:
+          op: replace
+          path: path
+          value: {}
+        createdDateTime: 2020-11-06T07:00:00Z
+        information: information
+        type: GATEWAY_UPDATE
+        uuid: uuid
+        status: COMPLETED
+        updatedDateTime: 2020-11-06T07:00:00Z
     VirtualGatewayChangeOperation:
       required:
       - op
@@ -10063,6 +10477,10 @@ components:
           type: object
           description: new value for updated parameter
       description: Fabric Gateway change operation data
+      example:
+        op: replace
+        path: path
+        value: {}
     GatewayActionType:
       type: string
       description: Gateway action type
@@ -10070,44 +10488,70 @@ components:
       - BGP_SESSION_STATUS_UPDATE
       - ROUTE_TABLE_ENTRY_UPDATE
     RouteTableEntry:
+      required:
+      - changeLog
+      - state
+      - type
       type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/RouteTableEntryType'
+        protocolType:
+          $ref: '#/components/schemas/RouteTableEntryProtocolType'
+        state:
+          $ref: '#/components/schemas/RouteTableEntryState'
+        age:
+          type: string
+          example: PT5M30S
+        prefix:
+          type: string
+          example: 192.168.10.0/24
+        nextHop:
+          type: string
+          example: 10.10.10.5
+        metric:
+          type: integer
+          example: 5
+        localPreference:
+          type: integer
+          example: 200
+        asPath:
+          type: array
+          items:
+            type: integer
+        connection:
+          $ref: '#/components/schemas/RouteTableEntry_connection'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
       description: Route table entry object
-      allOf:
-      - required:
-        - changeLog
-        - state
-        - type
-        type: object
-        properties:
-          type:
-            $ref: '#/components/schemas/RouteTableEntryType'
-          protocolType:
-            $ref: '#/components/schemas/RouteTableEntryProtocolType'
-          state:
-            $ref: '#/components/schemas/RouteTableEntryState'
-          age:
-            type: string
-            example: PT5M30S
-          prefix:
-            type: string
-            example: 192.168.10.0/24
-          nextHop:
-            type: string
-            example: 10.10.10.5
-          metric:
-            type: integer
-            example: 5
-          localPreference:
-            type: integer
-            example: 200
-          asPath:
-            type: array
-            items:
-              type: integer
-          connection:
-            $ref: '#/components/schemas/RouteTableEntry_connection'
-          changeLog:
-            $ref: '#/components/schemas/Changelog'
+      example:
+        nextHop: 10.10.10.5
+        metric: 5
+        prefix: 192.168.10.0/24
+        localPreference: 200
+        asPath:
+        - 0
+        - 0
+        changeLog:
+          createdByEmail: createdByEmail
+          deletedByFullName: deletedByFullName
+          updatedBy: updatedBy
+          createdBy: createdBy
+          updatedByEmail: updatedByEmail
+          createdByFullName: createdByFullName
+          createdDateTime: 2020-11-06T07:00:00Z
+          deletedDateTime: 2020-11-06T07:00:00Z
+          updatedByFullName: updatedByFullName
+          deletedBy: deletedBy
+          deletedByEmail: deletedByEmail
+          updatedDateTime: 2020-11-06T07:00:00Z
+        connection:
+          name: connection_1
+          uuid: 81331c52-04c0-4656-a4a7-18c52669348f
+        protocolType: BGP
+        state: ACTIVE
+        type: IPv4_BGP_ROUTE
+        age: PT5M30S
     code:
       type: string
       description: Gateway package code
@@ -10128,6 +10572,9 @@ components:
           type: string
           description: Gateway package NAT name
       description: Gateway package NAT support
+      example:
+        name: name
+        type: STATIC_NAT
     PackageChangeLog:
       type: object
       properties:
@@ -10140,6 +10587,9 @@ components:
           format: date-time
           example: 2020-11-06T07:00:00Z
       description: Gateway package change log
+      example:
+        createdDateTime: 2020-11-06T07:00:00Z
+        updatedDateTime: 2020-11-06T07:00:00Z
     RoutingProtocol:
       required:
       - type
@@ -10389,7 +10839,7 @@ components:
         authenticationKey: authenticationKey
         type: VD
         interface:
-          id: 5
+          id: 3
           type: CLOUD
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         routingProtocols:
@@ -10462,16 +10912,39 @@ components:
           region: "AMER, APAC, EMEA"
           ibx: AM1
         account: null
-        gateway: ""
+        gateway:
+          change:
+            data:
+              op: replace
+              path: path
+              value: {}
+            createdDateTime: 2020-11-06T07:00:00Z
+            information: information
+            type: GATEWAY_UPDATE
+            uuid: uuid
+            status: COMPLETED
+            updatedDateTime: 2020-11-06T07:00:00Z
+          changeLog: null
+          href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          state: PROVISIONED
+          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          operation:
+            aclRulesUsage: 0
+            bgpIpv6RoutesUsage: 0
+            bgpIpv4RoutesUsage: 0
+            connectionCount: 0
+            staticIpv4RoutesUsage: 0
+            aclsUsage: 0
+            staticIpv6RoutesUsage: 0
         peeringType: PRIVATE
         linkProtocol:
-          vni: 1
-          unit: 3052
-          vlanTag: 421
-          vlanCTag: 2802
+          vni: 9
+          unit: 3585
+          vlanTag: 4078
+          vlanCTag: 2735
           type: null
-          vlanSTag: 611
-          intUnit: 4
+          vlanSTag: 3834
+          intUnit: 6
         sellerRegion: sellerRegion
     ProviderStatus:
       type: string
@@ -10827,13 +11300,13 @@ components:
           type: integer
       description: Connection link protocol Configuration
       example:
-        vni: 1
-        unit: 3052
-        vlanTag: 421
-        vlanCTag: 2802
+        vni: 9
+        unit: 3585
+        vlanTag: 4078
+        vlanCTag: 2735
         type: null
-        vlanSTag: 611
-        intUnit: 4
+        vlanSTag: 3834
+        intUnit: 6
     VirtualDevice:
       type: object
       properties:
@@ -10878,7 +11351,7 @@ components:
           - NETWORK
       description: Virtual Device Interface Information
       example:
-        id: 5
+        id: 3
         type: CLOUD
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     PeeringType:
@@ -11111,6 +11584,9 @@ components:
         name:
           type: string
           example: connection_1
+      example:
+        name: connection_1
+        uuid: 81331c52-04c0-4656-a4a7-18c52669348f
     VirtualConnectionPriceASide_accessPoint_port_settings:
       type: object
       properties:
@@ -12042,7 +12518,7 @@ components:
           providerStatus: AVAILABLE
           equinixStatus: PROVISIONED
         changeLog:
-          createdDateTime: 2020-05-21T10:30:00.000Z
+          createdDateTime: 2020-05-21T10:30:00Z
     Vd2Sp-Response:
       value:
         href: https://api.equinix.com/fabric/v4/connections/f37e40c5-2802-4df7-9732-839a8a5868ce
@@ -12065,7 +12541,7 @@ components:
           equinixStatus: PENDING_APPROVAL
           providerStatus: NOT_AVAILABLE
         changeLog:
-          createdDateTime: 2021-10-27T16:25:37.229Z
+          createdDateTime: 2021-10-27 16:25:37.229
         aSide:
           accessPoint:
             virtualDevice:
@@ -12110,7 +12586,7 @@ components:
           equinixStatus: PROVISIONING
           providerStatus: NOT_AVAILABLE
         changeLog:
-          createdDateTime: 2021-10-27T16:25:37.229Z
+          createdDateTime: 2021-10-27 16:25:37.229
         aSide:
           accessPoint:
             virtualDevice:
@@ -12156,7 +12632,7 @@ components:
           equinixStatus: PROVISIONING
           providerStatus: NOT_AVAILABLE
         changeLog:
-          createdDateTime: 2021-10-27T16:25:37.229Z
+          createdDateTime: 2021-10-27 16:25:37.229
         aSide:
           accessPoint:
             virtualDevice:
@@ -12750,7 +13226,7 @@ components:
             equinixStatus: PENDING_APPROVAL
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
         - href: https://api.equinix.com/fabric/v4/connections/0f58dd05-f46d-4b1d-a154-2e85c396ea30
           type: EVPL_VC
           uuid: 0f58dd05-f46d-4b1d-a154-2e85c396ea30
@@ -12787,7 +13263,7 @@ components:
             equinixStatus: PENDING_APPROVAL
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
     nonGenericCreateResponse:
       value:
         data:
@@ -12830,7 +13306,7 @@ components:
             equinixStatus: PENDING_APPROVAL
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
         - href: https://api.equinix.com/fabric/v4/connections/0f58dd05-f46d-4b1d-a154-2e85c396ea30
           type: EVPL_VC
           uuid: 0f58dd05-f46d-4b1d-a154-2e85c396ea30
@@ -12870,7 +13346,7 @@ components:
             equinixStatus: PENDING_APPROVAL
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
     Vd2Sp-Redundant-Response:
       value:
         data:
@@ -12914,7 +13390,7 @@ components:
             equinixStatus: PENDING_APPROVAL
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
         - href: https://api.equinix.com/fabric/v4/connections/0f58dd05-f46d-4b1d-a154-2e85c396ea30
           type: EVPL_VC
           uuid: 0f58dd05-f46d-4b1d-a154-2e85c396ea30
@@ -12955,7 +13431,7 @@ components:
             equinixStatus: PENDING_APPROVAL
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
     Vd2Colo-Redundant-Response:
       value:
         data:
@@ -13000,7 +13476,7 @@ components:
             equinixStatus: PROVISIONING
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
         - href: https://api.equinix.com/fabric/v4/connections/0f58dd05-f46d-4b1d-a154-2e85c396ea30
           type: EVPL_VC
           uuid: 0f58dd05-f46d-4b1d-a154-2e85c396ea30
@@ -13042,7 +13518,7 @@ components:
             equinixStatus: PROVISIONING
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
     Vd2ColoUntagged-Redundant-Response:
       value:
         data:
@@ -13086,7 +13562,7 @@ components:
             equinixStatus: PROVISIONING
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
         - href: https://api.equinix.com/fabric/v4/connections/0f58dd05-f46d-4b1d-a154-2e85c396ea30
           type: EVPL_VC
           uuid: 0f58dd05-f46d-4b1d-a154-2e85c396ea30
@@ -13127,7 +13603,7 @@ components:
             equinixStatus: PROVISIONING
             providerStatus: NOT_AVAILABLE
           changeLog:
-            createdDateTime: 2020-05-21T10:30:00.000Z
+            createdDateTime: 2020-05-21T10:30:00Z
     ConnectionBulkMigrationRequest:
       value:
       - op: replace
@@ -13180,18 +13656,18 @@ components:
             providerStatus: AVAILABLE
           changeLog:
             createdBy: testBuyer
-            createdDateTime: 2021-12-02T07:17:41.663Z
+            createdDateTime: 2021-12-02 07:17:41.663
             createdByFullName: testBuyer testBuyer
             createdByEmail: testBuyer@equinix.com
             updatedBy: testBuyer
-            updatedDateTime: 2021-12-02T07:17:41.663Z
+            updatedDateTime: 2021-12-02 07:17:41.663
             updatedByFullName: testBuyer testBuyer
             updatedByEmail: testBuyer@equinix.com
           change:
             uuid: 2f395804-c197-4796-b7b3-359d5fa5d853
             type: CONNECTION_UPDATE
             status: APPROVED
-            createdDateTime: 2021-12-06T22:11:18.616Z
+            createdDateTime: 2021-12-06 22:11:18.616
             data:
               op: replace
               path: /aSide/accessPoint/port/uuid
@@ -13407,9 +13883,9 @@ components:
           equinixStatus: DEPROVISIONING
           providerStatus: DEPROVISIONING
         changeLog:
-          createdDateTime: 2020-05-21T10:30:00.000Z
-          updatedDateTime: 2020-05-21T10:30:00.000Z
-          deletedDateTime: 2020-05-21T10:30:00.000Z
+          createdDateTime: 2020-05-21T10:30:00Z
+          updatedDateTime: 2020-05-21T10:30:00Z
+          deletedDateTime: 2020-05-21T10:30:00Z
           createdBy: 232216
           updatedBy: 344339
           deletedBy: 232216
@@ -13508,14 +13984,14 @@ components:
           type: CONNECTION_UPDATE
           status: APPROVED
           createdDateTime: 2021-12-12T06:00:01.183Z
-          updatedDateTime: 2021-12-12T06:00:09.278Z
+          updatedDateTime: 2021-12-12T06:00:09.278916Z
           data:
             op: replace
             path: /aSide/accessPoint/port/uuid
             value: c791f8cb-58f9-8f90-8ce0-306a5c00a4ee
         changeLog:
-          createdDateTime: 2020-04-21T10:30:00.000Z
-          updatedDateTime: 2020-05-21T10:30:00.000Z
+          createdDateTime: 2020-04-21T10:30:00Z
+          updatedDateTime: 2020-05-21T10:30:00Z
         account:
           accountNumber: 270001
           orgId: 91997
@@ -13608,7 +14084,7 @@ components:
           type: CONNECTION_CREATION_ACCEPTANCE
           status: REQUESTED
           createdDateTime: 2021-12-12T06:00:01.183Z
-          updatedDateTime: 2021-12-12T06:00:09.278Z
+          updatedDateTime: 2021-12-12T06:00:09.278916Z
           data:
             zSide:
               accessPoint:
@@ -13620,8 +14096,8 @@ components:
                   vlanSTag: 1002
                   vlanCTag: 1001
         changeLog:
-          createdDateTime: 2020-04-21T10:30:00.000Z
-          updatedDateTime: 2020-05-21T10:30:00.000Z
+          createdDateTime: 2020-04-21T10:30:00Z
+          updatedDateTime: 2020-05-21T10:30:00Z
         account:
           accountNumber: 270001
           orgId: 91997
@@ -13739,11 +14215,11 @@ components:
           createdBy: abc@xyz.com
           createdByFullName: abc
           createdByEmail: abc@xyz.com
-          createdDateTime: 2021-10-30T07:21:39.000Z
+          createdDateTime: 2021-10-30T07:21:39Z
           updatedBy: abc@xyz.com
           updatedByFullName: abc
           updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-10-30T07:21:39.000Z
+          updatedDateTime: 2021-10-30T07:21:39Z
         type: BGP
         bgpIpv4:
           customerPeerIp: 10.1.1.3
@@ -13762,11 +14238,11 @@ components:
           createdBy: abc@xyz.com
           createdByFullName: abc
           createdByEmail: abc@xyz.com
-          createdDateTime: 2021-10-30T07:21:39.000Z
+          createdDateTime: 2021-10-30T07:21:39Z
           updatedBy: abc@xyz.com
           updatedByFullName: abc
           updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-10-30T07:21:39.000Z
+          updatedDateTime: 2021-10-30T07:21:39Z
         type: DIRECT
         directIpv4:
           equinixIfaceIp: 192.168.100.1/30
@@ -14025,7 +14501,7 @@ components:
           - property: /changeLog/updatedDateTime
             operator: =
             values:
-            - 2021-01-02T00:00:00.000Z
+            - 2021-01-02T00:00:00Z
         sort:
         - direction: DESC
           property: /changeLog/updatedDateTime
@@ -14991,8 +15467,8 @@ components:
         name: Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx
         bandwidth: 10000
         stats:
-          startDateTime: 2020-05-21T08:00:00.000Z
-          endDateTime: 2020-05-21T10:30:00.000Z
+          startDateTime: 2020-05-21T08:00:00Z
+          endDateTime: 2020-05-21T10:30:00Z
           bandwidthUtilization:
             unit: Mbps
             metricInterval: PT5M
@@ -15001,7 +15477,7 @@ components:
               mean: 48.90562310112
               lastPolled: 41.00905623111112
               metrics:
-              - intervalEndDateTime: 2020-05-21T10:30:00.000Z
+              - intervalEndDateTime: 2020-05-21T10:30:00Z
                 max: 45.5623145112009
                 mean: 31.38641687333333
             outbound:
@@ -15009,7 +15485,7 @@ components:
               mean: 33.70374303096296
               lastPolled: 41.43428905111111
               metrics:
-              - intervalEndDateTime: 2020-05-21T10:30:00.000Z
+              - intervalEndDateTime: 2020-05-21T10:30:00Z
                 max: 42.01401189333334
                 mean: 39.40894303096296
     "200_top":
@@ -15035,16 +15511,16 @@ components:
                 mean: 474960.24489120545
                 lastPolled: 53.333333333333336
                 metrics:
-                - intervalEndDateTime: 2021-03-18T18:49:21.000Z
+                - intervalEndDateTime: 2021-03-18T18:49:21Z
                   max: 53.333333333333336
                   mean: 53.333333333333336
-                - intervalEndDateTime: 2021-03-18T18:54:21.000Z
+                - intervalEndDateTime: 2021-03-18T18:54:21Z
                   max: 53.333333333333336
                   mean: 53.333333333333336
-                - intervalEndDateTime: 2021-03-18T18:59:21.000Z
+                - intervalEndDateTime: 2021-03-18T18:59:21Z
                   max: 53.333333333333336
                   mean: 53.333333333333336
-                - intervalEndDateTime: 2021-03-18T19:04:21.000Z
+                - intervalEndDateTime: 2021-03-18T19:04:21Z
                   max: 53.333333333333336
                   mean: 53.333333333333336
         - href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
@@ -15189,8 +15665,8 @@ components:
         uuid: 97d1850f-4df0-468c-9281-fa7b0dfa2096
         name: Admin-STATS-123-Abc
         stats:
-          startDateTime: 2021-01-10T20:05:08.000Z
-          endDateTime: 2021-01-10T21:05:08.000Z
+          startDateTime: 2021-01-10T20:05:08Z
+          endDateTime: 2021-01-10T21:05:08Z
           viewPoint: aSide
           bandwidthUtilization:
             unit: Mbps
@@ -15200,16 +15676,16 @@ components:
               mean: 39.96267986650665
               lastPolled: 41.00905623111112
               metrics:
-              - intervalEndDateTime: 2021-01-10T20:05:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:05:00Z
                 max: 41.89234537555556
                 mean: 33.62481298948148
-              - intervalEndDateTime: 2021-01-10T20:10:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:10:00Z
                 max: 41.86234987534256
                 mean: 36.92451598748148
-              - intervalEndDateTime: 2021-01-10T20:15:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:15:00Z
                 max: 41.86907222888888
                 mean: 43.98230834555556
-              - intervalEndDateTime: 2021-01-10T20:20:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:20:00Z
                 max: 41.91562025333334
                 mean: 41.086565260765425
             outbound:
@@ -15217,16 +15693,16 @@ components:
               mean: 38.116581250214345
               lastPolled: 41.43428905111111
               metrics:
-              - intervalEndDateTime: 2021-01-10T20:05:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:05:00Z
                 max: 41.99068261111111
                 mean: 33.70374303096296
-              - intervalEndDateTime: 2021-01-10T20:10:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:10:00Z
                 max: 42.56065261666111
                 mean: 31.52464373892222
-              - intervalEndDateTime: 2021-01-10T20:15:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:15:00Z
                 max: 41.96735416222222
                 mean: 44.08555118977779
-              - intervalEndDateTime: 2021-01-10T20:20:00.000Z
+              - intervalEndDateTime: 2021-01-10T20:20:00Z
                 max: 42.01401189333334
                 mean: 39.40894303096296
     ServiceProfilesResponse:
@@ -15473,6 +15949,7 @@ components:
             apiAvailable: false
             equinixManagedVlan: true
             bandwidthFromApi: false
+            integrationId: null
             equinixManagedPort: true
           authenticationKey:
             required: false
@@ -15748,6 +16225,7 @@ components:
             apiAvailable: false
             equinixManagedVlan: true
             bandwidthFromApi: false
+            integrationId: null
             equinixManagedPort: true
           authenticationKey:
             required: false
@@ -16472,7 +16950,7 @@ components:
           createdBy: abc@xyz.com
           createdByFullName: abc
           createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24T06:59:46.000Z
+          createdDateTime: 2021-09-24T06:59:46Z
     "400_invalid_package":
       value:
       - errorCode: EQ-3040028
@@ -16512,15 +16990,15 @@ components:
           createdBy: abc@xyz.com
           createdByFullName: abc
           createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24T06:59:46.000Z
+          createdDateTime: 2021-09-24T06:59:46Z
           updatedBy: abc@xyz.com
           updatedByFullName: abc
           updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-09-24T06:59:46.000Z
+          updatedDateTime: 2021-09-24T06:59:46Z
           deletedBy: abc@xyz.com
           deletedByFullName: abc
           deletedByEmail: abc@xyz.com
-          deletedDateTime: 2021-09-24T06:59:46.000Z
+          deletedDateTime: 2021-09-24T06:59:46Z
     "400_invalid_state":
       value:
       - errorCode: EQ-3040030
@@ -16566,15 +17044,15 @@ components:
           createdBy: abc@xyz.com
           createdByFullName: abc
           createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24T06:59:46.000Z
+          createdDateTime: 2021-09-24T06:59:46Z
           updatedBy: abc@xyz.com
           updatedByFullName: abc
           updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-09-24T06:59:46.000Z
+          updatedDateTime: 2021-09-24T06:59:46Z
           deletedBy: abc@xyz.com
           deletedByFullName: abc
           deletedByEmail: abc@xyz.com
-          deletedDateTime: 2021-09-24T06:59:46.000Z
+          deletedDateTime: 2021-09-24T06:59:46Z
     "400_invalid_operation":
       value:
       - errorCode: EQ-3040034
@@ -16587,7 +17065,7 @@ components:
         uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
         state: PENDING
         changeLog:
-          createdDateTime: 2020-05-21T10:30:00.000Z
+          createdDateTime: 2020-05-21T10:30:00Z
     RouteEntriesStatusUpdate:
       value:
         type: ROUTE_TABLE_ENTRY_UPDATE
@@ -16727,15 +17205,15 @@ components:
             createdBy: abc@xyz.com
             createdByFullName: abc
             createdByEmail: abc@xyz.com
-            createdDateTime: 2021-09-24T06:59:46.000Z
+            createdDateTime: 2021-09-24T06:59:46Z
             updatedBy: abc@xyz.com
             updatedByFullName: abc
             updatedByEmail: abc@xyz.com
-            updatedDateTime: 2021-09-24T06:59:46.000Z
+            updatedDateTime: 2021-09-24T06:59:46Z
             deletedBy: abc@xyz.com
             deletedByFullName: abc
             deletedByEmail: abc@xyz.com
-            deletedDateTime: 2021-09-24T06:59:46.000Z
+            deletedDateTime: 2021-09-24T06:59:46Z
     list-packages-response:
       value:
         pagination:
@@ -16759,8 +17237,8 @@ components:
             type: STATIC_NAT
             name: string
           changeLog:
-            createdDateTime: 2022-02-10T00:14:47.000Z
-            updatedDateTime: 2022-02-10T00:14:47.000Z
+            createdDateTime: 2022-02-10T00:14:47Z
+            updatedDateTime: 2022-02-10T00:14:47Z
     Request_Alibaba:
       value:
         filter:
