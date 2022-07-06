@@ -10,12 +10,17 @@ SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
 IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
+# IMAGE=openapitools/openapi-generator-cli # to use, change gen: to gen-openapitools
+VALIDATE_IMAGE=openapitools/openapi-generator-cli
+
 GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
 PACKAGE_PREFIX=fabric
 PACKAGE_MAJOR=v4
 
 SWAGGER=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${IMAGE}
+VALIDATE=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${VALIDATE_IMAGE}
+
 GOLANGCI_LINT=golangci-lint
 
 all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
@@ -34,12 +39,12 @@ fix-tags:
 patch:
 	# patch is idempotent, always starting with the fetched
 	# fetched file to create the patched file.
+	cp ${SPEC_FETCHED_FILE} ${SPEC_PATCHED_FILE}
 	ARGS="-o ${SPEC_PATCHED_FILE} ${SPEC_FETCHED_FILE}"; \
 	for diff in $(shell find patches/${SPEC_FETCHED_FILE} -name \*.patch | sort -n); do \
 		patch --no-backup-if-mismatch -N -t $$ARGS $$diff; \
 		ARGS=${SPEC_PATCHED_FILE}; \
 	done
-	find ${SPEC_PATCHED_FILE} -empty -exec cp ${SPEC_FETCHED_FILE} ${SPEC_PATCHED_FILE} \;
 
 patch-post:
 	# patch is idempotent, always starting with the generated files
@@ -47,8 +52,8 @@ patch-post:
 		patch --no-backup-if-mismatch -N -t -p1 -i $$diff; \
 	done
 
-clean:
-	rm -rf v1/
+clean: clean-docs
+	rm -rf ${PACKAGE_PREFIX}
 
 gen-openapitools:
 	${SWAGGER} generate -g go \
@@ -57,7 +62,7 @@ gen-openapitools:
 		--api-package models \
 		--git-user-id ${GIT_ORG} \
 		--git-repo-id ${GIT_REPO} \
-		-o /local/${PACKAGE_MAJOR} \
+		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i /local/${SPEC_PATCHED_FILE}
 
 gen-swagger:
@@ -76,9 +81,13 @@ gen-swagger:
 gen: gen-swagger
 
 validate:
-	${SWAGGER} validate \
+	${VALIDATE} validate \
 		--recommend \
 		-i /local/${SPEC_PATCHED_FILE}
+
+spectral:
+	spectral --help > /dev/null 2>&1 || echo "Spectral is not installed"
+	spectral lint $(SPEC_PATCHED_FILE)
 
 mod:
 	rm -f go.mod go.sum

@@ -10,4 +10,30 @@
 package v4
 
 // Fabric Gateway Package
-type VirtualGatewayPackage struct{}
+type VirtualGatewayPackage struct {
+	// Gateway package URI
+	Href string `json:"href,omitempty"`
+	// Type of Gateway package
+	Type_ string `json:"type,omitempty"`
+	Code  *Code  `json:"code,omitempty"`
+	// Fabric Gateway Package description
+	Description string `json:"description,omitempty"`
+	// Gateway package BGP IPv4 routes limit
+	TotalIPv4RoutesMax int32 `json:"totalIPv4RoutesMax,omitempty"`
+	// Gateway package BGP IPv6 routes limit
+	TotalIPv6RoutesMax int32 `json:"totalIPv6RoutesMax,omitempty"`
+	// Gateway package static IPv4 routes limit
+	StaticIPv4RoutesMax int32 `json:"staticIPv4RoutesMax,omitempty"`
+	// Gateway package static IPv6 routes limit
+	StaticIPv6RoutesMax int32 `json:"staticIPv6RoutesMax,omitempty"`
+	// Gateway package ACLs limit
+	AclMax int32 `json:"aclMax,omitempty"`
+	// Gateway package ACL rules limit
+	AclRuleMax int32 `json:"aclRuleMax,omitempty"`
+	// Gateway package high-available configuration support
+	IsHaSupported bool `json:"isHaSupported,omitempty"`
+	// Gateway package route filter support
+	IsRouteFilterSupported bool              `json:"isRouteFilterSupported,omitempty"`
+	Nat                    *Nat              `json:"nat,omitempty"`
+	ChangeLog              *PackageChangeLog `json:"changeLog,omitempty"`
+}

@@ -10,4 +10,10 @@
 package v4
 
 // Gateway actions response object
-type GatewayActionResponse struct{}
+type GatewayActionResponse struct {
+	Type_       *GatewayActionType  `json:"type"`
+	Uuid        string              `json:"uuid"`
+	Description string              `json:"description,omitempty"`
+	State       *GatewayActionState `json:"state"`
+	ChangeLog   *Changelog          `json:"changeLog"`
+}
