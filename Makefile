@@ -10,13 +10,17 @@ SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
 IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
-	# IMAGE=openapitools/openapi-generator-cli # to use, change gen: to gen-openapitools
+# IMAGE=openapitools/openapi-generator-cli # to use, change gen: to gen-openapitools
+VALIDATE_IMAGE=openapitools/openapi-generator-cli
+
 GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
 PACKAGE_PREFIX=fabric
 PACKAGE_MAJOR=v4
 
 SWAGGER=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${IMAGE}
+VALIDATE=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${VALIDATE_IMAGE}
+
 GOLANGCI_LINT=golangci-lint
 
 all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
@@ -77,7 +81,7 @@ gen-swagger:
 gen: gen-swagger
 
 validate:
-	${SWAGGER} validate \
+	${VALIDATE} validate \
 		--recommend \
 		-i /local/${SPEC_PATCHED_FILE}
 
