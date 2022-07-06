@@ -10,6 +10,7 @@ SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
 IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
+	# IMAGE=openapitools/openapi-generator-cli # to use, change gen: to gen-openapitools
 GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
 PACKAGE_PREFIX=fabric
@@ -34,12 +35,12 @@ fix-tags:
 patch:
 	# patch is idempotent, always starting with the fetched
 	# fetched file to create the patched file.
+	cp ${SPEC_FETCHED_FILE} ${SPEC_PATCHED_FILE}
 	ARGS="-o ${SPEC_PATCHED_FILE} ${SPEC_FETCHED_FILE}"; \
 	for diff in $(shell find patches/${SPEC_FETCHED_FILE} -name \*.patch | sort -n); do \
 		patch --no-backup-if-mismatch -N -t $$ARGS $$diff; \
 		ARGS=${SPEC_PATCHED_FILE}; \
 	done
-	find ${SPEC_PATCHED_FILE} -empty -exec cp ${SPEC_FETCHED_FILE} ${SPEC_PATCHED_FILE} \;
 
 patch-post:
 	# patch is idempotent, always starting with the generated files
