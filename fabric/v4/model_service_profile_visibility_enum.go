@@ -14,5 +14,5 @@ type ServiceProfileVisibilityEnum string
 // List of ServiceProfileVisibilityEnum
 const (
 	PRIVATE_ServiceProfileVisibilityEnum ServiceProfileVisibilityEnum = "PRIVATE"
-	PUBLIC_ServiceProfileVisibilityEnum  ServiceProfileVisibilityEnum = "PUBLIC"
+	PUBLIC_ServiceProfileVisibilityEnum ServiceProfileVisibilityEnum = "PUBLIC"
 )

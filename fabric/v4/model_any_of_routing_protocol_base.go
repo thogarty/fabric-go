@@ -10,6 +10,6 @@
 package v4
 
 type AnyOfRoutingProtocolBase struct {
-	RoutingProtocolBgpType
-	RoutingProtocolDirectType
+    RoutingProtocolBgpType
+    RoutingProtocolDirectType
 }

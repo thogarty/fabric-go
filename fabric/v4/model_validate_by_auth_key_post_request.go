@@ -11,7 +11,7 @@ package v4
 
 // Validate by providing auth key
 type ValidateByAuthKeyPostRequest struct {
-	Filter     *ValidateByAuthKeyPostRequestFilter     `json:"filter,omitempty"`
+	Filter *ValidateByAuthKeyPostRequestFilter `json:"filter,omitempty"`
 	Pagination *ValidateByAuthKeyPostRequestPagination `json:"pagination,omitempty"`
 	// Sorting options list
 	Sort []ValidateByAuthKeyPostRequestSort `json:"sort,omitempty"`

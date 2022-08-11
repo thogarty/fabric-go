@@ -9,4 +9,5 @@
  */
 package v4
 
-type RouteTableEntryFilter struct{}
+type RouteTableEntryFilter struct {
+}

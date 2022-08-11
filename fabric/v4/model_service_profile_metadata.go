@@ -11,23 +11,23 @@ package v4
 
 // Metadata. Response attribute. Ignored on request payload.
 type ServiceProfileMetadata struct {
-	Props                  string `json:"props,omitempty"`
-	RegEx                  string `json:"regEx,omitempty"`
-	RegExMsg               string `json:"regExMsg,omitempty"`
-	VlanRangeMaxValue      int32  `json:"vlanRangeMaxValue,omitempty"`
-	VlanRangeMinValue      int32  `json:"vlanRangeMinValue,omitempty"`
-	MaxQinq                string `json:"maxQinq,omitempty"`
-	MaxDot1q               int32  `json:"maxDot1q,omitempty"`
-	VariableBilling        bool   `json:"variableBilling,omitempty"`
-	GlobalOrganization     string `json:"globalOrganization,omitempty"`
-	LimitAuthKeyConn       bool   `json:"limitAuthKeyConn,omitempty"`
-	AllowSecondaryLocation bool   `json:"allowSecondaryLocation,omitempty"`
-	RedundantProfileId     string `json:"redundantProfileId,omitempty"`
-	AllowVcMigration       bool   `json:"allowVcMigration,omitempty"`
-	ConnectionEditable     bool   `json:"connectionEditable,omitempty"`
-	ReleaseVlan            bool   `json:"releaseVlan,omitempty"`
-	MaxConnectionsOnPort   int32  `json:"maxConnectionsOnPort,omitempty"`
+	Props string `json:"props,omitempty"`
+	RegEx string `json:"regEx,omitempty"`
+	RegExMsg string `json:"regExMsg,omitempty"`
+	VlanRangeMaxValue int32 `json:"vlanRangeMaxValue,omitempty"`
+	VlanRangeMinValue int32 `json:"vlanRangeMinValue,omitempty"`
+	MaxQinq string `json:"maxQinq,omitempty"`
+	MaxDot1q int32 `json:"maxDot1q,omitempty"`
+	VariableBilling bool `json:"variableBilling,omitempty"`
+	GlobalOrganization string `json:"globalOrganization,omitempty"`
+	LimitAuthKeyConn bool `json:"limitAuthKeyConn,omitempty"`
+	AllowSecondaryLocation bool `json:"allowSecondaryLocation,omitempty"`
+	RedundantProfileId string `json:"redundantProfileId,omitempty"`
+	AllowVcMigration bool `json:"allowVcMigration,omitempty"`
+	ConnectionEditable bool `json:"connectionEditable,omitempty"`
+	ReleaseVlan bool `json:"releaseVlan,omitempty"`
+	MaxConnectionsOnPort int32 `json:"maxConnectionsOnPort,omitempty"`
 	PortAssignmentStrategy string `json:"portAssignmentStrategy,omitempty"`
-	EqxManagedPort         bool   `json:"eqxManagedPort,omitempty"`
-	ConnectionNameEditable bool   `json:"connectionNameEditable,omitempty"`
+	EqxManagedPort bool `json:"eqxManagedPort,omitempty"`
+	ConnectionNameEditable bool `json:"connectionNameEditable,omitempty"`
 }

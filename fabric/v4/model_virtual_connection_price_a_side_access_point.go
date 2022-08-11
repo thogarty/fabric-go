@@ -10,8 +10,8 @@
 package v4
 
 type VirtualConnectionPriceASideAccessPoint struct {
-	Uuid     string                                      `json:"uuid,omitempty"`
-	Type_    *VirtualConnectionPriceAccessPointType      `json:"type,omitempty"`
-	Location *PriceLocation                              `json:"location,omitempty"`
-	Port     *VirtualConnectionPriceASideAccessPointPort `json:"port,omitempty"`
+	Uuid string `json:"uuid,omitempty"`
+	Type_ *VirtualConnectionPriceAccessPointType `json:"type,omitempty"`
+	Location *PriceLocation `json:"location,omitempty"`
+	Port *VirtualConnectionPriceASideAccessPointPort `json:"port,omitempty"`
 }

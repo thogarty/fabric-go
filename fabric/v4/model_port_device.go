@@ -12,6 +12,6 @@ package v4
 // Port device
 type PortDevice struct {
 	// Device name
-	Name       string                `json:"name,omitempty"`
+	Name string `json:"name,omitempty"`
 	Redundancy *PortDeviceRedundancy `json:"redundancy,omitempty"`
 }

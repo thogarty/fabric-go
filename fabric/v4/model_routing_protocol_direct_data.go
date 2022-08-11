@@ -11,16 +11,16 @@ package v4
 
 type RoutingProtocolDirectData struct {
 	// Routing protocol type
-	Type_      string                `json:"type,omitempty"`
-	Name       string                `json:"name,omitempty"`
+	Type_ string `json:"type,omitempty"`
+	Name string `json:"name,omitempty"`
 	DirectIpv4 *DirectConnectionIpv4 `json:"directIpv4,omitempty"`
 	DirectIpv6 *DirectConnectionIpv6 `json:"directIpv6,omitempty"`
 	// Routing Protocol URI
 	Href string `json:"href,omitempty"`
 	// Routing protocol identifier
-	Uuid      string                    `json:"uuid,omitempty"`
-	State     string                    `json:"state,omitempty"`
+	Uuid string `json:"uuid,omitempty"`
+	State string `json:"state,omitempty"`
 	Operation *RoutingProtocolOperation `json:"operation,omitempty"`
-	Change    *RoutingProtocolChange    `json:"change,omitempty"`
-	Changelog *Changelog                `json:"changelog,omitempty"`
+	Change *RoutingProtocolChange `json:"change,omitempty"`
+	Changelog *Changelog `json:"changelog,omitempty"`
 }

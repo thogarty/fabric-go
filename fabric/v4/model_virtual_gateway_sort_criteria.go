@@ -11,5 +11,5 @@ package v4
 
 type VirtualGatewaySortCriteria struct {
 	Direction *VirtualGatewaySortDirection `json:"direction,omitempty"`
-	Property  *VirtualGatewaySortBy        `json:"property,omitempty"`
+	Property *VirtualGatewaySortBy `json:"property,omitempty"`
 }

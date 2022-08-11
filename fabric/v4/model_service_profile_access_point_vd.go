@@ -11,8 +11,8 @@ package v4
 
 // Virtual Device Point
 type ServiceProfileAccessPointVd struct {
-	Type_         string              `json:"type"`
-	Uuid          string              `json:"uuid"`
-	Location      *SimplifiedLocation `json:"location,omitempty"`
-	InterfaceUuid string              `json:"interfaceUuid,omitempty"`
+	Type_ string `json:"type"`
+	Uuid string `json:"uuid"`
+	Location *SimplifiedLocation `json:"location,omitempty"`
+	InterfaceUuid string `json:"interfaceUuid,omitempty"`
 }

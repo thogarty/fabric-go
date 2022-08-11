@@ -13,12 +13,12 @@ package v4
 type VirtualGatewayPostRequest struct {
 	Type_ string `json:"type"`
 	// Customer-provided Fabric Gateway name
-	Name     string                        `json:"name"`
+	Name string `json:"name"`
 	Location *SimplifiedLocationWithoutIbx `json:"location"`
-	Package_ *VirtualGatewayPackageType    `json:"package"`
-	Order    *Order                        `json:"order,omitempty"`
-	Project  *Project                      `json:"project,omitempty"`
-	Account  *SimplifiedAccount            `json:"account"`
+	Package_ *VirtualGatewayPackageType `json:"package"`
+	Order *Order `json:"order,omitempty"`
+	Project *Project `json:"project,omitempty"`
+	Account *SimplifiedAccount `json:"account"`
 	// Preferences for notifications on connection configuration or status changes
 	Notifications []SimplifiedNotification `json:"notifications"`
 }

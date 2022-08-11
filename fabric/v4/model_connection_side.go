@@ -11,9 +11,9 @@ package v4
 
 // Connection configuration object for each side of multi-segment connection
 type ConnectionSide struct {
-	Invitation   *Invitation   `json:"invitation,omitempty"`
+	Invitation *Invitation `json:"invitation,omitempty"`
 	ServiceToken *ServiceToken `json:"serviceToken,omitempty"`
-	AccessPoint  *AccessPoint  `json:"accessPoint,omitempty"`
+	AccessPoint *AccessPoint `json:"accessPoint,omitempty"`
 	// Any additional information, which is not part of connection metadata or configuration
 	AdditionalInfo []ConnectionSideAdditionalInfo `json:"additionalInfo,omitempty"`
 }

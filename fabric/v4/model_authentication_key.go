@@ -11,7 +11,7 @@ package v4
 
 // Authentication Key Support and Customization
 type AuthenticationKey struct {
-	Required    bool   `json:"required,omitempty"`
-	Label       string `json:"label,omitempty"`
+	Required bool `json:"required,omitempty"`
+	Label string `json:"label,omitempty"`
 	Description string `json:"description,omitempty"`
 }

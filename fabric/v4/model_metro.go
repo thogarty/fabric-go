@@ -20,7 +20,7 @@ type Metro struct {
 	// Board geographic area in which the data center is located
 	Region string `json:"region,omitempty"`
 	// Name of the region in which the data center is located.
-	Name            string           `json:"name,omitempty"`
-	GeoCoordinates  *GeoCoordinates  `json:"geoCoordinates,omitempty"`
+	Name string `json:"name,omitempty"`
+	GeoCoordinates *GeoCoordinates `json:"geoCoordinates,omitempty"`
 	ConnectedMetros []ConnectedMetro `json:"connectedMetros,omitempty"`
 }

@@ -13,6 +13,6 @@ package v4
 type ConnectionActionRequest struct {
 	Type_ *Actions `json:"type"`
 	// Connection rejection reason datail
-	Description string                    `json:"description,omitempty"`
-	Data        *ConnectionAcceptanceData `json:"data,omitempty"`
+	Description string `json:"description,omitempty"`
+	Data *ConnectionAcceptanceData `json:"data,omitempty"`
 }

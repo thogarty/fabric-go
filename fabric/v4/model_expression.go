@@ -10,9 +10,9 @@
 package v4
 
 type Expression struct {
-	And      *[]Expression    `json:"and,omitempty"`
-	Or       *[]Expression    `json:"or,omitempty"`
+	And *[]Expression `json:"and,omitempty"`
+	Or *[]Expression `json:"or,omitempty"`
 	Property *SearchFieldName `json:"property,omitempty"`
-	Operator string           `json:"operator,omitempty"`
-	Values   []string         `json:"values,omitempty"`
+	Operator string `json:"operator,omitempty"`
+	Values []string `json:"values,omitempty"`
 }

@@ -10,6 +10,6 @@
 package v4
 
 type AnyOfVirtualGatewayFilter struct {
-	VirtualGatewaySimpleExpression
-	VirtualGatewayOrFilter
+    VirtualGatewaySimpleExpression
+    VirtualGatewayOrFilter
 }

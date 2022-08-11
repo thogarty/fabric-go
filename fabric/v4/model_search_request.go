@@ -11,7 +11,7 @@ package v4
 
 // Search requests containing criteria
 type SearchRequest struct {
-	Filter     *Expression        `json:"filter,omitempty"`
+	Filter *Expression `json:"filter,omitempty"`
 	Pagination *PaginationRequest `json:"pagination,omitempty"`
-	Sort       []SortCriteria     `json:"sort,omitempty"`
+	Sort []SortCriteria `json:"sort,omitempty"`
 }

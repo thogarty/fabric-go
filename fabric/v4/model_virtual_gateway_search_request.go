@@ -11,7 +11,7 @@ package v4
 
 // Search requests containing criteria
 type VirtualGatewaySearchRequest struct {
-	Filter     *VirtualGatewayFilters       `json:"filter,omitempty"`
-	Pagination *PaginationRequest           `json:"pagination,omitempty"`
-	Sort       []VirtualGatewaySortCriteria `json:"sort,omitempty"`
+	Filter *VirtualGatewayFilters `json:"filter,omitempty"`
+	Pagination *PaginationRequest `json:"pagination,omitempty"`
+	Sort []VirtualGatewaySortCriteria `json:"sort,omitempty"`
 }

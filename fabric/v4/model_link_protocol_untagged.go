@@ -11,7 +11,7 @@ package v4
 
 // Connection link protocol configuration - UNTAGGED
 type LinkProtocolUntagged struct {
-	Type_ *LinkProtocolType           `json:"type"`
-	Ipv4  *LinkProtocolIpv4Ipv6Config `json:"ipv4,omitempty"`
-	Ipv6  *LinkProtocolIpv4Ipv6Config `json:"ipv6,omitempty"`
+	Type_ *LinkProtocolType `json:"type"`
+	Ipv4 *LinkProtocolIpv4Ipv6Config `json:"ipv4,omitempty"`
+	Ipv6 *LinkProtocolIpv4Ipv6Config `json:"ipv6,omitempty"`
 }

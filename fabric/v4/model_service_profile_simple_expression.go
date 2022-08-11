@@ -10,9 +10,9 @@
 package v4
 
 type ServiceProfileSimpleExpression struct {
-	// Possible field names to use on filters:  * `/name` - Service Profile name  * `/uuid` - Service Profile uuid  * `/state` - Service Profile status  * `/metros/code` - Service Profile metro code  * `/visibility` - Service Profile package  * `/type` - Service Profile package
+	// Possible field names to use on filters:  * `/name` - Service Profile name  * `/uuid` - Service Profile uuid  * `/state` - Service Profile status  * `/metros/code` - Service Profile metro code  * `/visibility` - Service Profile package  * `/type` - Service Profile package 
 	Property string `json:"property,omitempty"`
-	// Possible operators to use on filters:  * `=` - equal
-	Operator string   `json:"operator,omitempty"`
-	Values   []string `json:"values,omitempty"`
+	// Possible operators to use on filters:  * `=` - equal 
+	Operator string `json:"operator,omitempty"`
+	Values []string `json:"values,omitempty"`
 }

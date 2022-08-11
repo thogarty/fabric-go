@@ -12,7 +12,7 @@ package v4
 // List of criteria for selecting network access points with optimal efficiency, security, compatibility, and availability.
 type AccessPointSelector struct {
 	// Type of Access point
-	Type_        string                    `json:"type,omitempty"`
-	Port         *SimplifiedMetadataEntity `json:"port,omitempty"`
-	LinkProtocol *LinkProtocol             `json:"linkProtocol,omitempty"`
+	Type_ string `json:"type,omitempty"`
+	Port *SimplifiedMetadataEntity `json:"port,omitempty"`
+	LinkProtocol *LinkProtocol `json:"linkProtocol,omitempty"`
 }

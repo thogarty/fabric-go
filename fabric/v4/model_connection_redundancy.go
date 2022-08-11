@@ -12,6 +12,6 @@ package v4
 // Connection redundancy configuration
 type ConnectionRedundancy struct {
 	// Redundancy group identifier (UUID of primary connection)
-	Group    string              `json:"group,omitempty"`
+	Group string `json:"group,omitempty"`
 	Priority *ConnectionPriority `json:"priority,omitempty"`
 }

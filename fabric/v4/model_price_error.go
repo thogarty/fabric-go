@@ -11,10 +11,10 @@ package v4
 
 // Error with details
 type PriceError struct {
-	ErrorCode      string                     `json:"errorCode"`
-	ErrorMessage   string                     `json:"errorMessage"`
-	CorrelationId  string                     `json:"correlationId,omitempty"`
-	Details        string                     `json:"details,omitempty"`
-	Help           string                     `json:"help,omitempty"`
+	ErrorCode string `json:"errorCode"`
+	ErrorMessage string `json:"errorMessage"`
+	CorrelationId string `json:"correlationId,omitempty"`
+	Details string `json:"details,omitempty"`
+	Help string `json:"help,omitempty"`
 	AdditionalInfo []PriceErrorAdditionalInfo `json:"additionalInfo,omitempty"`
 }

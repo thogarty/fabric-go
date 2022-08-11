@@ -11,5 +11,5 @@ package v4
 
 type RouteTableEntrySortCriteria struct {
 	Direction *RouteTableEntrySortDirection `json:"direction,omitempty"`
-	Property  *RouteTableEntrySortBy        `json:"property,omitempty"`
+	Property *RouteTableEntrySortBy `json:"property,omitempty"`
 }

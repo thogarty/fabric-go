@@ -11,7 +11,7 @@ package v4
 
 // Search requests containing criteria
 type RouteTableEntrySearchRequest struct {
-	Filter     *RouteTableEntryFilters       `json:"filter,omitempty"`
-	Pagination *PaginationRequest            `json:"pagination,omitempty"`
-	Sort       []RouteTableEntrySortCriteria `json:"sort,omitempty"`
+	Filter *RouteTableEntryFilters `json:"filter,omitempty"`
+	Pagination *PaginationRequest `json:"pagination,omitempty"`
+	Sort []RouteTableEntrySortCriteria `json:"sort,omitempty"`
 }

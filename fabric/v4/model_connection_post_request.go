@@ -13,14 +13,14 @@ package v4
 type ConnectionPostRequest struct {
 	Type_ *ConnectionType `json:"type"`
 	// Customer-provided connection name
-	Name  string `json:"name"`
+	Name string `json:"name"`
 	Order *Order `json:"order,omitempty"`
 	// Preferences for notifications on connection configuration or status changes
 	Notifications []SimplifiedNotification `json:"notifications,omitempty"`
 	// Connection bandwidth in Mbps
-	Bandwidth  int32                 `json:"bandwidth"`
+	Bandwidth int32 `json:"bandwidth"`
 	Redundancy *ConnectionRedundancy `json:"redundancy,omitempty"`
-	ASide      *ConnectionSide       `json:"aSide"`
-	ZSide      *ConnectionSide       `json:"zSide"`
-	Project    *Project              `json:"project,omitempty"`
+	ASide *ConnectionSide `json:"aSide"`
+	ZSide *ConnectionSide `json:"zSide"`
+	Project *Project `json:"project,omitempty"`
 }

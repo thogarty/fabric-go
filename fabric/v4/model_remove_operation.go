@@ -12,6 +12,6 @@ package v4
 // Remove sub-resource from an existing model
 type RemoveOperation struct {
 	// the operation to be performed
-	Op   string `json:"op"`
+	Op string `json:"op"`
 	Path string `json:"path"`
 }

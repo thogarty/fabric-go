@@ -11,7 +11,7 @@ package v4
 
 // List of connections
 type ConnectionSearchResponse struct {
-	Pagination *Pagination            `json:"pagination,omitempty"`
-	Sort       []SortCriteriaResponse `json:"sort,omitempty"`
-	Data       []Connection           `json:"data,omitempty"`
+	Pagination *Pagination `json:"pagination,omitempty"`
+	Sort []SortCriteriaResponse `json:"sort,omitempty"`
+	Data []Connection `json:"data,omitempty"`
 }

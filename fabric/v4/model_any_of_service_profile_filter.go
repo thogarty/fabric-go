@@ -10,6 +10,6 @@
 package v4
 
 type AnyOfServiceProfileFilter struct {
-	ServiceProfileSimpleExpression
-	ServiceProfileAndFilter
+    ServiceProfileSimpleExpression
+    ServiceProfileAndFilter
 }

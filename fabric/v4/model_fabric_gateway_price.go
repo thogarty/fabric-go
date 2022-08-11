@@ -12,7 +12,7 @@ package v4
 // Fabric Gateway Product configuration
 type FabricGatewayPrice struct {
 	// Unique identifier assigned to the Fabric Gateway
-	Uuid     string                `json:"uuid,omitempty"`
-	Location *PriceLocation        `json:"location,omitempty"`
+	Uuid string `json:"uuid,omitempty"`
+	Location *PriceLocation `json:"location,omitempty"`
 	Package_ *FabricGatewayPackage `json:"package,omitempty"`
 }

@@ -13,10 +13,10 @@ type ServiceMetro struct {
 	// metro code
 	Code string `json:"code,omitempty"`
 	// metro name
-	Name    string   `json:"name,omitempty"`
-	Ibxs    []string `json:"ibxs,omitempty"`
-	InTrail bool     `json:"inTrail,omitempty"`
+	Name string `json:"name,omitempty"`
+	Ibxs []string `json:"ibxs,omitempty"`
+	InTrail bool `json:"inTrail,omitempty"`
 	// service metro display name
-	DisplayName   string            `json:"displayName,omitempty"`
+	DisplayName string `json:"displayName,omitempty"`
 	SellerRegions map[string]string `json:"sellerRegions,omitempty"`
 }

@@ -10,9 +10,9 @@
 package v4
 
 type SearchExpression struct {
-	And      *[]SearchExpression `json:"and,omitempty"`
-	Or       *[]SearchExpression `json:"or,omitempty"`
-	Property string              `json:"property,omitempty"`
-	Operator string              `json:"operator,omitempty"`
-	Values   []string            `json:"values,omitempty"`
+	And *[]SearchExpression `json:"and,omitempty"`
+	Or *[]SearchExpression `json:"or,omitempty"`
+	Property string `json:"property,omitempty"`
+	Operator string `json:"operator,omitempty"`
+	Values []string `json:"values,omitempty"`
 }

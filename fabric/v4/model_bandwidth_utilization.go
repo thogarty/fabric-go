@@ -14,7 +14,7 @@ type BandwidthUtilization struct {
 	// Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
 	Unit string `json:"unit,omitempty"`
 	// An interval formatted value, indicating the time-interval the metric objects within the response represent
-	MetricInterval string     `json:"metricInterval,omitempty"`
-	Inbound        *Direction `json:"inbound,omitempty"`
-	Outbound       *Direction `json:"outbound,omitempty"`
+	MetricInterval string `json:"metricInterval,omitempty"`
+	Inbound *Direction `json:"inbound,omitempty"`
+	Outbound *Direction `json:"outbound,omitempty"`
 }

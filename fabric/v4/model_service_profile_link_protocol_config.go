@@ -12,11 +12,11 @@ package v4
 // Configuration for dot1q to qinq translation support
 type ServiceProfileLinkProtocolConfig struct {
 	// was tagType - missing on wiki
-	EncapsulationStrategy string   `json:"encapsulationStrategy,omitempty"`
-	NamedTags             []string `json:"namedTags,omitempty"`
+	EncapsulationStrategy string `json:"encapsulationStrategy,omitempty"`
+	NamedTags []string `json:"namedTags,omitempty"`
 	// was ctagLabel
 	VlanCTagLabel string `json:"vlanCTagLabel,omitempty"`
-	ReuseVlanSTag bool   `json:"reuseVlanSTag,omitempty"`
+	ReuseVlanSTag bool `json:"reuseVlanSTag,omitempty"`
 	// Port encapsulation - Derived response attribute. Ignored on request payloads.
 	Encapsulation string `json:"encapsulation,omitempty"`
 }

@@ -11,6 +11,6 @@ package v4
 
 // Service Profiles
 type ServiceProfiles struct {
-	Data       []ServiceProfile `json:"data,omitempty"`
-	Pagination *Pagination      `json:"pagination,omitempty"`
+	Data []ServiceProfile `json:"data,omitempty"`
+	Pagination *Pagination `json:"pagination,omitempty"`
 }

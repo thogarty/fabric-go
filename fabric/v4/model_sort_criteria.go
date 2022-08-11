@@ -11,5 +11,5 @@ package v4
 
 type SortCriteria struct {
 	Direction *SortDirection `json:"direction,omitempty"`
-	Property  *SortBy        `json:"property,omitempty"`
+	Property *SortBy `json:"property,omitempty"`
 }

@@ -11,8 +11,8 @@ package v4
 
 type RoutingProtocolDirectType struct {
 	// Routing protocol type
-	Type_      string                `json:"type"`
-	Name       string                `json:"name,omitempty"`
+	Type_ string `json:"type"`
+	Name string `json:"name,omitempty"`
 	DirectIpv4 *DirectConnectionIpv4 `json:"directIpv4,omitempty"`
 	DirectIpv6 *DirectConnectionIpv6 `json:"directIpv6,omitempty"`
 }

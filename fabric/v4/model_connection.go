@@ -19,24 +19,24 @@ type Connection struct {
 	// Customer-provided connection name
 	Name string `json:"name"`
 	// Customer-provided connection description
-	Description string               `json:"description,omitempty"`
-	State       *ConnectionState     `json:"state,omitempty"`
-	Change      *Change              `json:"change,omitempty"`
-	Operation   *ConnectionOperation `json:"operation,omitempty"`
-	Order       *Order               `json:"order,omitempty"`
+	Description string `json:"description,omitempty"`
+	State *ConnectionState `json:"state,omitempty"`
+	Change *Change `json:"change,omitempty"`
+	Operation *ConnectionOperation `json:"operation,omitempty"`
+	Order *Order `json:"order,omitempty"`
 	// Preferences for notifications on connection configuration or status changes
 	Notifications []SimplifiedNotification `json:"notifications,omitempty"`
-	Account       *SimplifiedAccount       `json:"account,omitempty"`
-	ChangeLog     *Changelog               `json:"changeLog,omitempty"`
+	Account *SimplifiedAccount `json:"account,omitempty"`
+	ChangeLog *Changelog `json:"changeLog,omitempty"`
 	// Connection bandwidth in Mbps
-	Bandwidth  int32                 `json:"bandwidth"`
+	Bandwidth int32 `json:"bandwidth"`
 	Redundancy *ConnectionRedundancy `json:"redundancy,omitempty"`
 	// Connection property derived from access point locations
-	IsRemote  bool                 `json:"isRemote,omitempty"`
+	IsRemote bool `json:"isRemote,omitempty"`
 	Direction *ConnectionDirection `json:"direction,omitempty"`
-	ASide     *ConnectionSide      `json:"aSide"`
-	ZSide     *ConnectionSide      `json:"zSide"`
+	ASide *ConnectionSide `json:"aSide"`
+	ZSide *ConnectionSide `json:"zSide"`
 	// Connection additional information
 	AdditionalInfo []ConnectionSideAdditionalInfo `json:"additionalInfo,omitempty"`
-	Project        *Project                       `json:"project,omitempty"`
+	Project *Project `json:"project,omitempty"`
 }

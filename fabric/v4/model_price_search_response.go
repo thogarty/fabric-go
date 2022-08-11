@@ -10,6 +10,6 @@
 package v4
 
 type PriceSearchResponse struct {
-	Data       []Price     `json:"data,omitempty"`
+	Data []Price `json:"data,omitempty"`
 	Pagination *Pagination `json:"pagination,omitempty"`
 }

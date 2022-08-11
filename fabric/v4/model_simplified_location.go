@@ -10,8 +10,8 @@
 package v4
 
 type SimplifiedLocation struct {
-	Region    string `json:"region,omitempty"`
+	Region string `json:"region,omitempty"`
 	MetroName string `json:"metroName,omitempty"`
 	MetroCode string `json:"metroCode,omitempty"`
-	Ibx       string `json:"ibx,omitempty"`
+	Ibx string `json:"ibx,omitempty"`
 }

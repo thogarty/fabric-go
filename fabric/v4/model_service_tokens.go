@@ -12,6 +12,6 @@ package v4
 // Service tokens authorize a user to access protected resources and services available on the Equinix Fabric network. The owner of the resources can distribute service tokens to third-party users (trusted partners and vendors), allowing them to directly access and work with the resources on the network without involving the resource owners.
 type ServiceTokens struct {
 	// List of Service Tokens
-	Data       []ServiceToken `json:"data,omitempty"`
-	Pagination *Pagination    `json:"pagination,omitempty"`
+	Data []ServiceToken `json:"data,omitempty"`
+	Pagination *Pagination `json:"pagination,omitempty"`
 }

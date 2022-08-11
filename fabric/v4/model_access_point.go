@@ -11,23 +11,23 @@ package v4
 
 // Access point object
 type AccessPoint struct {
-	Type_         *AccessPointType          `json:"type"`
-	Account       *SimplifiedAccount        `json:"account,omitempty"`
-	Location      *SimplifiedLocation       `json:"location"`
-	Port          *Port                     `json:"port,omitempty"`
-	Profile       *SimplifiedServiceProfile `json:"profile,omitempty"`
-	Gateway       *VirtualGateway           `json:"gateway,omitempty"`
-	LinkProtocol  *SimplifiedLinkProtocol   `json:"linkProtocol,omitempty"`
-	VirtualDevice *VirtualDevice            `json:"virtualDevice,omitempty"`
-	Interface_    *ModelInterface           `json:"interface,omitempty"`
+	Type_ *AccessPointType `json:"type"`
+	Account *SimplifiedAccount `json:"account,omitempty"`
+	Location *SimplifiedLocation `json:"location"`
+	Port *Port `json:"port,omitempty"`
+	Profile *SimplifiedServiceProfile `json:"profile,omitempty"`
+	Gateway *VirtualGateway `json:"gateway,omitempty"`
+	LinkProtocol *SimplifiedLinkProtocol `json:"linkProtocol,omitempty"`
+	VirtualDevice *VirtualDevice `json:"virtualDevice,omitempty"`
+	Interface_ *ModelInterface `json:"interface,omitempty"`
 	// Access point seller region
-	SellerRegion string       `json:"sellerRegion,omitempty"`
-	PeeringType  *PeeringType `json:"peeringType,omitempty"`
+	SellerRegion string `json:"sellerRegion,omitempty"`
+	PeeringType *PeeringType `json:"peeringType,omitempty"`
 	// Access point authentication key
 	AuthenticationKey string `json:"authenticationKey,omitempty"`
 	// Access point routing protocols configuration
 	RoutingProtocols []RoutingProtocol `json:"routingProtocols,omitempty"`
-	AdditionalInfo   *AdditionalInfo   `json:"additionalInfo,omitempty"`
+	AdditionalInfo *AdditionalInfo `json:"additionalInfo,omitempty"`
 	// Provider assigned Connection Id
 	ProviderConnectionId string `json:"providerConnectionId,omitempty"`
 }

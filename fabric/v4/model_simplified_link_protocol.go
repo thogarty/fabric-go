@@ -18,7 +18,7 @@ type SimplifiedLinkProtocol struct {
 	VlanSTag int32 `json:"vlanSTag,omitempty"`
 	// vlanCTag value specified for QINQ connections
 	VlanCTag int32 `json:"vlanCTag,omitempty"`
-	Unit     int32 `json:"unit,omitempty"`
-	Vni      int32 `json:"vni,omitempty"`
-	IntUnit  int32 `json:"intUnit,omitempty"`
+	Unit int32 `json:"unit,omitempty"`
+	Vni int32 `json:"vni,omitempty"`
+	IntUnit int32 `json:"intUnit,omitempty"`
 }

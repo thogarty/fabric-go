@@ -11,10 +11,10 @@ package v4
 
 // Colo Access Point
 type ServiceProfileAccessPointColo struct {
-	Type_                   string              `json:"type"`
-	Uuid                    string              `json:"uuid"`
-	Location                *SimplifiedLocation `json:"location,omitempty"`
-	SellerRegion            string              `json:"sellerRegion,omitempty"`
-	SellerRegionDescription string              `json:"sellerRegionDescription,omitempty"`
-	CrossConnectId          string              `json:"crossConnectId,omitempty"`
+	Type_ string `json:"type"`
+	Uuid string `json:"uuid"`
+	Location *SimplifiedLocation `json:"location,omitempty"`
+	SellerRegion string `json:"sellerRegion,omitempty"`
+	SellerRegionDescription string `json:"sellerRegionDescription,omitempty"`
+	CrossConnectId string `json:"crossConnectId,omitempty"`
 }

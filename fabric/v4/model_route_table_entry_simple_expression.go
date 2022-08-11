@@ -10,9 +10,9 @@
 package v4
 
 type RouteTableEntrySimpleExpression struct {
-	// Possible field names to use on filters:  * `/type` - Route table entry type  * `/prefix` - Route table entry type  * `/nextHop` - Route table entry type  * `/state` - Route table entry type  * `/_*` - all-category search
+	// Possible field names to use on filters:  * `/type` - Route table entry type  * `/prefix` - Route table entry type  * `/nextHop` - Route table entry type  * `/state` - Route table entry type  * `/_*` - all-category search 
 	Property string `json:"property,omitempty"`
-	// Possible operators to use on filters:  * `=` - equal  * `!=` - not equal  * `>` - greater than  * `>=` - greater than or equal to  * `<` - less than  * `<=` - less than or equal to  * `[NOT] BETWEEN` - (not) between  * `[NOT] LIKE` - (not) like  * `[NOT] IN` - (not) in  * `~*` - case-insensitive like
-	Operator string   `json:"operator,omitempty"`
-	Values   []string `json:"values,omitempty"`
+	// Possible operators to use on filters:  * `=` - equal  * `!=` - not equal  * `>` - greater than  * `>=` - greater than or equal to  * `<` - less than  * `<=` - less than or equal to  * `[NOT] BETWEEN` - (not) between  * `[NOT] LIKE` - (not) like  * `[NOT] IN` - (not) in  * `~*` - case-insensitive like 
+	Operator string `json:"operator,omitempty"`
+	Values []string `json:"values,omitempty"`
 }

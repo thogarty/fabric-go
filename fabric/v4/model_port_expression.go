@@ -10,9 +10,9 @@
 package v4
 
 type PortExpression struct {
-	And      *[]PortExpression    `json:"and,omitempty"`
-	Or       *[]PortExpression    `json:"or,omitempty"`
+	And *[]PortExpression `json:"and,omitempty"`
+	Or *[]PortExpression `json:"or,omitempty"`
 	Property *PortSearchFieldName `json:"property,omitempty"`
-	Operator string               `json:"operator,omitempty"`
-	Values   []string             `json:"values,omitempty"`
+	Operator string `json:"operator,omitempty"`
+	Values []string `json:"values,omitempty"`
 }

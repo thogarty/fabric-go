@@ -9,4 +9,5 @@
  */
 package v4
 
-type UpdateValue struct{}
+type UpdateValue struct {
+}

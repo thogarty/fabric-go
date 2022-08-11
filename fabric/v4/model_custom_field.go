@@ -11,11 +11,11 @@ package v4
 
 // Define Custom Attributes
 type CustomField struct {
-	Label       string   `json:"label"`
-	Description string   `json:"description"`
-	Required    bool     `json:"required,omitempty"`
-	DataType    string   `json:"dataType"`
-	Options     []string `json:"options,omitempty"`
+	Label string `json:"label"`
+	Description string `json:"description"`
+	Required bool `json:"required,omitempty"`
+	DataType string `json:"dataType"`
+	Options []string `json:"options,omitempty"`
 	// capture this field as a part of email notification
 	CaptureInEmail bool `json:"captureInEmail,omitempty"`
 }

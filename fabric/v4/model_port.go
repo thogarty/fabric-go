@@ -21,14 +21,14 @@ type Port struct {
 	// Port name
 	Name string `json:"name,omitempty"`
 	// Port description
-	Description string     `json:"description,omitempty"`
-	State       *PortState `json:"state,omitempty"`
-	Order       *Order     `json:"order,omitempty"`
+	Description string `json:"description,omitempty"`
+	State *PortState `json:"state,omitempty"`
+	Order *Order `json:"order,omitempty"`
 	// Unique ID for a virtual port.
-	CvpId     string             `json:"cvpId,omitempty"`
-	Operation *PortOperation     `json:"operation,omitempty"`
-	Account   *SimplifiedAccount `json:"account,omitempty"`
-	Changelog *Changelog         `json:"changelog,omitempty"`
+	CvpId string `json:"cvpId,omitempty"`
+	Operation *PortOperation `json:"operation,omitempty"`
+	Account *SimplifiedAccount `json:"account,omitempty"`
+	Changelog *Changelog `json:"changelog,omitempty"`
 	// Port service Type
 	ServiceType string `json:"serviceType,omitempty"`
 	// Port bandwidth in Mbps
@@ -36,16 +36,16 @@ type Port struct {
 	// Port available bandwidth in Mbps
 	AvailableBandwidth int32 `json:"availableBandwidth,omitempty"`
 	// Port used bandwidth in Mbps
-	UsedBandwidth int32               `json:"usedBandwidth,omitempty"`
-	Location      *SimplifiedLocation `json:"location,omitempty"`
-	Device        *PortDevice         `json:"device,omitempty"`
-	Interface_    *PortInterface      `json:"interface,omitempty"`
-	Tether        *PortTether         `json:"tether,omitempty"`
-	Redundancy    *PortRedundancy     `json:"redundancy,omitempty"`
-	Encapsulation *PortEncapsulation  `json:"encapsulation,omitempty"`
-	Lag           *PortLag            `json:"lag,omitempty"`
+	UsedBandwidth int32 `json:"usedBandwidth,omitempty"`
+	Location *SimplifiedLocation `json:"location,omitempty"`
+	Device *PortDevice `json:"device,omitempty"`
+	Interface_ *PortInterface `json:"interface,omitempty"`
+	Tether *PortTether `json:"tether,omitempty"`
+	Redundancy *PortRedundancy `json:"redundancy,omitempty"`
+	Encapsulation *PortEncapsulation `json:"encapsulation,omitempty"`
+	Lag *PortLag `json:"lag,omitempty"`
 	// Port ASN
-	Asn      int32         `json:"asn,omitempty"`
+	Asn int32 `json:"asn,omitempty"`
 	Settings *PortSettings `json:"settings,omitempty"`
 	// Number of physical ports
 	PhysicalPortQuantity int32 `json:"physicalPortQuantity,omitempty"`

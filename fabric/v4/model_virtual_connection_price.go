@@ -12,9 +12,9 @@ package v4
 // Virtual Connection Product configuration
 type VirtualConnectionPrice struct {
 	// Either uuid or rest of attributes are required
-	Uuid      string                                `json:"uuid,omitempty"`
-	Type_     *VirtualConnectionPriceConnectionType `json:"type,omitempty"`
-	Bandwidth int32                                 `json:"bandwidth,omitempty"`
-	ASide     *VirtualConnectionPriceASide          `json:"aSide,omitempty"`
-	ZSide     *VirtualConnectionPriceZSide          `json:"zSide,omitempty"`
+	Uuid string `json:"uuid,omitempty"`
+	Type_ *VirtualConnectionPriceConnectionType `json:"type,omitempty"`
+	Bandwidth int32 `json:"bandwidth,omitempty"`
+	ASide *VirtualConnectionPriceASide `json:"aSide,omitempty"`
+	ZSide *VirtualConnectionPriceZSide `json:"zSide,omitempty"`
 }

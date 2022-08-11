@@ -10,6 +10,6 @@
 package v4
 
 type RoutingProtocolBfd struct {
-	Enabled  bool   `json:"enabled"`
+	Enabled bool `json:"enabled"`
 	Interval string `json:"interval,omitempty"`
 }

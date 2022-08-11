@@ -11,10 +11,10 @@ package v4
 
 // VirtualDevice Access Point Type
 type ServiceProfileAccessPointTypeVd struct {
-	Type_               *ServiceProfileAccessPointTypeEnum `json:"type"`
-	Uuid                string                             `json:"uuid,omitempty"`
-	SupportedBandwidths *[]int32                           `json:"supportedBandwidths,omitempty"`
+	Type_ *ServiceProfileAccessPointTypeEnum `json:"type"`
+	Uuid string `json:"uuid,omitempty"`
+	SupportedBandwidths *[]int32 `json:"supportedBandwidths,omitempty"`
 	// Allow remote connections to Service Profile
 	AllowRemoteConnections bool `json:"allowRemoteConnections,omitempty"`
-	AllowCustomBandwidth   bool `json:"allowCustomBandwidth,omitempty"`
+	AllowCustomBandwidth bool `json:"allowCustomBandwidth,omitempty"`
 }

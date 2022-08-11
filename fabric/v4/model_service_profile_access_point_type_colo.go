@@ -11,9 +11,9 @@ package v4
 
 // Colo Access Point Type
 type ServiceProfileAccessPointTypeColo struct {
-	Type_               *ServiceProfileAccessPointTypeEnum `json:"type"`
-	Uuid                string                             `json:"uuid,omitempty"`
-	SupportedBandwidths *[]int32                           `json:"supportedBandwidths,omitempty"`
+	Type_ *ServiceProfileAccessPointTypeEnum `json:"type"`
+	Uuid string `json:"uuid,omitempty"`
+	SupportedBandwidths *[]int32 `json:"supportedBandwidths,omitempty"`
 	// Setting to allow or prohibit remote connections to the service profile.
 	AllowRemoteConnections bool `json:"allowRemoteConnections,omitempty"`
 	// Setting to enable or disable the ability of the buyer to customize the bandwidth.
@@ -23,15 +23,15 @@ type ServiceProfileAccessPointTypeColo struct {
 	// Setting to enable or disable the ability of the buyer to change connection bandwidth without approval of the seller.
 	AllowBandwidthAutoApproval bool `json:"allowBandwidthAutoApproval,omitempty"`
 	// Availability of a bandwidth upgrade. The default is false.
-	AllowBandwidthUpgrade bool                              `json:"allowBandwidthUpgrade,omitempty"`
-	LinkProtocolConfig    *ServiceProfileLinkProtocolConfig `json:"linkProtocolConfig,omitempty"`
+	AllowBandwidthUpgrade bool `json:"allowBandwidthUpgrade,omitempty"`
+	LinkProtocolConfig *ServiceProfileLinkProtocolConfig `json:"linkProtocolConfig,omitempty"`
 	// for verizon only.
 	EnableAutoGenerateServiceKey bool `json:"enableAutoGenerateServiceKey,omitempty"`
 	// Mandate redundant connections
-	ConnectionRedundancyRequired bool       `json:"connectionRedundancyRequired,omitempty"`
-	ApiConfig                    *ApiConfig `json:"apiConfig,omitempty"`
+	ConnectionRedundancyRequired bool `json:"connectionRedundancyRequired,omitempty"`
+	ApiConfig *ApiConfig `json:"apiConfig,omitempty"`
 	// custom name for \"Connection\"
-	ConnectionLabel   string                  `json:"connectionLabel,omitempty"`
-	AuthenticationKey *AuthenticationKey      `json:"authenticationKey,omitempty"`
-	Metadata          *ServiceProfileMetadata `json:"metadata,omitempty"`
+	ConnectionLabel string `json:"connectionLabel,omitempty"`
+	AuthenticationKey *AuthenticationKey `json:"authenticationKey,omitempty"`
+	Metadata *ServiceProfileMetadata `json:"metadata,omitempty"`
 }

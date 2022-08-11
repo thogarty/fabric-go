@@ -11,8 +11,8 @@ package v4
 
 type SimplifiedLocationWithoutIbx struct {
 	// The Canonical URL at which the resource resides.
-	Href      string `json:"href,omitempty"`
-	Region    string `json:"region,omitempty"`
+	Href string `json:"href,omitempty"`
+	Region string `json:"region,omitempty"`
 	MetroName string `json:"metroName,omitempty"`
 	MetroCode string `json:"metroCode"`
 }

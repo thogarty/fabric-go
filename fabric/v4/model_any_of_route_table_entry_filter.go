@@ -10,6 +10,6 @@
 package v4
 
 type AnyOfRouteTableEntryFilter struct {
-	RouteTableEntrySimpleExpression
-	RouteTableEntryOrFilter
+    RouteTableEntrySimpleExpression
+    RouteTableEntryOrFilter
 }

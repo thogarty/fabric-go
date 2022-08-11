@@ -10,6 +10,6 @@
 package v4
 
 type AnyOfRoutingProtocolData struct {
-	RoutingProtocolBgpData
-	RoutingProtocolDirectData
+    RoutingProtocolBgpData
+    RoutingProtocolDirectData
 }

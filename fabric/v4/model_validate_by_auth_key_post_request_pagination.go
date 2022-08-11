@@ -12,5 +12,5 @@ package v4
 // Pagination
 type ValidateByAuthKeyPostRequestPagination struct {
 	Offset int32 `json:"offset,omitempty"`
-	Limit  int32 `json:"limit,omitempty"`
+	Limit int32 `json:"limit,omitempty"`
 }

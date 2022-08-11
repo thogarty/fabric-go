@@ -11,7 +11,7 @@ package v4
 
 type SimplifiedNotification struct {
 	// Notification Type
-	Type_        string `json:"type"`
+	Type_ string `json:"type"`
 	SendInterval string `json:"sendInterval,omitempty"`
 	// Array of contact emails
 	Emails []string `json:"emails"`

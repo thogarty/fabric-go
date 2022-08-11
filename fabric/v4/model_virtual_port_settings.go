@@ -13,10 +13,10 @@ package v4
 type VirtualPortSettings struct {
 	PortType string `json:"portType"`
 	// Product name
-	Product                string `json:"product,omitempty"`
-	Buyout                 bool   `json:"buyout,omitempty"`
-	ViewPortPermission     bool   `json:"viewPortPermission,omitempty"`
-	PlaceVcOrderPermission bool   `json:"placeVcOrderPermission,omitempty"`
-	Layer3Enabled          bool   `json:"layer3Enabled,omitempty"`
-	ProductCode            string `json:"productCode,omitempty"`
+	Product string `json:"product,omitempty"`
+	Buyout bool `json:"buyout,omitempty"`
+	ViewPortPermission bool `json:"viewPortPermission,omitempty"`
+	PlaceVcOrderPermission bool `json:"placeVcOrderPermission,omitempty"`
+	Layer3Enabled bool `json:"layer3Enabled,omitempty"`
+	ProductCode string `json:"productCode,omitempty"`
 }

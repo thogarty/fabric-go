@@ -18,7 +18,7 @@ type ServiceTokenConnection struct {
 	// Connection bandwidth limit in Mbps
 	BandwidthLimit int32 `json:"bandwidthLimit,omitempty"`
 	// List of permitted bandwidths.
-	SupportedBandwidths []int32           `json:"supportedBandwidths,omitempty"`
-	ASide               *ServiceTokenSide `json:"aSide,omitempty"`
-	ZSide               *ServiceTokenSide `json:"zSide,omitempty"`
+	SupportedBandwidths []int32 `json:"supportedBandwidths,omitempty"`
+	ASide *ServiceTokenSide `json:"aSide,omitempty"`
+	ZSide *ServiceTokenSide `json:"zSide,omitempty"`
 }

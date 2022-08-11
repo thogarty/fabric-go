@@ -10,9 +10,9 @@
 package v4
 
 type VirtualGatewaySimpleExpression struct {
-	// Possible field names to use on filters:  * `/project/projectId` - project id (mandatory)  * `/name` - Fabric Gateway name  * `/uuid` - Fabric Gateway uuid  * `/state` - Fabric Gateway status  * `/location/metroCode` - Fabric Gateway metro code  * `/location/metroName` - Fabric Gateway metro name  * `/package/code` - Fabric Gateway package  * `/_*` - all-category search
+	// Possible field names to use on filters:  * `/project/projectId` - project id (mandatory)  * `/name` - Fabric Gateway name  * `/uuid` - Fabric Gateway uuid  * `/state` - Fabric Gateway status  * `/location/metroCode` - Fabric Gateway metro code  * `/location/metroName` - Fabric Gateway metro name  * `/package/code` - Fabric Gateway package  * `/_*` - all-category search 
 	Property string `json:"property,omitempty"`
-	// Possible operators to use on filters:  * `=` - equal  * `!=` - not equal  * `>` - greater than  * `>=` - greater than or equal to  * `<` - less than  * `<=` - less than or equal to  * `[NOT] BETWEEN` - (not) between  * `[NOT] LIKE` - (not) like  * `[NOT] IN` - (not) in  * `~*` - case-insensitive like
-	Operator string   `json:"operator,omitempty"`
-	Values   []string `json:"values,omitempty"`
+	// Possible operators to use on filters:  * `=` - equal  * `!=` - not equal  * `>` - greater than  * `>=` - greater than or equal to  * `<` - less than  * `<=` - less than or equal to  * `[NOT] BETWEEN` - (not) between  * `[NOT] LIKE` - (not) like  * `[NOT] IN` - (not) in  * `~*` - case-insensitive like 
+	Operator string `json:"operator,omitempty"`
+	Values []string `json:"values,omitempty"`
 }

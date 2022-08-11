@@ -11,13 +11,13 @@ package v4
 
 type RoutingProtocolBgpType struct {
 	// Routing protocol type
-	Type_   string                    `json:"type"`
-	Name    string                    `json:"name,omitempty"`
+	Type_ string `json:"type"`
+	Name string `json:"name,omitempty"`
 	BgpIpv4 *BgpConnectionIpv4Request `json:"bgpIpv4,omitempty"`
 	BgpIpv6 *BgpConnectionIpv6Request `json:"bgpIpv6,omitempty"`
 	// Customer asn
 	CustomerAsn int64 `json:"customerAsn,omitempty"`
 	// BGP authorization key
-	BgpAuthKey string              `json:"bgpAuthKey,omitempty"`
-	Bfd        *RoutingProtocolBfd `json:"bfd,omitempty"`
+	BgpAuthKey string `json:"bgpAuthKey,omitempty"`
+	Bfd *RoutingProtocolBfd `json:"bfd,omitempty"`
 }

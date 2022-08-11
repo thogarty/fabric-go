@@ -11,9 +11,9 @@ package v4
 
 // Physical Port configuration settings
 type PhysicalPortSettings struct {
-	PortType          string `json:"portType"`
-	ErrorMessage      string `json:"errorMessage,omitempty"`
-	SharedPortType    string `json:"sharedPortType,omitempty"`
+	PortType string `json:"portType"`
+	ErrorMessage string `json:"errorMessage,omitempty"`
+	SharedPortType string `json:"sharedPortType,omitempty"`
 	SharedPortProduct string `json:"sharedPortProduct,omitempty"`
-	PackageType       string `json:"packageType,omitempty"`
+	PackageType string `json:"packageType,omitempty"`
 }

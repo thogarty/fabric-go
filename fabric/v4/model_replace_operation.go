@@ -12,7 +12,7 @@ package v4
 // Replace attribute value or sub-resource in the existing model
 type ReplaceOperation struct {
 	// the operation to be performed
-	Op   string `json:"op"`
+	Op string `json:"op"`
 	Path string `json:"path"`
 	// value to replace with
 	Value *interface{} `json:"value"`

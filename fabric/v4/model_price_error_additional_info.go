@@ -11,5 +11,5 @@ package v4
 
 type PriceErrorAdditionalInfo struct {
 	Property string `json:"property,omitempty"`
-	Reason   string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty"`
 }

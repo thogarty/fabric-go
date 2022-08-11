@@ -10,4 +10,5 @@
 package v4
 
 // new object value for updated parameter
-type UpdateValueObject struct{}
+type UpdateValueObject struct {
+}

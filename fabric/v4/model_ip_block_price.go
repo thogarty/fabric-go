@@ -12,8 +12,8 @@ package v4
 // IP Block Product configuration
 type IpBlockPrice struct {
 	// Either uuid or rest of attributes are required
-	Uuid         string         `json:"uuid,omitempty"`
-	Type_        *IpBlockType   `json:"type,omitempty"`
-	PrefixLength int32          `json:"prefixLength,omitempty"`
-	Location     *PriceLocation `json:"location,omitempty"`
+	Uuid string `json:"uuid,omitempty"`
+	Type_ *IpBlockType `json:"type,omitempty"`
+	PrefixLength int32 `json:"prefixLength,omitempty"`
+	Location *PriceLocation `json:"location,omitempty"`
 }

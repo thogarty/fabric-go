@@ -11,10 +11,10 @@ package v4
 
 // Error Response with details
 type ModelError struct {
-	ErrorCode      string                     `json:"errorCode"`
-	ErrorMessage   string                     `json:"errorMessage"`
-	CorrelationId  string                     `json:"correlationId,omitempty"`
-	Details        string                     `json:"details,omitempty"`
-	Help           string                     `json:"help,omitempty"`
+	ErrorCode string `json:"errorCode"`
+	ErrorMessage string `json:"errorMessage"`
+	CorrelationId string `json:"correlationId,omitempty"`
+	Details string `json:"details,omitempty"`
+	Help string `json:"help,omitempty"`
 	AdditionalInfo []PriceErrorAdditionalInfo `json:"additionalInfo,omitempty"`
 }

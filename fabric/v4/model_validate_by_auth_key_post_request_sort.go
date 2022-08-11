@@ -12,5 +12,5 @@ package v4
 // Sorting option object
 type ValidateByAuthKeyPostRequestSort struct {
 	Direction string `json:"direction,omitempty"`
-	Property  string `json:"property,omitempty"`
+	Property string `json:"property,omitempty"`
 }

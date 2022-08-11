@@ -11,7 +11,7 @@ package v4
 
 // Search requests containing criteria
 type ServiceProfileSearchRequest struct {
-	Filter     *ServiceProfileFilter        `json:"filter,omitempty"`
-	Pagination *PaginationRequest           `json:"pagination,omitempty"`
-	Sort       []ServiceProfileSortCriteria `json:"sort,omitempty"`
+	Filter *ServiceProfileFilter `json:"filter,omitempty"`
+	Pagination *PaginationRequest `json:"pagination,omitempty"`
+	Sort []ServiceProfileSortCriteria `json:"sort,omitempty"`
 }

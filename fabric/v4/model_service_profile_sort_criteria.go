@@ -11,5 +11,5 @@ package v4
 
 type ServiceProfileSortCriteria struct {
 	Direction *ServiceProfileSortDirection `json:"direction,omitempty"`
-	Property  *ServiceProfileSortBy        `json:"property,omitempty"`
+	Property *ServiceProfileSortBy `json:"property,omitempty"`
 }

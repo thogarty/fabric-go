@@ -13,20 +13,20 @@ package v4
 type VirtualGateway struct {
 	Type_ string `json:"type"`
 	// Customer-provided Fabric Gateway name
-	Name     string                        `json:"name"`
+	Name string `json:"name"`
 	Location *SimplifiedLocationWithoutIbx `json:"location"`
-	Package_ *VirtualGatewayPackageType    `json:"package"`
-	Order    *Order                        `json:"order,omitempty"`
-	Project  *Project                      `json:"project,omitempty"`
-	Account  *SimplifiedAccount            `json:"account"`
+	Package_ *VirtualGatewayPackageType `json:"package"`
+	Order *Order `json:"order,omitempty"`
+	Project *Project `json:"project,omitempty"`
+	Account *SimplifiedAccount `json:"account"`
 	// Preferences for notifications on connection configuration or status changes
 	Notifications []SimplifiedNotification `json:"notifications"`
 	// Fabric Gateway URI
 	Href string `json:"href"`
 	// Equinix-assigned access point identifier
-	Uuid      string                          `json:"uuid"`
-	State     *VirtualGatewayAccessPointState `json:"state"`
-	Operation *VirtualGatewayOperation        `json:"operation"`
-	ChangeLog *Changelog                      `json:"changeLog"`
-	Change    *GatewayChange                  `json:"change,omitempty"`
+	Uuid string `json:"uuid"`
+	State *VirtualGatewayAccessPointState `json:"state"`
+	Operation *VirtualGatewayOperation `json:"operation"`
+	ChangeLog *Changelog `json:"changeLog"`
+	Change *GatewayChange `json:"change,omitempty"`
 }

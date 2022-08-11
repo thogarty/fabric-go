@@ -15,7 +15,7 @@ type VirtualGatewayPackage struct {
 	Href string `json:"href,omitempty"`
 	// Type of Gateway package
 	Type_ string `json:"type,omitempty"`
-	Code  *Code  `json:"code,omitempty"`
+	Code *Code `json:"code,omitempty"`
 	// Fabric Gateway Package description
 	Description string `json:"description,omitempty"`
 	// Gateway package BGP IPv4 routes limit
@@ -33,7 +33,7 @@ type VirtualGatewayPackage struct {
 	// Gateway package high-available configuration support
 	IsHaSupported bool `json:"isHaSupported,omitempty"`
 	// Gateway package route filter support
-	IsRouteFilterSupported bool              `json:"isRouteFilterSupported,omitempty"`
-	Nat                    *Nat              `json:"nat,omitempty"`
-	ChangeLog              *PackageChangeLog `json:"changeLog,omitempty"`
+	IsRouteFilterSupported bool `json:"isRouteFilterSupported,omitempty"`
+	Nat *Nat `json:"nat,omitempty"`
+	ChangeLog *PackageChangeLog `json:"changeLog,omitempty"`
 }

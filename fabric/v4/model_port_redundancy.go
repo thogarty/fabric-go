@@ -14,6 +14,6 @@ type PortRedundancy struct {
 	// Access point redundancy
 	Enabled bool `json:"enabled,omitempty"`
 	// Port redundancy group
-	Group    int32         `json:"group,omitempty"`
+	Group int32 `json:"group,omitempty"`
 	Priority *PortPriority `json:"priority,omitempty"`
 }

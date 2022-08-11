@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/antihax/optional v1.0.0
-	golang.org/x/oauth2 v0.0.0-20220630143837-2104d58473e0
+	golang.org/x/oauth2 v0.0.0-20220808172628-8227340efae7
 )
 
 require (

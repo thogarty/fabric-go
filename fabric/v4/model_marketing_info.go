@@ -13,6 +13,6 @@ type MarketingInfo struct {
 	// Logo file name
 	Logo string `json:"logo,omitempty"`
 	// Profile promotion on marketplace
-	Promotion    bool          `json:"promotion,omitempty"`
+	Promotion bool `json:"promotion,omitempty"`
 	ProcessSteps []ProcessStep `json:"processSteps,omitempty"`
 }
