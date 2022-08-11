@@ -9,4 +9,4 @@
  */
 package v4
 
-type ServiceProfileFilter interface{}
+type ServiceProfileFilter struct{}
