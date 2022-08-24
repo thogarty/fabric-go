@@ -10,5 +10,9 @@
 package v4
 
 // Access Point Type
-type ServiceProfileAccessPointType interface {
+type ServiceProfileAccessPointType struct {
+	Type_ *ServiceProfileAccessPointTypeEnum `json:"type"`
+	Uuid  string                             `json:"uuid,omitempty"`
+	ServiceProfileAccessPointTypeColo
+	ServiceProfileAccessPointTypeVd
 }
