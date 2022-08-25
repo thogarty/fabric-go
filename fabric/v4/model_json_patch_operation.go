@@ -12,6 +12,7 @@ package v4
 // Service Profile Access Points
 type JsonPatchOperation struct {
 	// the operation to be performed
-	Op string `json:"op"`
-	Path string `json:"path"`
+	Op    string       `json:"op"`
+	Path  string       `json:"path"`
+	Value *interface{} `json:"value"`
 }
