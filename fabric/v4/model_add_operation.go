@@ -15,5 +15,5 @@ type AddOperation struct {
 	Op   string `json:"op"`
 	Path string `json:"path"`
 	// value to add
-	Value interface{} `json:"value"`
+	Value *interface{} `json:"value"`
 }
