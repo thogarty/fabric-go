@@ -12,8 +12,8 @@ package v4
 // Add Sub-Resource to the existing model
 type AddOperation struct {
 	// the operation to be performed
-	Op string `json:"op"`
+	Op   string `json:"op"`
 	Path string `json:"path"`
 	// value to add
-	Value *interface{} `json:"value"`
+	Value interface{} `json:"value"`
 }
