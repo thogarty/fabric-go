@@ -11,6 +11,6 @@ package v4
 
 type AnyOfconnectionsConnectionIdBody struct {
 	NexusConnectionUpdateRequest
-	NexusConnectionPortUpdateRequest
-	NexusConnectionBulkUpdateRequest
+	//NexusConnectionPortUpdateRequest
+	//NexusConnectionBulkUpdateRequest
 }
