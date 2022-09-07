@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**SearchPrices**](PricesApi.md#SearchPrices) | **Post** /fabric/v4/prices/search | 
 
 # **SearchPrices**
-> PriceSearchResponse SearchPrices(ctx, body)
+> PriceSearchResponse SearchPrices(ctx, body, optional)
 
 
 Search prices by search criteria
@@ -18,6 +18,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**FilterBody**](FilterBody.md)|  | 
+ **optional** | ***PricesApiSearchPricesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PricesApiSearchPricesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **correlationId** | **optional.**| Correlation identifier | 
 
 ### Return type
 

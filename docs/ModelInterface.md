@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Href** | **string** | Virtual Interface URI | [optional] [default to null]
 **Uuid** | **string** | Equinix-assigned Virtual Device Interface identifier | [optional] [default to null]
 **Id** | **int32** | Interface id | [optional] [default to null]
 **Type_** | **string** | Virtual Device Interface type | [optional] [default to null]

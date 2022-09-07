@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**GetMetros**](MetrosApi.md#GetMetros) | **Get** /fabric/v4/metros | Get all Metros
 
 # **GetMetroByCode**
-> Metro GetMetroByCode(ctx, metroCode)
+> Metro GetMetroByCode(ctx, metroCode, optional)
 Get Metro by Code
 
 GET Metros retrieves all Equinix Fabric metros, as well as latency data between each metro location. .
@@ -19,6 +19,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **metroCode** | [**string**](.md)| Metro Code | 
+ **optional** | ***MetrosApiGetMetroByCodeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a MetrosApiGetMetroByCodeOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **correlationId** | **optional.String**| Correlation identifier | 
 
 ### Return type
 
@@ -55,6 +63,7 @@ Name | Type | Description  | Notes
  **presence** | [**optional.Interface of Presence**](.md)| User On Boarded Metros based on Fabric resource availability | 
  **offset** | **optional.Int32**| offset | 
  **limit** | **optional.Int32**| number of records to fetch | 
+ **correlationId** | **optional.String**| Correlation identifier | 
 
 ### Return type
 
