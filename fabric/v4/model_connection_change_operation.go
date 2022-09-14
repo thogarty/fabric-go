@@ -16,5 +16,5 @@ type ConnectionChangeOperation struct {
 	// path inside document leading to updated parameter
 	Path string `json:"path"`
 	// new value for updated parameter
-	Value *interface{} `json:"value"`
+	Value interface{} `json:"value"`
 }
