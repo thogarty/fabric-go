@@ -4,13 +4,71 @@ All URIs are relative to *https://api.equinix.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddToLag**](PortsApi.md#AddToLag) | **Post** /fabric/v4/ports/{portId}/physicalPorts/bulk | Add to Lag
+[**CreateBulkPort**](PortsApi.md#CreateBulkPort) | **Post** /fabric/v4/ports/bulk | Create Port
 [**CreatePort**](PortsApi.md#CreatePort) | **Post** /fabric/v4/ports | Create Port
 [**GetPortByUuid**](PortsApi.md#GetPortByUuid) | **Get** /fabric/v4/ports/{portId} | Get Port by uuid
 [**GetPorts**](PortsApi.md#GetPorts) | **Get** /fabric/v4/ports | Get All Ports
-[**SearchPorts**](PortsApi.md#SearchPorts) | **Post** /fabric/i4/ports/search | Search ports
+
+# **AddToLag**
+> AllPhysicalPortsResponse AddToLag(ctx, body, portId)
+Add to Lag
+
+Add Physical Ports to Virtual Port.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**AddToLagRequest**](AddToLagRequest.md)|  | 
+  **portId** | [**string**](.md)| Port UUID | 
+
+### Return type
+
+[**AllPhysicalPortsResponse**](AllPhysicalPortsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateBulkPort**
+> AllPortsResponse CreateBulkPort(ctx, body)
+Create Port
+
+Create Port creates Equinix Fabric™ Port.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**BulkPort**](BulkPort.md)|  | 
+
+### Return type
+
+[**AllPortsResponse**](AllPortsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreatePort**
-> AllPortsResponse CreatePort(ctx, body, optional)
+> AllPortsResponse CreatePort(ctx, body)
 Create Port
 
 Create Port creates Equinix Fabric™ Port.
@@ -21,15 +79,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**Port**](Port.md)|  | 
- **optional** | ***PortsApiCreatePortOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a PortsApiCreatePortOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 
@@ -104,42 +153,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **SearchPorts**
-> AllPortsResponse SearchPorts(ctx, body, optional)
-Search ports
-
-The API provides capability to get list of user's virtual ports using search criteria, including optional filtering, pagination and sorting
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**PortSearchRequest**](PortSearchRequest.md)|  | 
- **optional** | ***PortsApiSearchPortsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a PortsApiSearchPortsOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
-
-### Return type
-
-[**AllPortsResponse**](AllPortsResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

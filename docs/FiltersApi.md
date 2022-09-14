@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**GetFilters**](FiltersApi.md#GetFilters) | **Get** /fabric/v4/filters | Get Search Filters
 
 # **GetFilters**
-> FilterResponse GetFilters(ctx, type_, optional)
+> FilterResponse GetFilters(ctx, type_)
 Get Search Filters
 
 The API provides capability to get list of user's Fabric Resource search criteria
@@ -18,15 +18,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **type_** | [**ResourceType**](.md)| Resource Type | 
- **optional** | ***FiltersApiGetFiltersOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a FiltersApiGetFiltersOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 

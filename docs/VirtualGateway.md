@@ -14,7 +14,9 @@ Name | Type | Description | Notes
 **Href** | **string** | Fabric Gateway URI | [optional] [default to null]
 **Uuid** | **string** | Equinix-assigned access point identifier | [optional] [default to null]
 **State** | [***VirtualGatewayAccessPointState**](VirtualGatewayAccessPointState.md) |  | [optional] [default to null]
-**Operation** | [***VirtualGatewayOperation**](VirtualGatewayOperation.md) |  | [optional] [default to null]
+**BgpIpv4RoutesCount** | **int32** | Access point used and maximum number of IPv4 BGP routes | [optional] [default to null]
+**BgpIpv6RoutesCount** | **int32** | Access point used and maximum number of IPv6 BGP routes | [optional] [default to null]
+**ConnectionsCount** | **int32** | Number of connections associated with this Access point | [optional] [default to null]
 **ChangeLog** | [***Changelog**](Changelog.md) |  | [optional] [default to null]
 **Change** | [***GatewayChange**](GatewayChange.md) |  | [optional] [default to null]
 

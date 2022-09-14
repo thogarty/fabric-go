@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**UpdateNetworkByUuid**](NetworksApi.md#UpdateNetworkByUuid) | **Patch** /fabric/v4/networks/{networkId} | Update Network By ID
 
 # **CreateNetwork**
-> Network CreateNetwork(ctx, body, optional)
+> Network CreateNetwork(ctx, body)
 Create Network
 
 This API provides capability to create user's Fabric Network
@@ -25,15 +25,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**NetworkPostRequest**](NetworkPostRequest.md)|  | 
- **optional** | ***NetworksApiCreateNetworkOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiCreateNetworkOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 
@@ -51,7 +42,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteNetworkByUuid**
-> Network DeleteNetworkByUuid(ctx, networkId, optional)
+> Network DeleteNetworkByUuid(ctx, networkId)
 Delete Network By ID
 
 This API provides capability to delete user's Fabric Network
@@ -62,15 +53,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **networkId** | [**string**](.md)| Network UUID | 
- **optional** | ***NetworksApiDeleteNetworkByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiDeleteNetworkByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -88,7 +70,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetConnectionsByNetworkUuid**
-> NetworkConnections GetConnectionsByNetworkUuid(ctx, networkId, optional)
+> NetworkConnections GetConnectionsByNetworkUuid(ctx, networkId)
 Get Connections
 
 The API provides capability to get list of user's Fabric Network connections
@@ -99,15 +81,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **networkId** | [**string**](.md)| Network UUID | 
- **optional** | ***NetworksApiGetConnectionsByNetworkUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiGetConnectionsByNetworkUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -125,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetNetworkByUuid**
-> Network GetNetworkByUuid(ctx, networkId, optional)
+> Network GetNetworkByUuid(ctx, networkId)
 Get Network By ID
 
 This API provides capability to retrieve user's Fabric Network
@@ -136,15 +109,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **networkId** | [**string**](.md)| Network UUID | 
- **optional** | ***NetworksApiGetNetworkByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiGetNetworkByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -162,7 +126,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetNetworkChangeByUuid**
-> NetworkChange GetNetworkChangeByUuid(ctx, networkId, changeId, optional)
+> NetworkChange GetNetworkChangeByUuid(ctx, networkId, changeId)
 Get Change By ID
 
 This API provides capability to retrieve user's Fabric Network Change
@@ -174,16 +138,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **networkId** | [**string**](.md)| Network UUID | 
   **changeId** | [**string**](.md)| Network Change UUID | 
- **optional** | ***NetworksApiGetNetworkChangeByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiGetNetworkChangeByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -201,7 +155,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetNetworkChanges**
-> NetworkChangeResponse GetNetworkChanges(ctx, networkId, optional)
+> NetworkChangeResponse GetNetworkChanges(ctx, networkId)
 Get Network Changes
 
 The API provides capability to get list of user's Fabric Network changes
@@ -212,15 +166,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **networkId** | [**string**](.md)| Network UUID | 
- **optional** | ***NetworksApiGetNetworkChangesOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiGetNetworkChangesOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -238,7 +183,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SearchNetworks**
-> NetworkSearchResponse SearchNetworks(ctx, body, optional)
+> NetworkSearchResponse SearchNetworks(ctx, body)
 Search Network
 
 The API provides capability to get list of user's Fabric Network using search criteria, including optional filtering, pagination and sorting
@@ -249,15 +194,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**NetworkSearchRequest**](NetworkSearchRequest.md)|  | 
- **optional** | ***NetworksApiSearchNetworksOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiSearchNetworksOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 
@@ -275,7 +211,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateNetworkByUuid**
-> Network UpdateNetworkByUuid(ctx, body, networkId, optional)
+> Network UpdateNetworkByUuid(ctx, body, networkId)
 Update Network By ID
 
 This API provides capability to update user's Fabric Network
@@ -287,16 +223,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**[]NetworkChangeOperation**](NetworkChangeOperation.md)|  | 
   **networkId** | [**string**](.md)| Network UUID | 
- **optional** | ***NetworksApiUpdateNetworkByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a NetworksApiUpdateNetworkByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 

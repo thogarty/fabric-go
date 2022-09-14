@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**SearchRoutes**](RoutesApi.md#SearchRoutes) | **Post** /fabric/v4/gateways/{gatewayId}/routes/search | Search Route Table
 
 # **SearchRoutes**
-> RouteTableEntrySearchResponse SearchRoutes(ctx, body, gatewayId, optional)
+> RouteTableEntrySearchResponse SearchRoutes(ctx, body, gatewayId)
 Search Route Table
 
 The API provides capability to get list of user's Fabric Gateways route table entries using search criteria, including optional filtering, pagination and sorting
@@ -19,17 +19,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**RouteTableEntrySearchRequest**](RouteTableEntrySearchRequest.md)|  | 
   **gatewayId** | [**string**](.md)| Gateway UUID | 
- **optional** | ***RoutesApiSearchRoutesOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutesApiSearchRoutesOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
- **xSOURCE** | **optional.**| source | 
 
 ### Return type
 

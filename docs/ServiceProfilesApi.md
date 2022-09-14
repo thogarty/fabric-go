@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**UpdateServiceProfileByUuid**](ServiceProfilesApi.md#UpdateServiceProfileByUuid) | **Patch** /fabric/v4/serviceProfiles/{serviceProfileId} | Update Profile
 
 # **CreateServiceProfile**
-> ServiceProfile CreateServiceProfile(ctx, body, icVersion, optional)
+> ServiceProfile CreateServiceProfile(ctx, body)
 Create Profile
 
 Create Service Profile creates Equinix Fabric™ Service Profile.
@@ -24,17 +24,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**ServiceProfileRequest**](ServiceProfileRequest.md)|  | 
-  **icVersion** | **string**| api version | 
- **optional** | ***ServiceProfilesApiCreateServiceProfileOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ServiceProfilesApiCreateServiceProfileOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 
@@ -52,7 +41,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteServiceProfileByUuid**
-> ServiceProfile DeleteServiceProfileByUuid(ctx, serviceProfileId, icVersion, optional)
+> ServiceProfile DeleteServiceProfileByUuid(ctx, serviceProfileId)
 Delete Profile
 
 delete Service Profile by UUID
@@ -63,17 +52,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **serviceProfileId** | [**string**](.md)| Service Profile UUID | 
-  **icVersion** | **string**| api version | 
- **optional** | ***ServiceProfilesApiDeleteServiceProfileByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ServiceProfilesApiDeleteServiceProfileByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -91,7 +69,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetServiceProfileByUuid**
-> ServiceProfile GetServiceProfileByUuid(ctx, serviceProfileId, icVersion, optional)
+> ServiceProfile GetServiceProfileByUuid(ctx, serviceProfileId, optional)
 Get Profile
 
 Get service profile by UUID. View Point parameter if set to zSide will give seller's view of the profile otherwise buyer's view.
@@ -102,7 +80,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **serviceProfileId** | [**string**](.md)| Service Profile UUID | 
-  **icVersion** | **string**| api version | 
  **optional** | ***ServiceProfilesApiGetServiceProfileByUuidOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -110,11 +87,7 @@ Optional parameters are passed through a pointer to a ServiceProfilesApiGetServi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
  **viewPoint** | **optional.String**| flips view between buyer and seller representation | [default to aSide]
- **style** | **optional.String**| style | [default to MAX]
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -132,7 +105,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetServiceProfiles**
-> ServiceProfiles GetServiceProfiles(ctx, icVersion, optional)
+> ServiceProfiles GetServiceProfiles(ctx, optional)
 Get all Profiles
 
 The API request returns all Equinix Fabric Service Profiles in accordance with the view point requested.
@@ -142,20 +115,15 @@ The API request returns all Equinix Fabric Service Profiles in accordance with t
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **icVersion** | **string**| api version | 
  **optional** | ***ServiceProfilesApiGetServiceProfilesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a ServiceProfilesApiGetServiceProfilesOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
  **offset** | **optional.Int32**| offset | 
  **limit** | **optional.Int32**| number of records to fetch | 
  **viewPoint** | **optional.String**| flips view between buyer and seller representation | [default to aSide]
- **style** | **optional.String**| style | [default to MAX]
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -173,7 +141,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PutServiceProfileByUuid**
-> ServiceProfile PutServiceProfileByUuid(ctx, body, serviceProfileId, ifMatch, icVersion, optional)
+> ServiceProfile PutServiceProfileByUuid(ctx, body, serviceProfileId, ifMatch)
 Replace Profile
 
 This API request replaces a service profile definition
@@ -186,19 +154,6 @@ Name | Type | Description  | Notes
   **body** | [**ServiceProfileRequest**](ServiceProfileRequest.md)|  | 
   **serviceProfileId** | [**string**](.md)| Service Profile UUID | 
   **ifMatch** | **string**| conditional request | 
-  **icVersion** | **string**| api version | 
- **optional** | ***ServiceProfilesApiPutServiceProfileByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ServiceProfilesApiPutServiceProfileByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 
@@ -216,7 +171,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SearchServiceProfiles**
-> ServiceProfiles SearchServiceProfiles(ctx, body, icVersion, optional)
+> ServiceProfiles SearchServiceProfiles(ctx, body)
 Profile Search
 
 Search service profiles by search criteria
@@ -227,17 +182,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**ServiceProfileSearchRequest**](ServiceProfileSearchRequest.md)|  | 
-  **icVersion** | **string**| api version | 
- **optional** | ***ServiceProfilesApiSearchServiceProfilesOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ServiceProfilesApiSearchServiceProfilesOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 
@@ -255,7 +199,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateServiceProfileByUuid**
-> ServiceProfile UpdateServiceProfileByUuid(ctx, body, serviceProfileId, ifMatch, icVersion, optional)
+> ServiceProfile UpdateServiceProfileByUuid(ctx, body, serviceProfileId, ifMatch)
 Update Profile
 
 Update Service Profile by UUID
@@ -268,19 +212,6 @@ Name | Type | Description  | Notes
   **body** | [**[]JsonPatchOperation**](JsonPatchOperation.md)|  | 
   **serviceProfileId** | [**string**](.md)| Service Profile UUID | 
   **ifMatch** | **string**| conditional request | 
-  **icVersion** | **string**| api version | 
- **optional** | ***ServiceProfilesApiUpdateServiceProfileByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ServiceProfilesApiUpdateServiceProfileByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
 
 ### Return type
 

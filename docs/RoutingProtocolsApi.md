@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**ReplaceConnectionRoutingProtocolByUuid**](RoutingProtocolsApi.md#ReplaceConnectionRoutingProtocolByUuid) | **Put** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId} | Replace Protocol
 
 # **CreateConnectionRoutingProtocol**
-> RoutingProtocolData CreateConnectionRoutingProtocol(ctx, body, connectionId, optional)
+> RoutingProtocolData CreateConnectionRoutingProtocol(ctx, body, connectionId)
 Create Protocol
 
 This API provides capability to create Routing Protocol for connections
@@ -26,17 +26,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**RoutingProtocolBase**](RoutingProtocolBase.md)|  | 
   **connectionId** | [**string**](.md)| Connection Id | 
- **optional** | ***RoutingProtocolsApiCreateConnectionRoutingProtocolOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutingProtocolsApiCreateConnectionRoutingProtocolOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
- **xSOURCE** | **optional.**| source | 
 
 ### Return type
 
@@ -54,7 +43,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateConnectionRoutingProtocolsInBulk**
-> GetResponse CreateConnectionRoutingProtocolsInBulk(ctx, body, connectionId, optional)
+> GetResponse CreateConnectionRoutingProtocolsInBulk(ctx, body, connectionId)
 Bulk Create Protocol
 
 This API provides capability to create Routing Protocol for connections
@@ -66,17 +55,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**ConnectionRoutingProtocolPostRequest**](ConnectionRoutingProtocolPostRequest.md)|  | 
   **connectionId** | [**string**](.md)| Connection Id | 
- **optional** | ***RoutingProtocolsApiCreateConnectionRoutingProtocolsInBulkOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutingProtocolsApiCreateConnectionRoutingProtocolsInBulkOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
- **xSOURCE** | **optional.**| source | 
 
 ### Return type
 
@@ -94,7 +72,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteConnectionRoutingProtocolByUuid**
-> RoutingProtocolData DeleteConnectionRoutingProtocolByUuid(ctx, routingProtocolId, connectionId, optional)
+> RoutingProtocolData DeleteConnectionRoutingProtocolByUuid(ctx, routingProtocolId, connectionId)
 Delete Protocol
 
 This API provides capability to delete Routing Protocols on virtual connection
@@ -106,17 +84,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **routingProtocolId** | [**string**](.md)| Routing Protocol Id | 
   **connectionId** | [**string**](.md)| Connection Id | 
- **optional** | ***RoutingProtocolsApiDeleteConnectionRoutingProtocolByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutingProtocolsApiDeleteConnectionRoutingProtocolByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
- **xSOURCE** | **optional.String**| source | 
 
 ### Return type
 
@@ -134,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetConnectionRoutingProtocolByUuid**
-> RoutingProtocolData GetConnectionRoutingProtocolByUuid(ctx, routingProtocolId, connectionId, optional)
+> RoutingProtocolData GetConnectionRoutingProtocolByUuid(ctx, routingProtocolId, connectionId)
 Get Protocol
 
 This API provides capability to accept/reject user's virtual connection
@@ -146,17 +113,6 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **routingProtocolId** | [**string**](.md)| Routing Protocol Id | 
   **connectionId** | [**string**](.md)| Connection Id | 
- **optional** | ***RoutingProtocolsApiGetConnectionRoutingProtocolByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutingProtocolsApiGetConnectionRoutingProtocolByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
- **xSOURCE** | **optional.String**| source | 
 
 ### Return type
 
@@ -192,9 +148,6 @@ Optional parameters are passed through a pointer to a RoutingProtocolsApiGetConn
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
- **xSOURCE** | **optional.String**| source | 
  **offset** | **optional.Int32**| offset | 
  **limit** | **optional.Int32**| number of records to fetch | 
 
@@ -214,7 +167,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetConnectionRoutingProtocolsChangeByUuid**
-> RoutingProtocolChangeData GetConnectionRoutingProtocolsChangeByUuid(ctx, connectionId, routingProtocolId, changeId, optional)
+> RoutingProtocolChangeData GetConnectionRoutingProtocolsChangeByUuid(ctx, connectionId, routingProtocolId, changeId)
 Get Change By ID
 
 This API provides capability to retrieve specific Routing Protocol Change
@@ -227,17 +180,6 @@ Name | Type | Description  | Notes
   **connectionId** | [**string**](.md)| Connection Id | 
   **routingProtocolId** | [**string**](.md)| Routing Protocol Id | 
   **changeId** | [**string**](.md)| Routing Protocol Change UUID | 
- **optional** | ***RoutingProtocolsApiGetConnectionRoutingProtocolsChangeByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutingProtocolsApiGetConnectionRoutingProtocolsChangeByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
 
 ### Return type
 
@@ -275,8 +217,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xCORRELATIONID** | **optional.String**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.String**| User name | 
  **offset** | **optional.Int32**| offset | 
  **limit** | **optional.Int32**| number of records to fetch | 
 
@@ -296,7 +236,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ReplaceConnectionRoutingProtocolByUuid**
-> RoutingProtocolData ReplaceConnectionRoutingProtocolByUuid(ctx, body, routingProtocolId, connectionId, optional)
+> RoutingProtocolData ReplaceConnectionRoutingProtocolByUuid(ctx, body, routingProtocolId, connectionId)
 Replace Protocol
 
 This API provides capability to replace complete Routing Protocols on a virtual connection
@@ -309,18 +249,6 @@ Name | Type | Description  | Notes
   **body** | [**RoutingProtocolBase**](RoutingProtocolBase.md)|  | 
   **routingProtocolId** | [**string**](.md)| Routing Protocol Id | 
   **connectionId** | [**string**](.md)| Connection Id | 
- **optional** | ***RoutingProtocolsApiReplaceConnectionRoutingProtocolByUuidOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RoutingProtocolsApiReplaceConnectionRoutingProtocolByUuidOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **xCORRELATIONID** | **optional.**| Correlation identifier | 
- **xAUTHUSERNAME** | **optional.**| User name | 
- **xSOURCE** | **optional.**| source | 
 
 ### Return type
 

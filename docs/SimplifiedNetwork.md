@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 **Href** | **string** | Network URI | [optional] [default to null]
 **Uuid** | **string** | Equinix-assigned network identifier | [default to null]
 **Name** | **string** | Customer-assigned network name | [optional] [default to null]
-**PlatformUuid** | **string** | Equinix-assigned platform connection identifier | [optional] [default to null]
 **State** | [***NetworkState**](NetworkState.md) |  | [optional] [default to null]
 **Account** | [***SimplifiedAccount**](SimplifiedAccount.md) |  | [optional] [default to null]
 **Change** | [***SimplifiedNetworkChange**](SimplifiedNetworkChange.md) |  | [optional] [default to null]
