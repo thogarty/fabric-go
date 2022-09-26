@@ -32,7 +32,7 @@ type Port struct {
 	ConnectivitySourceType string     `json:"connectivitySourceType"`
 	Project                *Project   `json:"project,omitempty"`
 	State                  *PortState `json:"state,omitempty"`
-	Order                  *Order     `json:"order,omitempty"`
+	Order                  *PortOrder `json:"order,omitempty"`
 	// Equinix assigned response attribute for Unique ID for a virtual port.
 	CvpId     string             `json:"cvpId,omitempty"`
 	Operation *PortOperation     `json:"operation,omitempty"`

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Tether** | [***PortTether**](PortTether.md) |  | [optional] [default to null]
 **DemarcationPoint** | [***PortDemarcationPoint**](PortDemarcationPoint.md) |  | [optional] [default to null]
 **AdditionalInfo** | [**[]PortAdditionalInfo**](PortAdditionalInfo.md) | Physical Port additional information | [optional] [default to null]
-**Order** | [***Order**](Order.md) |  | [optional] [default to null]
+**Order** | [***PortOrder**](PortOrder.md) |  | [optional] [default to null]
 **Operation** | [***PortOperation**](PortOperation.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

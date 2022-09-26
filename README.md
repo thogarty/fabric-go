@@ -30,6 +30,8 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**SearchConnections**](docs/ConnectionsApi.md#searchconnections) | **Post** /fabric/v4/connections/search | Search connections
 *ConnectionsApi* | [**UpdateConnectionByUuid**](docs/ConnectionsApi.md#updateconnectionbyuuid) | **Patch** /fabric/v4/connections/{connectionId} | Update by ID
 *ConnectionsApi* | [**ValidateConnections**](docs/ConnectionsApi.md#validateconnections) | **Post** /fabric/v4/connections/validate | Validate AuthKey
+*EventsApi* | [**GetEvent**](docs/EventsApi.md#getevent) | **Get** /fabric/v4/events/{eventId} | Get Event
+*EventsApi* | [**GetEventsByAsset**](docs/EventsApi.md#geteventsbyasset) | **Get** /fabric/v4/events | Get Events of Asset
 *FiltersApi* | [**GetFilters**](docs/FiltersApi.md#getfilters) | **Get** /fabric/v4/filters | Get Search Filters
 *GatewaysApi* | [**CreateGateway**](docs/GatewaysApi.md#creategateway) | **Post** /fabric/v4/gateways | Create Gateway
 *GatewaysApi* | [**CreateGatewayAction**](docs/GatewaysApi.md#creategatewayaction) | **Post** /fabric/v4/gateways/{gatewayId}/actions | Route table actions
@@ -87,7 +89,6 @@ Class | Method | HTTP request | Description
  - [AccessPointType](docs/AccessPointType.md)
  - [Actions](docs/Actions.md)
  - [AddOperation](docs/AddOperation.md)
- - [AddToLagRequest](docs/AddToLagRequest.md)
  - [AdditionalInfo](docs/AdditionalInfo.md)
  - [AllOfServiceProfileAccount](docs/AllOfServiceProfileAccount.md)
  - [AllOfServiceProfileChangeLog](docs/AllOfServiceProfileChangeLog.md)
@@ -104,6 +105,7 @@ Class | Method | HTTP request | Description
  - [BandwidthUtilization](docs/BandwidthUtilization.md)
  - [BgpConnectionIpv4](docs/BgpConnectionIpv4.md)
  - [BgpConnectionIpv6](docs/BgpConnectionIpv6.md)
+ - [BulkPhysicalPort](docs/BulkPhysicalPort.md)
  - [BulkPort](docs/BulkPort.md)
  - [Change](docs/Change.md)
  - [Changelog](docs/Changelog.md)
@@ -217,6 +219,9 @@ Class | Method | HTTP request | Description
  - [PortLoa](docs/PortLoa.md)
  - [PortNotification](docs/PortNotification.md)
  - [PortOperation](docs/PortOperation.md)
+ - [PortOrder](docs/PortOrder.md)
+ - [PortOrderSignature](docs/PortOrderSignature.md)
+ - [PortOrderSignatureDelegate](docs/PortOrderSignatureDelegate.md)
  - [PortPriority](docs/PortPriority.md)
  - [PortRedundancy](docs/PortRedundancy.md)
  - [PortSettings](docs/PortSettings.md)

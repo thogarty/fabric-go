@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ProductCode** | **string** |  | [optional] [default to null]
 **SharedPortType** | **bool** |  | [optional] [default to null]
 **SharedPortProduct** | **string** |  | [optional] [default to null]
-**PackageType** | **string** |  | [optional] [default to null]
+**PackageType** | **string** | Type of Port Package | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

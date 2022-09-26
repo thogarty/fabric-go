@@ -25,6 +25,6 @@ type PhysicalPort struct {
 	DemarcationPoint *PortDemarcationPoint `json:"demarcationPoint,omitempty"`
 	// Physical Port additional information
 	AdditionalInfo []PortAdditionalInfo `json:"additionalInfo,omitempty"`
-	Order          *Order               `json:"order,omitempty"`
+	Order          *PortOrder           `json:"order,omitempty"`
 	Operation      *PortOperation       `json:"operation,omitempty"`
 }

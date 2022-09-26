@@ -16,8 +16,8 @@ type NetworkSortBy string
 const (
 	NAME_NetworkSortBy                        NetworkSortBy = "/name"
 	UUID_NetworkSortBy                        NetworkSortBy = "/uuid"
-	STATE_NetworkSortBy                       NetworkSortBy = "/state"
 	SCOPE_NetworkSortBy                       NetworkSortBy = "/scope"
+	OPERATIONEQUINIX_STATUS_NetworkSortBy     NetworkSortBy = "/operation/equinixStatus"
 	LOCATIONREGION_NetworkSortBy              NetworkSortBy = "/location/region"
 	CHANGE_LOGCREATED_DATE_TIME_NetworkSortBy NetworkSortBy = "/changeLog/createdDateTime"
 	CHANGE_LOGUPDATED_DATE_TIME_NetworkSortBy NetworkSortBy = "/changeLog/updatedDateTime"

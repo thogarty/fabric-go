@@ -25,6 +25,8 @@ servers:
 tags:
 - name: Connections
   description: Connections
+- name: Events
+  description: Events
 - name: Filters
   description: Filters
 - name: Gateways
@@ -2798,7 +2800,8 @@ paths:
       tags:
       - Ports
       summary: Create Port
-      description: Create Port creates Equinix Fabric™ Port.
+      description: Create Port creates Equinix Fabric™ Port.<font color="red"> <sup
+        color='red'>Preview</sup></font>
       operationId: createPort
       parameters: []
       requestBody:
@@ -2813,6 +2816,10 @@ paths:
                 $ref: '#/components/examples/COLOSinglePortLag'
               COLOLagPortNewGroup:
                 $ref: '#/components/examples/COLOLagPortNewGroup'
+              COLOAddSecondaryPort:
+                $ref: '#/components/examples/COLOAddSecondaryPort'
+              REMOTESingleNewLag:
+                $ref: '#/components/examples/REMOTESinglePortNewGroupLagRequest'
         required: true
       responses:
         "201":
@@ -2847,7 +2854,8 @@ paths:
       tags:
       - Ports
       summary: Create Port
-      description: Create Port creates Equinix Fabric™ Port.
+      description: Create Port creates Equinix Fabric™ Port.<font color="red"> <sup
+        color='red'>Preview</sup></font>
       operationId: createBulkPort
       parameters: []
       requestBody:
@@ -2874,7 +2882,7 @@ paths:
       tags:
       - Ports
       summary: Add to Lag
-      description: Add Physical Ports to Virtual Port.
+      description: Add Physical Ports to Virtual Port.<font color="red"> <sup color='red'>Preview</sup></font>
       operationId: addToLag
       parameters:
       - name: portId
@@ -2889,10 +2897,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddToLagRequest'
+              $ref: '#/components/schemas/BulkPhysicalPort'
             examples:
               COLOAddToLag:
                 $ref: '#/components/examples/COLOAddToLag'
+              REMOTEAddToLag:
+                $ref: '#/components/examples/REMOTEAddToLag'
         required: true
       responses:
         "200":
@@ -3040,7 +3050,7 @@ paths:
                 example:
                   $ref: '#/components/examples/403'
         "415":
-          description: Internal server error
+          description: Unsupported Media Type
           content:
             application/json:
               schema:
@@ -3199,15 +3209,6 @@ paths:
               examples:
                 gatewayResponse:
                   $ref: '#/components/examples/GatewayPatchResponseExample'
-        "202":
-          description: Fabric Gateway Access point object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VirtualGateway'
-              examples:
-                gatewayResponse:
-                  $ref: '#/components/examples/GatewayPatchResponseExample'
         "400":
           description: Bad request
           content:
@@ -3245,7 +3246,7 @@ paths:
                 example:
                   $ref: '#/components/examples/404'
         "415":
-          description: Internal server error
+          description: Unsupported Media Type
           content:
             application/json:
               schema:
@@ -3353,7 +3354,7 @@ paths:
                 $ref: '#/components/examples/RouteEntriesStatusUpdate'
         required: true
       responses:
-        "200":
+        "202":
           description: Successful operation
           content:
             application/json:
@@ -3540,7 +3541,7 @@ paths:
                 example:
                   $ref: '#/components/examples/403'
         "415":
-          description: Internal server error
+          description: Unsupported Media Type
           content:
             application/json:
               schema:
@@ -3746,6 +3747,256 @@ paths:
               examples:
                 Bad Request:
                   $ref: '#/components/examples/error-400'
+      security:
+      - BearerAuth: []
+  /fabric/v4/events/{eventId}:
+    get:
+      tags:
+      - Events
+      summary: Get Event
+      description: "The API provides capability to get list of events for user Asset,\
+        \ including pagination"
+      operationId: getEvent
+      parameters:
+      - name: eventId
+        in: path
+        description: Event UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/EventId'
+      - name: connectionId
+        in: query
+        description: Connection UUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId_1'
+      - name: portId
+        in: query
+        description: Port UUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/PortId'
+      - name: type
+        in: query
+        description: type of events
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: object
+          enum:
+          - TRANSACTION_STATUS_AUDIT
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              example:
+              - href: https://api.equinix.com/fabric/v4/events/4362dbd4-0118-445c-9542-82a35a1a4c70
+                type: TRANSACTION_STATUS_AUDIT
+                uuid: 4362dbd4-0118-445c-9542-82a35a1a4c70
+                createdDateTime: 2022-02-03 15:06:09.16835
+                additionalInfo:
+                - key: correlationId
+                  value: testSp
+                body:
+                  href: https://api.equinix.com/fabric/v4/connections/f372169c-3e19-413a-849f-7ecc7fc536d7
+                  type: EVPL_VC
+                  uuid: f372169c-3e19-413a-849f-7ecc7fc536d7
+                  name: test_connection
+                  transaction:
+                    type: ASSET_CREATION
+                    state: FAILED
+                    initatedDateTime: 2022-02-03 15:06:09.16835
+                    duration: PT0S
+                    stage:
+                      type: CONNECTION_REQUEST_VALIDATOR
+                      state: FAILED
+                      initiatedDateTime: 2022-02-03 15:06:09.16835
+                      completedDateTime: 2022-02-03 15:06:09.16845
+                      duration: PT10S
+                  errors:
+                  - errorCode: EQ-3142532
+                    errorMessage: "Token with Invalid Status to create connection,\
+                      \ Please enter valid ServiceToken"
+                    details: Please enter valid ServiceToken UUID.
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+      security:
+      - BearerAuth: []
+  /fabric/v4/events:
+    get:
+      tags:
+      - Events
+      summary: Get Events of Asset
+      description: "The API provides capability to get list of events for user Asset,\
+        \ including pagination"
+      operationId: getEventsByAsset
+      parameters:
+      - name: connectionId
+        in: query
+        description: Connection UUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId_1'
+      - name: portId
+        in: query
+        description: Port UUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/PortId'
+      - name: type
+        in: query
+        description: type of events
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: object
+          enum:
+          - TRANSACTION_STATUS_AUDIT
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                pagination:
+                  offset: 20
+                  limit: 10
+                  total: 2
+                data:
+                - href: https://api.equinix.com/fabric/v4/events/4362dbd4-0118-445c-9542-82a35a1a4c70
+                  type: TRANSACTION_STATUS_AUDIT
+                  uuid: 4362dbd4-0118-445c-9542-82a35a1a4c70
+                  createdDateTime: 2022-02-03 15:06:09.16835
+                  additionalInfo:
+                  - key: correlationId
+                    value: testSp
+                  body:
+                    href: https://api.equinix.com/fabric/v4/connections/f372169c-3e19-413a-849f-7ecc7fc536d7
+                    type: EVPL_VC
+                    uuid: f372169c-3e19-413a-849f-7ecc7fc536d7
+                    name: test_connection
+                    transaction:
+                      type: ASSET_CREATION
+                      state: INITIATED
+                      initatedDateTime: 2022-02-03 15:06:09.16835
+                      duration: PT0S
+                      durationSlo: PT2M20S
+                      stage:
+                        external: true
+                        type: CONNECTION_REQUEST_VALIDATOR
+                        state: INITIATED
+                        initiatedDateTime: 2022-02-03 15:06:09.16835
+                        completedDateTime: 2022-02-03 15:06:09.16845
+                        duration: PT10S
+                        durationSlo: PT0S
+                - href: https://api.equinix.com/fabric/v4/events/4362dbd4-0118-445c-9542-82a35a1a4c70
+                  type: TRANSACTION_STATUS_AUDIT
+                  uuid: 4362dbd4-0118-445c-9542-82a35a1a4c70
+                  createdDateTime: 2022-02-03 15:06:09.16835
+                  additionalInfo:
+                  - key: correlationId
+                    value: testSp
+                  body:
+                    href: https://api.equinix.com/fabric/v4/connections/f372169c-3e19-413a-849f-7ecc7fc536d7
+                    type: EVPL_VC
+                    uuid: f372169c-3e19-413a-849f-7ecc7fc536d7
+                    name: test_connection
+                    transaction:
+                      type: ASSET_CREATION
+                      state: FAILED
+                      initatedDateTime: 2022-02-03 15:06:09.16835
+                      duration: PT0S
+                      durationSlo: PT2M20S
+                      stage:
+                        external: true
+                        type: CONNECTION_REQUEST_VALIDATOR
+                        state: FAILED
+                        initiatedDateTime: 2022-02-03 15:06:09.16835
+                        completedDateTime: 2022-02-03 15:06:09.16845
+                        duration: PT10S
+                        durationSlo: PT0S
+                    errors:
+                    - errorCode: EQ-3142532
+                      errorMessage: "Token with Invalid Status to create connection,\
+                        \ Please enter valid ServiceToken"
+                      details: Please enter valid ServiceToken UUID.
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
       security:
       - BearerAuth: []
   /fabric/v4/networks:
@@ -4683,7 +4934,7 @@ components:
                 viewPortPermission: true
                 placeVcOrderPermission: true
                 sharedPortType: true
-                packageType: packageType
+                packageType: STANDARD
                 sharedPortProduct: sharedPortProduct
               availableBandwidth: 0
               demarcationPoint:
@@ -4715,7 +4966,17 @@ components:
                 type: XF_PHYSICAL_PORT
                 operation: null
                 interfaceSpeed: 0
-                order: null
+                order:
+                  orderNumber: orderNumber
+                  orderId: orderId
+                  signature:
+                    delegate:
+                      firstName: firstName
+                      lastName: lastName
+                      email: email
+                    signatory: ECHOSIGN
+                  purchaseOrderNumber: purchaseOrderNumber
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               - interfaceType: interfaceType
                 demarcationPoint: null
                 tether: null
@@ -4728,7 +4989,17 @@ components:
                 type: XF_PHYSICAL_PORT
                 operation: null
                 interfaceSpeed: 0
-                order: null
+                order:
+                  orderNumber: orderNumber
+                  orderId: orderId
+                  signature:
+                    delegate:
+                      firstName: firstName
+                      lastName: lastName
+                      email: email
+                    signatory: ECHOSIGN
+                  purchaseOrderNumber: purchaseOrderNumber
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               cvpId: cvpId
               name: name
               location: null
@@ -5140,7 +5411,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -5172,7 +5443,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -5185,7 +5466,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -5579,7 +5870,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -5611,7 +5902,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -5624,7 +5925,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -6170,6 +6481,7 @@ components:
       - /zSide/accessPoint/location/metroName
       - /zSide/accessPoint/name
       - /zSide/accessPoint/port/uuid
+      - /zSide/accessPoint/network/uuid
       - /zSide/accessPoint/port/name
       - /zSide/accessPoint/profile/uuid
       - /zSide/accessPoint/type
@@ -6445,7 +6757,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -6477,7 +6789,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -6490,7 +6812,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -6884,7 +7216,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -6916,7 +7248,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -6929,7 +7271,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -8899,9 +9251,13 @@ components:
           order:
             orderNumber: orderNumber
             orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
             purchaseOrderNumber: purchaseOrderNumber
-            href: http://example.com/aeiou
-            billingTier: billingTier
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           settings:
             product: product
@@ -8911,7 +9267,7 @@ components:
             viewPortPermission: true
             placeVcOrderPermission: true
             sharedPortType: true
-            packageType: packageType
+            packageType: STANDARD
             sharedPortProduct: sharedPortProduct
           availableBandwidth: 0
           demarcationPoint:
@@ -8943,7 +9299,17 @@ components:
             type: XF_PHYSICAL_PORT
             operation: null
             interfaceSpeed: 0
-            order: null
+            order:
+              orderNumber: orderNumber
+              orderId: orderId
+              signature:
+                delegate:
+                  firstName: firstName
+                  lastName: lastName
+                  email: email
+                signatory: ECHOSIGN
+              purchaseOrderNumber: purchaseOrderNumber
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - interfaceType: interfaceType
             demarcationPoint: null
             tether: null
@@ -8956,7 +9322,17 @@ components:
             type: XF_PHYSICAL_PORT
             operation: null
             interfaceSpeed: 0
-            order: null
+            order:
+              orderNumber: orderNumber
+              orderId: orderId
+              signature:
+                delegate:
+                  firstName: firstName
+                  lastName: lastName
+                  email: email
+                signatory: ECHOSIGN
+              purchaseOrderNumber: purchaseOrderNumber
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           changelog:
             createdByEmail: john.smith@example.com
             deletedByFullName: John Smith
@@ -9057,9 +9433,13 @@ components:
           order:
             orderNumber: orderNumber
             orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
             purchaseOrderNumber: purchaseOrderNumber
-            href: http://example.com/aeiou
-            billingTier: billingTier
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           settings:
             product: product
@@ -9069,7 +9449,7 @@ components:
             viewPortPermission: true
             placeVcOrderPermission: true
             sharedPortType: true
-            packageType: packageType
+            packageType: STANDARD
             sharedPortProduct: sharedPortProduct
           availableBandwidth: 0
           demarcationPoint:
@@ -9101,7 +9481,17 @@ components:
             type: XF_PHYSICAL_PORT
             operation: null
             interfaceSpeed: 0
-            order: null
+            order:
+              orderNumber: orderNumber
+              orderId: orderId
+              signature:
+                delegate:
+                  firstName: firstName
+                  lastName: lastName
+                  email: email
+                signatory: ECHOSIGN
+              purchaseOrderNumber: purchaseOrderNumber
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - interfaceType: interfaceType
             demarcationPoint: null
             tether: null
@@ -9114,7 +9504,17 @@ components:
             type: XF_PHYSICAL_PORT
             operation: null
             interfaceSpeed: 0
-            order: null
+            order:
+              orderNumber: orderNumber
+              orderId: orderId
+              signature:
+                delegate:
+                  firstName: firstName
+                  lastName: lastName
+                  email: email
+                signatory: ECHOSIGN
+              purchaseOrderNumber: purchaseOrderNumber
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           changelog:
             createdByEmail: john.smith@example.com
             deletedByFullName: John Smith
@@ -9226,7 +9626,7 @@ components:
         state:
           $ref: '#/components/schemas/PortState'
         order:
-          $ref: '#/components/schemas/Order'
+          $ref: '#/components/schemas/PortOrder'
         cvpId:
           type: string
           description: Equinix assigned response attribute for Unique ID for a virtual
@@ -9349,9 +9749,13 @@ components:
         order:
           orderNumber: orderNumber
           orderId: orderId
+          signature:
+            delegate:
+              firstName: firstName
+              lastName: lastName
+              email: email
+            signatory: ECHOSIGN
           purchaseOrderNumber: purchaseOrderNumber
-          href: http://example.com/aeiou
-          billingTier: billingTier
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         settings:
           product: product
@@ -9361,7 +9765,7 @@ components:
           viewPortPermission: true
           placeVcOrderPermission: true
           sharedPortType: true
-          packageType: packageType
+          packageType: STANDARD
           sharedPortProduct: sharedPortProduct
         availableBandwidth: 0
         demarcationPoint:
@@ -9393,7 +9797,17 @@ components:
           type: XF_PHYSICAL_PORT
           operation: null
           interfaceSpeed: 0
-          order: null
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
+            purchaseOrderNumber: purchaseOrderNumber
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - interfaceType: interfaceType
           demarcationPoint: null
           tether: null
@@ -9406,7 +9820,17 @@ components:
           type: XF_PHYSICAL_PORT
           operation: null
           interfaceSpeed: 0
-          order: null
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
+            purchaseOrderNumber: purchaseOrderNumber
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         changelog:
           createdByEmail: john.smith@example.com
           deletedByFullName: John Smith
@@ -9494,7 +9918,7 @@ components:
           items:
             $ref: '#/components/schemas/PortAdditionalInfo'
         order:
-          $ref: '#/components/schemas/Order'
+          $ref: '#/components/schemas/PortOrder'
         operation:
           $ref: '#/components/schemas/PortOperation'
       description: Physical Port specification
@@ -9511,7 +9935,17 @@ components:
         type: XF_PHYSICAL_PORT
         operation: null
         interfaceSpeed: 0
-        order: null
+        order:
+          orderNumber: orderNumber
+          orderId: orderId
+          signature:
+            delegate:
+              firstName: firstName
+              lastName: lastName
+              email: email
+            signatory: ECHOSIGN
+          purchaseOrderNumber: purchaseOrderNumber
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     BulkPort:
       type: object
       properties:
@@ -9520,7 +9954,7 @@ components:
           items:
             $ref: '#/components/schemas/Port'
       description: Create bulk connection post request
-    AddToLagRequest:
+    BulkPhysicalPort:
       type: object
       properties:
         data:
@@ -9560,7 +9994,17 @@ components:
           type: XF_PHYSICAL_PORT
           operation: null
           interfaceSpeed: 0
-          order: null
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
+            purchaseOrderNumber: purchaseOrderNumber
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - interfaceType: interfaceType
           demarcationPoint: null
           tether: null
@@ -9573,7 +10017,17 @@ components:
           type: XF_PHYSICAL_PORT
           operation: null
           interfaceSpeed: 0
-          order: null
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
+            purchaseOrderNumber: purchaseOrderNumber
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     VirtualGatewayPostRequest:
       type: object
       properties:
@@ -10452,7 +10906,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -10484,7 +10938,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -10497,7 +10961,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -10891,7 +11365,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -10923,7 +11397,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -10936,7 +11420,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -11096,6 +11590,21 @@ components:
           key: key
         - value: value
           key: key
+    EventId:
+      type: string
+      description: Event UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    ConnectionId_1:
+      type: string
+      description: Connection UUID
+      format: uuid
+      example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+    PortId:
+      type: string
+      description: Port UUID
+      format: uuid
+      example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
     NetworkPostRequest:
       required:
       - name
@@ -11264,8 +11773,8 @@ components:
       enum:
       - /name
       - /uuid
-      - /state
       - /scope
+      - /operation/equinixStatus
       - /location/region
       - /changeLog/createdDateTime
       - /changeLog/updatedDateTime
@@ -11555,7 +12064,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -11587,7 +12096,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -11600,7 +12119,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -11994,7 +12523,7 @@ components:
                   viewPortPermission: true
                   placeVcOrderPermission: true
                   sharedPortType: true
-                  packageType: packageType
+                  packageType: STANDARD
                   sharedPortProduct: sharedPortProduct
                 availableBandwidth: 0
                 demarcationPoint:
@@ -12026,7 +12555,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 - interfaceType: interfaceType
                   demarcationPoint: null
                   tether: null
@@ -12039,7 +12578,17 @@ components:
                   type: XF_PHYSICAL_PORT
                   operation: null
                   interfaceSpeed: 0
-                  order: null
+                  order:
+                    orderNumber: orderNumber
+                    orderId: orderId
+                    signature:
+                      delegate:
+                        firstName: firstName
+                        lastName: lastName
+                        email: email
+                      signatory: ECHOSIGN
+                    purchaseOrderNumber: purchaseOrderNumber
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 cvpId: cvpId
                 name: name
                 location: null
@@ -12731,7 +13280,7 @@ components:
               viewPortPermission: true
               placeVcOrderPermission: true
               sharedPortType: true
-              packageType: packageType
+              packageType: STANDARD
               sharedPortProduct: sharedPortProduct
             availableBandwidth: 0
             demarcationPoint:
@@ -12763,7 +13312,17 @@ components:
               type: XF_PHYSICAL_PORT
               operation: null
               interfaceSpeed: 0
-              order: null
+              order:
+                orderNumber: orderNumber
+                orderId: orderId
+                signature:
+                  delegate:
+                    firstName: firstName
+                    lastName: lastName
+                    email: email
+                  signatory: ECHOSIGN
+                purchaseOrderNumber: purchaseOrderNumber
+                uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             - interfaceType: interfaceType
               demarcationPoint: null
               tether: null
@@ -12776,7 +13335,17 @@ components:
               type: XF_PHYSICAL_PORT
               operation: null
               interfaceSpeed: 0
-              order: null
+              order:
+                orderNumber: orderNumber
+                orderId: orderId
+                signature:
+                  delegate:
+                    firstName: firstName
+                    lastName: lastName
+                    email: email
+                  signatory: ECHOSIGN
+                purchaseOrderNumber: purchaseOrderNumber
+                uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             cvpId: cvpId
             name: name
             location: null
@@ -13608,6 +14177,35 @@ components:
       - DEPROVISIONED
       - INACTIVE
       - FAILED
+    PortOrder:
+      type: object
+      properties:
+        purchaseOrderNumber:
+          type: string
+          description: Purchase order number
+        orderId:
+          type: string
+          description: Order Identification
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        uuid:
+          type: string
+          description: Equinix-assigned order identifier
+          format: uuid
+        signature:
+          $ref: '#/components/schemas/PortOrder_signature'
+      example:
+        orderNumber: orderNumber
+        orderId: orderId
+        signature:
+          delegate:
+            firstName: firstName
+            lastName: lastName
+            email: email
+          signatory: ECHOSIGN
+        purchaseOrderNumber: purchaseOrderNumber
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     PortOperation:
       type: object
       properties:
@@ -13806,6 +14404,13 @@ components:
           type: string
         packageType:
           type: string
+          description: Type of Port Package
+          enum:
+          - STANDARD
+          - UNTAGGED
+          - UNLIMITED
+          - NETWORK_EDGE
+          - FREE
       description: Port configuration settings
       example:
         product: product
@@ -13815,7 +14420,7 @@ components:
         viewPortPermission: true
         placeVcOrderPermission: true
         sharedPortType: true
-        packageType: packageType
+        packageType: STANDARD
         sharedPortProduct: sharedPortProduct
     PortNotification:
       required:
@@ -14461,7 +15066,7 @@ components:
             viewPortPermission: true
             placeVcOrderPermission: true
             sharedPortType: true
-            packageType: packageType
+            packageType: STANDARD
             sharedPortProduct: sharedPortProduct
           availableBandwidth: 0
           demarcationPoint:
@@ -14493,7 +15098,17 @@ components:
             type: XF_PHYSICAL_PORT
             operation: null
             interfaceSpeed: 0
-            order: null
+            order:
+              orderNumber: orderNumber
+              orderId: orderId
+              signature:
+                delegate:
+                  firstName: firstName
+                  lastName: lastName
+                  email: email
+                signatory: ECHOSIGN
+              purchaseOrderNumber: purchaseOrderNumber
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - interfaceType: interfaceType
             demarcationPoint: null
             tether: null
@@ -14506,7 +15121,17 @@ components:
             type: XF_PHYSICAL_PORT
             operation: null
             interfaceSpeed: 0
-            order: null
+            order:
+              orderNumber: orderNumber
+              orderId: orderId
+              signature:
+                delegate:
+                  firstName: firstName
+                  lastName: lastName
+                  email: email
+                signatory: ECHOSIGN
+              purchaseOrderNumber: purchaseOrderNumber
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           cvpId: cvpId
           name: name
           location: null
@@ -15069,7 +15694,7 @@ components:
           viewPortPermission: true
           placeVcOrderPermission: true
           sharedPortType: true
-          packageType: packageType
+          packageType: STANDARD
           sharedPortProduct: sharedPortProduct
         availableBandwidth: 0
         demarcationPoint:
@@ -15101,7 +15726,17 @@ components:
           type: XF_PHYSICAL_PORT
           operation: null
           interfaceSpeed: 0
-          order: null
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
+            purchaseOrderNumber: purchaseOrderNumber
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - interfaceType: interfaceType
           demarcationPoint: null
           tether: null
@@ -15114,7 +15749,17 @@ components:
           type: XF_PHYSICAL_PORT
           operation: null
           interfaceSpeed: 0
-          order: null
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: ECHOSIGN
+            purchaseOrderNumber: purchaseOrderNumber
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         cvpId: cvpId
         name: name
         location: null
@@ -15493,6 +16138,7 @@ components:
       - COLO
       - GW
       - CHAINGROUP
+      - NETWORK
     VirtualConnectionBridgePackageCode:
       type: string
       description: Virtual Connection bridge package code
@@ -15565,6 +16211,42 @@ components:
         property:
           type: string
       description: Sorting option object
+    PortOrder_signature_delegate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: name of delegate
+        lastName:
+          type: string
+          description: last Name of delegate
+        email:
+          type: string
+          description: email of delegate
+      description: delegate oder details
+      example:
+        firstName: firstName
+        lastName: lastName
+        email: email
+    PortOrder_signature:
+      type: object
+      properties:
+        signatory:
+          type: string
+          description: Port signature Type
+          enum:
+          - ECHOSIGN
+          - DELEGATE
+          - ACCOUNT_SUPPORT
+        delegate:
+          $ref: '#/components/schemas/PortOrder_signature_delegate'
+      description: Port signature Type
+      example:
+        delegate:
+          firstName: firstName
+          lastName: lastName
+          email: email
+        signatory: ECHOSIGN
     RouteTableEntry_connection:
       type: object
       properties:
@@ -21151,6 +21833,9 @@ components:
         - registeredUsers:
           - jaguarsuser-port-order
           type: TECHNICAL
+        additionalInfo:
+        - key: lagType
+          value: Single
         physicalPorts:
         - type: XF_PHYSICAL_PORT
           demarcationPoint:
@@ -21200,6 +21885,96 @@ components:
             cageUniqueSpaceId: GV1:01:002174
             patchPanel: CP:Demarc:1259684
             connectorType: SC
+    COLOAddSecondaryPort:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 10000
+        physicalPortsType: 1G_LX
+        connectivitySourceType: COLO
+        location:
+          ibx: SV1
+        settings:
+          packageType: STANDARD
+          sharedPortType: false
+          sharedPortProduct: null
+        redundancy:
+          priority: SECONDARY
+          group: 1f6bdb37-f131-5925-c039-fe1785fad165
+        lag:
+          enabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 567
+        account:
+          accountNumber: 1000
+        order:
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        additionalInfo:
+        - key: internalReferenceId
+          value: 635368
+        - key: quoteReferenceId
+          value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
+        - key: orderUuid
+          value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        physicalPorts:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: AM1
+            cabinet: AM1:02:032575:0105
+            cage: AM1:02:032575
+            patchPanel: PP:0105:1260379
+            patchPanelPortA: 14
+            patchPanelPortB: 15
+            connectorType: LC
+    REMOTESinglePortNewGroupLagRequest:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1G LX
+        connectivitySourceType: REMOTE
+        location:
+          ibx: GV1
+          metroCode: GV
+        settings:
+          packageType: STANDARD
+          sharedPortType: false
+        lag:
+          enabled: true
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        account:
+          accountNumber: "270848"
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        loas:
+        - uuid: 396e93c2-3b3a-4d47-a9d9-1ea68627374b
+        additionalInfo:
+        - key: circuitId
+          value: "656356"
+        - key: lagType
+          value: Single
+        order:
+          signature:
+            signatory: DELEGATE
+            delegate:
+              email: testEmail1@equinix.com
     COLOSinglePortNonLagResponse:
       value:
         href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad166
@@ -21607,21 +22382,110 @@ components:
         - type: XF_PHYSICAL_PORT
           demarcationPoint:
             ibx: AM1
-            cabinet: AM1:02:032575:0105
-            cage: AM1:02:032575
+            cabinetUniqueSpaceId: AM1:02:032575:0105
+            cageUniqueSpaceId: AM1:02:032575
             patchPanel: PP:0105:1260379
             patchPanelPortA: 14
             patchPanelPortB: 15
             connectorType: LC
+          additionalInfo:
+          - key: internalReferenceId
+            value: 635368
+          - key: quoteReferenceId
+            value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
+          - key: orderUuid
+            value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
+          - key: lagType
+            value: Existing
+          - key: connectivitySourceType
+            value: COLO
+          - key: physicalPortsType
+            value: 10G SMF
+          - key: packageType
+            value: STANDARD
+          - key: notification
+            value: jaguarsuser-port-order
         - type: XF_PHYSICAL_PORT
           demarcationPoint:
             ibx: AM1
-            cabinet: AM1:02:032575:0105
-            cage: AM1:02:032575
+            cabinetUniqueSpaceId: AM1:02:032575:0105
+            cageUniqueSpaceId: AM1:02:032575
             patchPanel: PP:0105:1260379
             patchPanelPortA: 16
             patchPanelPortB: 17
             connectorType: LC
+          additionalInfo:
+          - key: internalReferenceId
+            value: 635368
+          - key: quoteReferenceId
+            value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
+          - key: orderUuid
+            value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
+          - key: lagType
+            value: Existing
+          - key: connectivitySourceType
+            value: COLO
+          - key: physicalPortsType
+            value: 10G SMF
+          - key: packageType
+            value: STANDARD
+          - key: notification
+            value: jaguarsuser-port-order
+    REMOTEAddToLag:
+      value:
+        data:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: AM1
+            cabinetUniqueSpaceId: AM1:02:032575:0105
+            cageUniqueSpaceId: AM1:02:032575
+            patchPanel: PP:0105:1260379
+            patchPanelPortA: 14
+            patchPanelPortB: 15
+            connectorType: LC
+          additionalInfo:
+          - key: internalReferenceId
+            value: 635368
+          - key: quoteReferenceId
+            value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
+          - key: orderUuid
+            value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
+          - key: lagType
+            value: Existing
+          - key: connectivitySourceType
+            value: REMOTE
+          - key: physicalPortsType
+            value: 10G SMF
+          - key: packageType
+            value: STANDARD
+          - key: notification
+            value: jaguarsuser-port-order
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: AM1
+            cabinetUniqueSpaceId: AM1:02:032575:0105
+            cageUniqueSpaceId: AM1:02:032575
+            patchPanel: PP:0105:1260379
+            patchPanelPortA: 16
+            patchPanelPortB: 17
+            connectorType: LC
+          additionalInfo:
+          - key: internalReferenceId
+            value: 635368
+          - key: quoteReferenceId
+            value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
+          - key: orderUuid
+            value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
+          - key: lagType
+            value: Existing
+          - key: connectivitySourceType
+            value: REMOTE
+          - key: physicalPortsType
+            value: 10G SMF
+          - key: packageType
+            value: STANDARD
+          - key: notification
+            value: jaguarsuser-port-order
     portByUUID:
       value:
         href: https://api.equinix.com/fabric/v4/ports/e91484bb-4f65-4ab3-8f77-500dec2f855d
@@ -21901,10 +22765,11 @@ components:
           deletedDateTime: 2021-09-24T06:59:46Z
     "400_invalid_operation":
       value:
-      - errorCode: EQ-3040034
+      - errorCode: EQ-3040054
         errorMessage: Invalid Argument passed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Only replace name operation is supported.
+        details: "Only replace name, replace package and replace notifications operations\
+          \ are supported."
     GatewayActionResponse:
       value:
         type: ROUTE_TABLE_ENTRY_UPDATE

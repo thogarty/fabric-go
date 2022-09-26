@@ -47,6 +47,8 @@ type APIClient struct {
 
 	ConnectionsApi *ConnectionsApiService
 
+	EventsApi *EventsApiService
+
 	FiltersApi *FiltersApiService
 
 	GatewaysApi *GatewaysApiService
@@ -87,6 +89,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
+	c.EventsApi = (*EventsApiService)(&c.common)
 	c.FiltersApi = (*FiltersApiService)(&c.common)
 	c.GatewaysApi = (*GatewaysApiService)(&c.common)
 	c.MetrosApi = (*MetrosApiService)(&c.common)

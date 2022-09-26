@@ -5,7 +5,7 @@ CURRENT_GID := $(shell id -g)
 
 # https://github.com/OpenAPITools/openapi-generator-cli
 # SPEC_URL:="https://developer.equinix.com/sites/default/files/fabric-v4-catalog-fabric_v4_3.yaml"
-SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
+#SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
 
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
@@ -28,10 +28,10 @@ all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
 pull:
 	docker pull ${IMAGE}
 
-fetch:
-	curl \
-		-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36' \
-		-o ${SPEC_FETCHED_FILE} ${SPEC_URL}
+#fetch:
+	#curl \
+	#	-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36' \
+	#	-o ${SPEC_FETCHED_FILE} #${SPEC_URL}
 
 fix-tags:
 	- jq '. | select(((.paths[][].tags| type=="array"), length) > 1).paths[][].tags |= [.[0]]' ${SPEC_FETCHED_FILE} | diff -d -U6 ${SPEC_FETCHED_FILE} - >  patches/01-tag-from-last-in-path.patch

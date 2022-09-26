@@ -46,6 +46,7 @@ const (
 	Z_SIDEACCESS_POINTLOCATIONMETRO_NAME_SearchFieldName      SearchFieldName = "/zSide/accessPoint/location/metroName"
 	Z_SIDEACCESS_POINTNAME_SearchFieldName                    SearchFieldName = "/zSide/accessPoint/name"
 	Z_SIDEACCESS_POINTPORTUUID_SearchFieldName                SearchFieldName = "/zSide/accessPoint/port/uuid"
+	Z_SIDEACCESS_POINTNETWORKUUID_SearchFieldName             SearchFieldName = "/zSide/accessPoint/network/uuid"
 	Z_SIDEACCESS_POINTPORTNAME_SearchFieldName                SearchFieldName = "/zSide/accessPoint/port/name"
 	Z_SIDEACCESS_POINTPROFILEUUID_SearchFieldName             SearchFieldName = "/zSide/accessPoint/profile/uuid"
 	Z_SIDEACCESS_POINTTYPE_SearchFieldName                    SearchFieldName = "/zSide/accessPoint/type"

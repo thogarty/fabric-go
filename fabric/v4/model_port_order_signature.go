@@ -9,17 +9,9 @@
  */
 package v4
 
-// Port configuration settings
-type PortSettings struct {
-	// Product name
-	Product                string `json:"product,omitempty"`
-	Buyout                 bool   `json:"buyout,omitempty"`
-	ViewPortPermission     bool   `json:"viewPortPermission,omitempty"`
-	PlaceVcOrderPermission bool   `json:"placeVcOrderPermission,omitempty"`
-	Layer3Enabled          bool   `json:"layer3Enabled,omitempty"`
-	ProductCode            string `json:"productCode,omitempty"`
-	SharedPortType         bool   `json:"sharedPortType,omitempty"`
-	SharedPortProduct      string `json:"sharedPortProduct,omitempty"`
-	// Type of Port Package
-	PackageType string `json:"packageType,omitempty"`
+// Port signature Type
+type PortOrderSignature struct {
+	// Port signature Type
+	Signatory string                      `json:"signatory,omitempty"`
+	Delegate  *PortOrderSignatureDelegate `json:"delegate,omitempty"`
 }

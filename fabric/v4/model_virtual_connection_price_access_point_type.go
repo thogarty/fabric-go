@@ -19,4 +19,5 @@ const (
 	COLO_VirtualConnectionPriceAccessPointType       VirtualConnectionPriceAccessPointType = "COLO"
 	GW_VirtualConnectionPriceAccessPointType         VirtualConnectionPriceAccessPointType = "GW"
 	CHAINGROUP_VirtualConnectionPriceAccessPointType VirtualConnectionPriceAccessPointType = "CHAINGROUP"
+	NETWORK_VirtualConnectionPriceAccessPointType    VirtualConnectionPriceAccessPointType = "NETWORK"
 )

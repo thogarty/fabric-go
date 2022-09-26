@@ -14,14 +14,14 @@ Method | HTTP request | Description
 > AllPhysicalPortsResponse AddToLag(ctx, body, portId)
 Add to Lag
 
-Add Physical Ports to Virtual Port.
+Add Physical Ports to Virtual Port.<font color=\"red\"> <sup color='red'>Preview</sup></font>
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**AddToLagRequest**](AddToLagRequest.md)|  | 
+  **body** | [**BulkPhysicalPort**](BulkPhysicalPort.md)|  | 
   **portId** | [**string**](.md)| Port UUID | 
 
 ### Return type
@@ -43,7 +43,7 @@ No authorization required
 > AllPortsResponse CreateBulkPort(ctx, body)
 Create Port
 
-Create Port creates Equinix Fabric™ Port.
+Create Port creates Equinix Fabric™ Port.<font color=\"red\"> <sup color='red'>Preview</sup></font>
 
 ### Required Parameters
 
@@ -71,7 +71,7 @@ No authorization required
 > AllPortsResponse CreatePort(ctx, body)
 Create Port
 
-Create Port creates Equinix Fabric™ Port.
+Create Port creates Equinix Fabric™ Port.<font color=\"red\"> <sup color='red'>Preview</sup></font>
 
 ### Required Parameters
 

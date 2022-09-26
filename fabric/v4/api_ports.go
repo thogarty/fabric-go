@@ -29,13 +29,13 @@ type PortsApiService service
 
 /*
 PortsApiService Add to Lag
-Add Physical Ports to Virtual Port.
+Add Physical Ports to Virtual Port.&lt;font color&#x3D;\&quot;red\&quot;&gt; &lt;sup color&#x3D;&#x27;red&#x27;&gt;Preview&lt;/sup&gt;&lt;/font&gt;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param portId Port UUID
 @return AllPhysicalPortsResponse
 */
-func (a *PortsApiService) AddToLag(ctx context.Context, body AddToLagRequest, portId string) (AllPhysicalPortsResponse, *http.Response, error) {
+func (a *PortsApiService) AddToLag(ctx context.Context, body BulkPhysicalPort, portId string) (AllPhysicalPortsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}
@@ -148,7 +148,7 @@ func (a *PortsApiService) AddToLag(ctx context.Context, body AddToLagRequest, po
 
 /*
 PortsApiService Create Port
-Create Port creates Equinix Fabric™ Port.
+Create Port creates Equinix Fabric™ Port.&lt;font color&#x3D;\&quot;red\&quot;&gt; &lt;sup color&#x3D;&#x27;red&#x27;&gt;Preview&lt;/sup&gt;&lt;/font&gt;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return AllPortsResponse
@@ -235,7 +235,7 @@ func (a *PortsApiService) CreateBulkPort(ctx context.Context, body BulkPort) (Al
 
 /*
 PortsApiService Create Port
-Create Port creates Equinix Fabric™ Port.
+Create Port creates Equinix Fabric™ Port.&lt;font color&#x3D;\&quot;red\&quot;&gt; &lt;sup color&#x3D;&#x27;red&#x27;&gt;Preview&lt;/sup&gt;&lt;/font&gt;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return AllPortsResponse

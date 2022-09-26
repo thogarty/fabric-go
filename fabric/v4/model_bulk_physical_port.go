@@ -10,7 +10,7 @@
 package v4
 
 // Add to Lag request
-type AddToLagRequest struct {
+type BulkPhysicalPort struct {
 	// add physical ports to virtual port
 	Data []PhysicalPort `json:"data,omitempty"`
 }

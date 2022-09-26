@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **ConnectivitySourceType** | **string** | Port connectivity type | [default to null]
 **Project** | [***Project**](Project.md) |  | [optional] [default to null]
 **State** | [***PortState**](PortState.md) |  | [optional] [default to null]
-**Order** | [***Order**](Order.md) |  | [optional] [default to null]
+**Order** | [***PortOrder**](PortOrder.md) |  | [optional] [default to null]
 **CvpId** | **string** | Equinix assigned response attribute for Unique ID for a virtual port. | [optional] [default to null]
 **Operation** | [***PortOperation**](PortOperation.md) |  | [optional] [default to null]
 **Account** | [***SimplifiedAccount**](SimplifiedAccount.md) |  | [default to null]

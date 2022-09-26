@@ -11,9 +11,7 @@ package v4
 
 // Access Point Type
 type ServiceProfileAccessPointType struct {
-	Type_               *ServiceProfileAccessPointTypeEnum `json:"type"`
-	Uuid                string                             `json:"uuid,omitempty"`
-	SupportedBandwidths *[]int32                           `json:"supportedBandwidths,omitempty"`
+	SupportedBandwidths *[]int32 `json:"supportedBandwidths,omitempty"`
 	// Setting to allow or prohibit remote connections to the service profile.
 	AllowRemoteConnections bool `json:"allowRemoteConnections,omitempty"`
 	// Setting to enable or disable the ability of the buyer to customize the bandwidth.
@@ -31,7 +29,9 @@ type ServiceProfileAccessPointType struct {
 	ConnectionRedundancyRequired bool       `json:"connectionRedundancyRequired,omitempty"`
 	ApiConfig                    *ApiConfig `json:"apiConfig,omitempty"`
 	// custom name for \"Connection\"
-	ConnectionLabel   string                  `json:"connectionLabel,omitempty"`
-	AuthenticationKey *AuthenticationKey      `json:"authenticationKey,omitempty"`
-	Metadata          *ServiceProfileMetadata `json:"metadata,omitempty"`
+	ConnectionLabel   string                             `json:"connectionLabel,omitempty"`
+	AuthenticationKey *AuthenticationKey                 `json:"authenticationKey,omitempty"`
+	Metadata          *ServiceProfileMetadata            `json:"metadata,omitempty"`
+	Type_             *ServiceProfileAccessPointTypeEnum `json:"type"`
+	Uuid              string                             `json:"uuid,omitempty"`
 }

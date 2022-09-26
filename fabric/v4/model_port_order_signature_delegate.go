@@ -9,17 +9,12 @@
  */
 package v4
 
-// Port configuration settings
-type PortSettings struct {
-	// Product name
-	Product                string `json:"product,omitempty"`
-	Buyout                 bool   `json:"buyout,omitempty"`
-	ViewPortPermission     bool   `json:"viewPortPermission,omitempty"`
-	PlaceVcOrderPermission bool   `json:"placeVcOrderPermission,omitempty"`
-	Layer3Enabled          bool   `json:"layer3Enabled,omitempty"`
-	ProductCode            string `json:"productCode,omitempty"`
-	SharedPortType         bool   `json:"sharedPortType,omitempty"`
-	SharedPortProduct      string `json:"sharedPortProduct,omitempty"`
-	// Type of Port Package
-	PackageType string `json:"packageType,omitempty"`
+// delegate oder details
+type PortOrderSignatureDelegate struct {
+	// name of delegate
+	FirstName string `json:"firstName,omitempty"`
+	// last Name of delegate
+	LastName string `json:"lastName,omitempty"`
+	// email of delegate
+	Email string `json:"email,omitempty"`
 }
