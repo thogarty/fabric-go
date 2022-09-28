@@ -23,7 +23,8 @@ VALIDATE=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${
 
 GOLANGCI_LINT=golangci-lint
 
-all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
+#all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
+all: pull patch clean gen mod docs move-other patch-post fmt test stage
 
 pull:
 	docker pull ${IMAGE}
