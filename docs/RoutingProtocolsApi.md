@@ -9,6 +9,8 @@ Method | HTTP request | Description
 [**DeleteConnectionRoutingProtocolByUuid**](RoutingProtocolsApi.md#DeleteConnectionRoutingProtocolByUuid) | **Delete** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId} | Delete Protocol
 [**GetConnectionRoutingProtocolByUuid**](RoutingProtocolsApi.md#GetConnectionRoutingProtocolByUuid) | **Get** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId} | Get Protocol
 [**GetConnectionRoutingProtocols**](RoutingProtocolsApi.md#GetConnectionRoutingProtocols) | **Get** /fabric/v4/connections/{connectionId}/routingProtocols | GetRoutingProtocols
+[**GetConnectionRoutingProtocolsChangeByUuid**](RoutingProtocolsApi.md#GetConnectionRoutingProtocolsChangeByUuid) | **Get** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/changes/{changeId} | Get Change By ID
+[**GetConnectionRoutingProtocolsChanges**](RoutingProtocolsApi.md#GetConnectionRoutingProtocolsChanges) | **Get** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/changes | Get Changes
 [**ReplaceConnectionRoutingProtocolByUuid**](RoutingProtocolsApi.md#ReplaceConnectionRoutingProtocolByUuid) | **Put** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId} | Replace Protocol
 
 # **CreateConnectionRoutingProtocol**
@@ -152,6 +154,75 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetResponse**](GetResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetConnectionRoutingProtocolsChangeByUuid**
+> RoutingProtocolChangeData GetConnectionRoutingProtocolsChangeByUuid(ctx, connectionId, routingProtocolId, changeId)
+Get Change By ID
+
+This API provides capability to retrieve specific Routing Protocol Change
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **connectionId** | [**string**](.md)| Connection Id | 
+  **routingProtocolId** | [**string**](.md)| Routing Protocol Id | 
+  **changeId** | [**string**](.md)| Routing Protocol Change UUID | 
+
+### Return type
+
+[**RoutingProtocolChangeData**](RoutingProtocolChangeData.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetConnectionRoutingProtocolsChanges**
+> RoutingProtocolChangeDataResponse GetConnectionRoutingProtocolsChanges(ctx, connectionId, routingProtocolId, optional)
+Get Changes
+
+This API provides capability to retrieve user's Routing Protocol Changes
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **connectionId** | [**string**](.md)| Connection Id | 
+  **routingProtocolId** | [**string**](.md)| Routing Protocol Id | 
+ **optional** | ***RoutingProtocolsApiGetConnectionRoutingProtocolsChangesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a RoutingProtocolsApiGetConnectionRoutingProtocolsChangesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **offset** | **optional.Int32**| offset | 
+ **limit** | **optional.Int32**| number of records to fetch | 
+
+### Return type
+
+[**RoutingProtocolChangeDataResponse**](RoutingProtocolChangeDataResponse.md)
 
 ### Authorization
 

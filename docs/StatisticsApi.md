@@ -58,7 +58,7 @@ Optional parameters are passed through a pointer to a StatisticsApiGetPortStatsO
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sort** | [**optional.Interface of Sort**](.md)| Key or set of keys that organizes the search payload by property (such as createdDate or metroCode) or by direction. Ascending (ASC) is the default value. The \&quot;?\&quot; prefix indicates descending (DESC) order. | 
+ **sort** | [**optional.Interface of Sort**](.md)| Key or set of keys that organizes the search payload by property (such as createdDate or metroCode) or by direction. Ascending (ASC) is the default value. The \&quot;‒\&quot; prefix indicates descending (DESC) order. | 
  **top** | [**optional.Interface of int32**](.md)| Filter returning only the specified number of most heavily trafficked ports. The standard value is [1...10], and the default is 5. | 
  **duration** | [**optional.Interface of Duration**](.md)| duration | 
  **direction** | [**optional.Interface of QueryDirection**](.md)| Direction of traffic from the requester&#x27;s viewpoint. The default is outbound. | 

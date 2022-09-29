@@ -1,0 +1,10 @@
+diff --git b/fabric/v4/model_service_profile_filter.go a/fabric/v4/model_service_profile_filter.go
+index 03d0ee5..909b5be 100644
+--- b/fabric/v4/model_service_profile_filter.go
++++ a/fabric/v4/model_service_profile_filter.go
+@@ -9,4 +9,4 @@
+  */
+ package v4
+ 
+-type ServiceProfileFilter struct{}
++type ServiceProfileFilter interface{}

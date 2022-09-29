@@ -1,7 +1,7 @@
-diff --git a/README.md b/README.md
+diff --git a/fabric/v4/README.md b/fabric/v4/README.md
 index 34d42ea..b170903 100644
---- a/README.md
-+++ b/README.md
+--- a/fabric/v4/README.md
++++ b/fabric/v4/README.md
 @@ -13,7 +13,7 @@ For more information, please visit [https://equinix.com/about/](https://equinix.
  ## Installation
  Put the package under your project folder and add the following in import:

@@ -4,8 +4,96 @@ All URIs are relative to *https://api.equinix.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddToLag**](PortsApi.md#AddToLag) | **Post** /fabric/v4/ports/{portId}/physicalPorts/bulk | Add to Lag
+[**CreateBulkPort**](PortsApi.md#CreateBulkPort) | **Post** /fabric/v4/ports/bulk | Create Port
+[**CreatePort**](PortsApi.md#CreatePort) | **Post** /fabric/v4/ports | Create Port
 [**GetPortByUuid**](PortsApi.md#GetPortByUuid) | **Get** /fabric/v4/ports/{portId} | Get Port by uuid
 [**GetPorts**](PortsApi.md#GetPorts) | **Get** /fabric/v4/ports | Get All Ports
+
+# **AddToLag**
+> AllPhysicalPortsResponse AddToLag(ctx, body, portId)
+Add to Lag
+
+Add Physical Ports to Virtual Port.<font color=\"red\"> <sup color='red'>Preview</sup></font>
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**BulkPhysicalPort**](BulkPhysicalPort.md)|  | 
+  **portId** | [**string**](.md)| Port UUID | 
+
+### Return type
+
+[**AllPhysicalPortsResponse**](AllPhysicalPortsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateBulkPort**
+> AllPortsResponse CreateBulkPort(ctx, body)
+Create Port
+
+Create Port creates Equinix Fabric™ Port.<font color=\"red\"> <sup color='red'>Preview</sup></font>
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**BulkPort**](BulkPort.md)|  | 
+
+### Return type
+
+[**AllPortsResponse**](AllPortsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreatePort**
+> AllPortsResponse CreatePort(ctx, body)
+Create Port
+
+Create Port creates Equinix Fabric™ Port.<font color=\"red\"> <sup color='red'>Preview</sup></font>
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**Port**](Port.md)|  | 
+
+### Return type
+
+[**AllPortsResponse**](AllPortsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPortByUuid**
 > Port GetPortByUuid(ctx, portId)
@@ -36,13 +124,23 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPorts**
-> AllPortsResponse GetPorts(ctx, )
+> AllPortsResponse GetPorts(ctx, optional)
 Get All Ports
 
 Get All Ports returns details of all assigned and available ports for the specified user credentials. The metro attribute in the response shows the origin of the proposed connection.
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***PortsApiGetPortsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PortsApiGetPortsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **optional.String**| port name to be provided if specific port(s) to be retrieved | 
 
 ### Return type
 
