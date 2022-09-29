@@ -1,30 +1,13 @@
-diff --git a/fabric/v4/model_any_of_update_value.go b/fabric/v4/model_any_of_update_value.go
-index dda316b..43b28a1 100644
---- a/fabric/v4/model_any_of_update_value.go
-+++ b/fabric/v4/model_any_of_update_value.go
-@@ -10,8 +10,8 @@
- package v4
- 
- type AnyOfUpdateValue struct {
--    UpdateValueObject
--    UpdateValueString
--    UpdateValueInteger
--    UpdateValueArray
-+	UpdateValueObject
-+	// UpdateValueString
-+	// UpdateValueInteger
-+	// UpdateValueArray
- }
 diff --git a/fabric/v4/model_connection_change_operation.go b/fabric/v4/model_connection_change_operation.go
 index ee47126..53971ec 100644
---- a/fabric/v4/model_connection_change_operation.go
-+++ b/fabric/v4/model_connection_change_operation.go
-@@ -14,6 +14,6 @@ type ConnectionChangeOperation struct {
- 	// Handy shortcut for operation name
- 	Op string `json:"op"`
+diff --git b/fabric/v4/model_connection_change_operation.go a/fabric/v4/model_connection_change_operation.go
+index e9e4c1a..ce72a4d 100644
+--- b/fabric/v4/model_connection_change_operation.go
++++ a/fabric/v4/model_connection_change_operation.go
+@@ -16,5 +16,5 @@ type ConnectionChangeOperation struct {
  	// path inside document leading to updated parameter
--	Path string `json:"path"`
--	Value *UpdateValue `json:"value"`
-+	Path  string      `json:"path"`
+ 	Path string `json:"path"`
+ 	// new value for updated parameter
+-	Value *interface{} `json:"value"`
 +	Value interface{} `json:"value"`
  }
