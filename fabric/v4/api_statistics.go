@@ -31,11 +31,12 @@ type StatisticsApiService service
 /*
 StatisticsApiService Get Stats by uuid
 This API provides service-level metrics so that you can view access and gather key information required to manage service subscription sizing and capacity
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId Connection UUID
- * @param startDateTime startDateTime
- * @param endDateTime endDateTime
- * @param viewPoint viewPoint
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param connectionId Connection UUID
+  - @param startDateTime startDateTime
+  - @param endDateTime endDateTime
+  - @param viewPoint viewPoint
+
 @return Statistics
 */
 func (a *StatisticsApiService) GetConnectionStatsByPortUuid(ctx context.Context, connectionId string, startDateTime time.Time, endDateTime time.Time, viewPoint ViewPoint) (Statistics, *http.Response, error) {
@@ -284,10 +285,11 @@ func (a *StatisticsApiService) GetPortStats(ctx context.Context, metros []string
 /*
 StatisticsApiService Get Stats by uuid
 This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param portId Port UUID
- * @param startDateTime startDateTime
- * @param endDateTime endDateTime
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param portId Port UUID
+  - @param startDateTime startDateTime
+  - @param endDateTime endDateTime
+
 @return Statistics
 */
 func (a *StatisticsApiService) GetPortStatsByPortUuid(ctx context.Context, portId string, startDateTime time.Time, endDateTime time.Time) (Statistics, *http.Response, error) {

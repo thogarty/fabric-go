@@ -27,8 +27,9 @@ type FiltersApiService service
 /*
 FiltersApiService Get Search Filters
 The API provides capability to get list of user&#x27;s Fabric Resource search criteria
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param type_ Resource Type
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param type_ Resource Type
+
 @return FilterResponse
 */
 func (a *FiltersApiService) GetFilters(ctx context.Context, type_ ResourceType) (FilterResponse, *http.Response, error) {

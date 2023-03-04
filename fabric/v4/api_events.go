@@ -28,12 +28,11 @@ type EventsApiService service
 /*
 EventsApiService Get Event
 The API provides capability to get list of events for user Asset, including pagination
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param eventId Event UUID
- * @param connectionId Connection UUID
- * @param portId Port UUID
- * @param type_ type of events
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param eventId Event UUID
+  - @param connectionId Connection UUID
+  - @param portId Port UUID
+  - @param type_ type of events
 */
 func (a *EventsApiService) GetEvent(ctx context.Context, eventId string, connectionId string, portId string, type_ interface{}) (*http.Response, error) {
 	var (
@@ -141,11 +140,10 @@ func (a *EventsApiService) GetEvent(ctx context.Context, eventId string, connect
 /*
 EventsApiService Get Events of Asset
 The API provides capability to get list of events for user Asset, including pagination
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId Connection UUID
- * @param portId Port UUID
- * @param type_ type of events
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param connectionId Connection UUID
+  - @param portId Port UUID
+  - @param type_ type of events
 */
 func (a *EventsApiService) GetEventsByAsset(ctx context.Context, connectionId string, portId string, type_ interface{}) (*http.Response, error) {
 	var (

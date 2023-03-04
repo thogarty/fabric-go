@@ -30,9 +30,10 @@ type RoutingProtocolsApiService service
 /*
 RoutingProtocolsApiService Create Protocol
 This API provides capability to create Routing Protocol for connections
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param connectionId Connection Id
+
 @return RoutingProtocolData
 */
 func (a *RoutingProtocolsApiService) CreateConnectionRoutingProtocol(ctx context.Context, body RoutingProtocolBase, connectionId string) (RoutingProtocolData, *http.Response, error) {
@@ -179,9 +180,10 @@ func (a *RoutingProtocolsApiService) CreateConnectionRoutingProtocol(ctx context
 /*
 RoutingProtocolsApiService Bulk Create Protocol
 This API provides capability to create Routing Protocol for connections
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param connectionId Connection Id
+
 @return GetResponse
 */
 func (a *RoutingProtocolsApiService) CreateConnectionRoutingProtocolsInBulk(ctx context.Context, body ConnectionRoutingProtocolPostRequest, connectionId string) (GetResponse, *http.Response, error) {
@@ -328,9 +330,10 @@ func (a *RoutingProtocolsApiService) CreateConnectionRoutingProtocolsInBulk(ctx 
 /*
 RoutingProtocolsApiService Delete Protocol
 This API provides capability to delete Routing Protocols on virtual connection
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param routingProtocolId Routing Protocol Id
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param routingProtocolId Routing Protocol Id
+  - @param connectionId Connection Id
+
 @return RoutingProtocolData
 */
 func (a *RoutingProtocolsApiService) DeleteConnectionRoutingProtocolByUuid(ctx context.Context, routingProtocolId string, connectionId string) (RoutingProtocolData, *http.Response, error) {
@@ -476,9 +479,10 @@ func (a *RoutingProtocolsApiService) DeleteConnectionRoutingProtocolByUuid(ctx c
 /*
 RoutingProtocolsApiService Get Protocol
 This API provides capability to accept/reject user&#x27;s virtual connection
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param routingProtocolId Routing Protocol Id
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param routingProtocolId Routing Protocol Id
+  - @param connectionId Connection Id
+
 @return RoutingProtocolData
 */
 func (a *RoutingProtocolsApiService) GetConnectionRoutingProtocolByUuid(ctx context.Context, routingProtocolId string, connectionId string) (RoutingProtocolData, *http.Response, error) {
@@ -775,10 +779,11 @@ func (a *RoutingProtocolsApiService) GetConnectionRoutingProtocols(ctx context.C
 /*
 RoutingProtocolsApiService Get Change By ID
 This API provides capability to retrieve specific Routing Protocol Change
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId Connection Id
- * @param routingProtocolId Routing Protocol Id
- * @param changeId Routing Protocol Change UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param connectionId Connection Id
+  - @param routingProtocolId Routing Protocol Id
+  - @param changeId Routing Protocol Change UUID
+
 @return RoutingProtocolChangeData
 */
 func (a *RoutingProtocolsApiService) GetConnectionRoutingProtocolsChangeByUuid(ctx context.Context, connectionId string, routingProtocolId string, changeId string) (RoutingProtocolChangeData, *http.Response, error) {
@@ -1068,10 +1073,11 @@ func (a *RoutingProtocolsApiService) GetConnectionRoutingProtocolsChanges(ctx co
 /*
 RoutingProtocolsApiService Replace Protocol
 This API provides capability to replace complete Routing Protocols on a virtual connection
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param routingProtocolId Routing Protocol Id
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param routingProtocolId Routing Protocol Id
+  - @param connectionId Connection Id
+
 @return RoutingProtocolData
 */
 func (a *RoutingProtocolsApiService) ReplaceConnectionRoutingProtocolByUuid(ctx context.Context, body RoutingProtocolBase, routingProtocolId string, connectionId string) (RoutingProtocolData, *http.Response, error) {

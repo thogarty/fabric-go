@@ -30,8 +30,9 @@ type ServiceProfilesApiService service
 /*
 ServiceProfilesApiService Create Profile
 Create Service Profile creates Equinix Fabric™ Service Profile.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return ServiceProfile
 */
 func (a *ServiceProfilesApiService) CreateServiceProfile(ctx context.Context, body ServiceProfileRequest) (ServiceProfile, *http.Response, error) {
@@ -157,8 +158,9 @@ func (a *ServiceProfilesApiService) CreateServiceProfile(ctx context.Context, bo
 /*
 ServiceProfilesApiService Delete Profile
 delete Service Profile by UUID
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param serviceProfileId Service Profile UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param serviceProfileId Service Profile UUID
+
 @return ServiceProfile
 */
 func (a *ServiceProfilesApiService) DeleteServiceProfileByUuid(ctx context.Context, serviceProfileId string) (ServiceProfile, *http.Response, error) {
@@ -573,10 +575,11 @@ func (a *ServiceProfilesApiService) GetServiceProfiles(ctx context.Context, loca
 /*
 ServiceProfilesApiService Replace Profile
 This API request replaces a service profile definition
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param ifMatch conditional request
- * @param serviceProfileId Service Profile UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param ifMatch conditional request
+  - @param serviceProfileId Service Profile UUID
+
 @return ServiceProfile
 */
 func (a *ServiceProfilesApiService) PutServiceProfileByUuid(ctx context.Context, body ServiceProfileRequest, ifMatch string, serviceProfileId string) (ServiceProfile, *http.Response, error) {
@@ -714,8 +717,9 @@ func (a *ServiceProfilesApiService) PutServiceProfileByUuid(ctx context.Context,
 /*
 ServiceProfilesApiService Profile Search
 Search service profiles by search criteria
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return ServiceProfiles
 */
 func (a *ServiceProfilesApiService) SearchServiceProfiles(ctx context.Context, body ServiceProfileSearchRequest) (ServiceProfiles, *http.Response, error) {
@@ -831,10 +835,11 @@ func (a *ServiceProfilesApiService) SearchServiceProfiles(ctx context.Context, b
 /*
 ServiceProfilesApiService Update Profile
 Update Service Profile by UUID
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param ifMatch conditional request
- * @param serviceProfileId Service Profile UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param ifMatch conditional request
+  - @param serviceProfileId Service Profile UUID
+
 @return ServiceProfile
 */
 func (a *ServiceProfilesApiService) UpdateServiceProfileByUuid(ctx context.Context, body []JsonPatchOperation, ifMatch string, serviceProfileId string) (ServiceProfile, *http.Response, error) {

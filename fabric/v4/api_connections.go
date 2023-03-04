@@ -30,8 +30,9 @@ type ConnectionsApiService service
 /*
 ConnectionsApiService Create Connection
 This API provides capability to create user&#x27;s virtual connection
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return Connection
 */
 func (a *ConnectionsApiService) CreateConnection(ctx context.Context, body ConnectionPostRequest) (Connection, *http.Response, error) {
@@ -157,9 +158,10 @@ func (a *ConnectionsApiService) CreateConnection(ctx context.Context, body Conne
 /*
 ConnectionsApiService Connection Actions
 This API provides capability to accept/reject user&#x27;s virtual connection
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param connectionId Connection Id
+
 @return Connection
 */
 func (a *ConnectionsApiService) CreateConnectionAction(ctx context.Context, body ConnectionActionRequest, connectionId string) (Connection, *http.Response, error) {
@@ -286,8 +288,9 @@ func (a *ConnectionsApiService) CreateConnectionAction(ctx context.Context, body
 /*
 ConnectionsApiService Bulk Connections
 This API provides capability to create bulk virtual connections
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return ConnectionBulk
 */
 func (a *ConnectionsApiService) CreateConnectionsInBulk(ctx context.Context, body ConnectionBulkPostRequest) (ConnectionBulk, *http.Response, error) {
@@ -423,8 +426,9 @@ func (a *ConnectionsApiService) CreateConnectionsInBulk(ctx context.Context, bod
 /*
 ConnectionsApiService Delete by ID
 Delete Connection by ID
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId Connection UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param connectionId Connection UUID
+
 @return Connection
 */
 func (a *ConnectionsApiService) DeleteConnectionByUuid(ctx context.Context, connectionId string) (Connection, *http.Response, error) {
@@ -685,8 +689,9 @@ func (a *ConnectionsApiService) GetConnectionByUuid(ctx context.Context, connect
 /*
 ConnectionsApiService Search connections
 The API provides capability to get list of user&#x27;s virtual connections using search criteria, including optional filtering, pagination and sorting
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return ConnectionSearchResponse
 */
 func (a *ConnectionsApiService) SearchConnections(ctx context.Context, body SearchRequest) (ConnectionSearchResponse, *http.Response, error) {
@@ -812,9 +817,10 @@ func (a *ConnectionsApiService) SearchConnections(ctx context.Context, body Sear
 /*
 ConnectionsApiService Update by ID
 Update Connection by ID
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param connectionId Connection Id
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param connectionId Connection Id
+
 @return Connection
 */
 func (a *ConnectionsApiService) UpdateConnectionByUuid(ctx context.Context, body []ConnectionChangeOperation, connectionId string) (Connection, *http.Response, error) {
@@ -931,8 +937,9 @@ func (a *ConnectionsApiService) UpdateConnectionByUuid(ctx context.Context, body
 /*
 ConnectionsApiService Validate AuthKey
 This API provides capability to validate by auth key
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return ConnectionResponse
 */
 func (a *ConnectionsApiService) ValidateConnections(ctx context.Context, body ValidateByAuthKeyPostRequest) (ConnectionResponse, *http.Response, error) {

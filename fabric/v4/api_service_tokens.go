@@ -30,8 +30,9 @@ type ServiceTokensApiService service
 /*
 ServiceTokensApiService Create Service Token
 Create Service Tokens generates Equinix Fabric™ service tokens. These tokens authorize users to access protected resources and services.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return ServiceToken
 */
 func (a *ServiceTokensApiService) CreateServiceToken(ctx context.Context, body ServiceToken) (ServiceToken, *http.Response, error) {
@@ -147,9 +148,8 @@ func (a *ServiceTokensApiService) CreateServiceToken(ctx context.Context, body S
 /*
 ServiceTokensApiService Delete Token by uuid
 Delete Service Tokens removes an Equinix Fabric service token corresponding to the specified uuid which are in INACTIVE state.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param serviceTokenId Service Token UUID
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param serviceTokenId Service Token UUID
 */
 func (a *ServiceTokensApiService) DeleteServiceTokenByUuid(ctx context.Context, serviceTokenId string) (*http.Response, error) {
 	var (
@@ -234,8 +234,9 @@ func (a *ServiceTokensApiService) DeleteServiceTokenByUuid(ctx context.Context, 
 /*
 ServiceTokensApiService Get Token by uuid
 Get Specified Service Tokens uses the uuid of an Equinix Fabric service token to return details about the token&#x27;s type, state, location, bandwidth, and other key properties.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param serviceTokenId Service Token UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param serviceTokenId Service Token UUID
+
 @return ServiceToken
 */
 func (a *ServiceTokensApiService) GetServiceTokenByUuid(ctx context.Context, serviceTokenId string) (ServiceToken, *http.Response, error) {
