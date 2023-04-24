@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PurchaseOrderNumber** | **string** | Purchase order number | [optional] [default to null]
+**PurchaseOrder** | [***PortOrderPurchaseOrder**](PortOrder_purchaseOrder.md) |  | [optional] [default to null]
 **OrderId** | **string** | Order Identification | [optional] [default to null]
 **OrderNumber** | **string** | Order Reference Number | [optional] [default to null]
 **Uuid** | **string** | Equinix-assigned order identifier | [optional] [default to null]

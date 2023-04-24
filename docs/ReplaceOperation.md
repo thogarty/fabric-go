@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | **string** | the operation to be performed | [default to null]
+**Op** | [***OpEnum**](OpEnum.md) |  | [default to null]
 **Path** | **string** |  | [default to null]
 **Value** | [***interface{}**](interface{}.md) | value to replace with | [default to null]
 

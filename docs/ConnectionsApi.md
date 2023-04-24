@@ -6,12 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateConnection**](ConnectionsApi.md#CreateConnection) | **Post** /fabric/v4/connections | Create Connection
 [**CreateConnectionAction**](ConnectionsApi.md#CreateConnectionAction) | **Post** /fabric/v4/connections/{connectionId}/actions | Connection Actions
-[**CreateConnectionsInBulk**](ConnectionsApi.md#CreateConnectionsInBulk) | **Post** /fabric/v4/connections/bulk | Bulk Connections
 [**DeleteConnectionByUuid**](ConnectionsApi.md#DeleteConnectionByUuid) | **Delete** /fabric/v4/connections/{connectionId} | Delete by ID
 [**GetConnectionByUuid**](ConnectionsApi.md#GetConnectionByUuid) | **Get** /fabric/v4/connections/{connectionId} | Get Connection by ID
 [**SearchConnections**](ConnectionsApi.md#SearchConnections) | **Post** /fabric/v4/connections/search | Search connections
 [**UpdateConnectionByUuid**](ConnectionsApi.md#UpdateConnectionByUuid) | **Patch** /fabric/v4/connections/{connectionId} | Update by ID
-[**ValidateConnections**](ConnectionsApi.md#ValidateConnections) | **Post** /fabric/v4/connections/validate | Validate AuthKey
+[**ValidateConnections**](ConnectionsApi.md#ValidateConnections) | **Post** /fabric/v4/connections/validate | Validate Connection
 
 # **CreateConnection**
 > Connection CreateConnection(ctx, body)
@@ -42,7 +41,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateConnectionAction**
-> Connection CreateConnectionAction(ctx, body, connectionId)
+> ConnectionAction CreateConnectionAction(ctx, body, connectionId)
 Connection Actions
 
 This API provides capability to accept/reject user's virtual connection
@@ -57,35 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Connection**](Connection.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **CreateConnectionsInBulk**
-> ConnectionBulk CreateConnectionsInBulk(ctx, body)
-Bulk Connections
-
-This API provides capability to create bulk virtual connections
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ConnectionBulkPostRequest**](ConnectionBulkPostRequest.md)|  | 
-
-### Return type
-
-[**ConnectionBulk**](ConnectionBulk.md)
+[**ConnectionAction**](ConnectionAction.md)
 
 ### Authorization
 
@@ -221,7 +192,7 @@ Name | Type | Description  | Notes
 
 # **ValidateConnections**
 > ConnectionResponse ValidateConnections(ctx, body)
-Validate AuthKey
+Validate Connection
 
 This API provides capability to validate by auth key
 
@@ -230,7 +201,7 @@ This API provides capability to validate by auth key
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ValidateByAuthKeyPostRequest**](ValidateByAuthKeyPostRequest.md)|  | 
+  **body** | [**ValidateConnectionRequest**](ValidateConnectionRequest.md)|  | 
 
 ### Return type
 

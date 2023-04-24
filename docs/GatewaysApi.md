@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**UpdateGatewayByUuid**](GatewaysApi.md#UpdateGatewayByUuid) | **Patch** /fabric/v4/gateways/{gatewayId} | Update Gateway
 
 # **CreateGateway**
-> VirtualGateway CreateGateway(ctx, body)
+> FabricGateway CreateGateway(ctx, body)
 Create Gateway
 
 This API provides capability to create user's Fabric Gateways
@@ -25,11 +25,11 @@ This API provides capability to create user's Fabric Gateways
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**VirtualGatewayPostRequest**](VirtualGatewayPostRequest.md)|  | 
+  **body** | [**FabricGatewayPostRequest**](FabricGatewayPostRequest.md)|  | 
 
 ### Return type
 
-[**VirtualGateway**](VirtualGateway.md)
+[**FabricGateway**](FabricGateway.md)
 
 ### Authorization
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetGatewayByUuid**
-> VirtualGateway GetGatewayByUuid(ctx, gatewayId)
+> FabricGateway GetGatewayByUuid(ctx, gatewayId)
 Get Gateway
 
 This API provides capability to retrieve user's Fabric Gateway
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualGateway**](VirtualGateway.md)
+[**FabricGateway**](FabricGateway.md)
 
 ### Authorization
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetGatewayPackageByCode**
-> VirtualGatewayPackage GetGatewayPackageByCode(ctx, gatewayPackageCode)
+> FabricGatewayPackage GetGatewayPackageByCode(ctx, gatewayPackageCode)
 Get Package Details
 
 This API provides capability to retrieve user's Fabric Gateway Package Details
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualGatewayPackage**](VirtualGatewayPackage.md)
+[**FabricGatewayPackage**](FabricGatewayPackage.md)
 
 ### Authorization
 
@@ -237,7 +237,7 @@ The API provides capability to get list of user's Fabric Gateways using search c
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**VirtualGatewaySearchRequest**](VirtualGatewaySearchRequest.md)|  | 
+  **body** | [**FabricGatewaySearchRequest**](FabricGatewaySearchRequest.md)|  | 
 
 ### Return type
 
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateGatewayByUuid**
-> VirtualGateway UpdateGatewayByUuid(ctx, body, gatewayId)
+> FabricGateway UpdateGatewayByUuid(ctx, body, gatewayId)
 Update Gateway
 
 This API provides capability to update user's Fabric Gateway
@@ -265,12 +265,12 @@ This API provides capability to update user's Fabric Gateway
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**[]VirtualGatewayChangeOperation**](VirtualGatewayChangeOperation.md)|  | 
+  **body** | [**[]FabricGatewayChangeOperation**](FabricGatewayChangeOperation.md)|  | 
   **gatewayId** | [**string**](.md)| Gateway UUID | 
 
 ### Return type
 
-[**VirtualGateway**](VirtualGateway.md)
+[**FabricGateway**](FabricGateway.md)
 
 ### Authorization
 

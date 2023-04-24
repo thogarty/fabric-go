@@ -1,5 +1,7 @@
---- b/fabric/v4/model_service_profile_access_point_type.go
-+++ a/fabric/v4/model_service_profile_access_point_type.go
+diff --git a/fabric/v4/model_service_profile_access_point_type.go b/fabric/v4/model_service_profile_access_point_type.go
+index 20479f2..b8d35b2 100644
+--- a/fabric/v4/model_service_profile_access_point_type.go
++++ b/fabric/v4/model_service_profile_access_point_type.go
 @@ -10,4 +10,28 @@
  package v4
  

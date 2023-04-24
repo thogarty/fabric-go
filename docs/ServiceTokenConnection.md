@@ -4,6 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** | Type of Connection | [default to null]
+**Href** | **string** | An absolute URL that is the subject of the link&#x27;s context. | [optional] [default to null]
+**Uuid** | **string** | Equinix-assigned connection identifier | [optional] [default to null]
 **AllowRemoteConnection** | **bool** | Authorization to connect remotely | [optional] [default to false]
 **BandwidthLimit** | **int32** | Connection bandwidth limit in Mbps | [optional] [default to null]
 **SupportedBandwidths** | **[]int32** | List of permitted bandwidths. | [optional] [default to null]

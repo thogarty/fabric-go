@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Code** | **string** | Code Assigned to an Equinix IBX data center in a specified metropolitan area. | [optional] [default to null]
 **Region** | **string** | Board geographic area in which the data center is located | [optional] [default to null]
 **Name** | **string** | Name of the region in which the data center is located. | [optional] [default to null]
+**EquinixAsn** | **int64** | Autonomous system number (ASN) for a specified Fabric metro. The ASN is a unique identifier that carries the network routing protocol and exchanges that data with other internal systems via border gateway protocol. | [optional] [default to null]
 **GeoCoordinates** | [***GeoCoordinates**](GeoCoordinates.md) |  | [optional] [default to null]
 **ConnectedMetros** | [**[]ConnectedMetro**](ConnectedMetro.md) |  | [optional] [default to null]
 

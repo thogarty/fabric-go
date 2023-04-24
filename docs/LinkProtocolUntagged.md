@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | [***LinkProtocolType**](LinkProtocolType.md) |  | [default to null]
+**Type_** | [***LinkProtocolType**](LinkProtocolType.md) |  | [optional] [default to null]
 **Ipv4** | [***LinkProtocolIpv4Ipv6Config**](LinkProtocolIpv4Ipv6Config.md) |  | [optional] [default to null]
 **Ipv6** | [***LinkProtocolIpv4Ipv6Config**](LinkProtocolIpv4Ipv6Config.md) |  | [optional] [default to null]
 

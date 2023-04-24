@@ -1,3 +1,5 @@
+diff --git a/fabric/v4/model_json_patch_operation.go b/fabric/v4/model_json_patch_operation.go
+index 69549e7..285c316 100644
 --- b/fabric/v4/model_json_patch_operation.go
 +++ a/fabric/v4/model_json_patch_operation.go
 @@ -10,4 +10,9 @@

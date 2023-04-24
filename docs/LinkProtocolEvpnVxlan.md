@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | [***LinkProtocolType**](LinkProtocolType.md) |  | [default to null]
+**Type_** | [***LinkProtocolType**](LinkProtocolType.md) |  | [optional] [default to null]
 **Vnid** | **int32** | Virtual Network Identifier | [default to null]
 **Type5vni** | **int32** | Type 5 VNI identifier | [default to null]
 

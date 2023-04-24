@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | [***ServiceProfileAccessPointTypeEnum**](ServiceProfileAccessPointTypeEnum.md) |  | [default to null]
 **Uuid** | **string** |  | [optional] [default to null]
+**Type_** | [***ServiceProfileAccessPointTypeEnum**](ServiceProfileAccessPointTypeEnum.md) |  | [default to null]
 **SupportedBandwidths** | [***[]int32**](array.md) |  | [optional] [default to null]
 **AllowRemoteConnections** | **bool** | Setting to allow or prohibit remote connections to the service profile. | [optional] [default to false]
 **AllowCustomBandwidth** | **bool** | Setting to enable or disable the ability of the buyer to customize the bandwidth. | [optional] [default to false]

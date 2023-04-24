@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **CreatedDateTime** | [**time.Time**](time.Time.md) | Set when change flow starts | [optional] [default to null]
 **UpdatedDateTime** | [**time.Time**](time.Time.md) | Set when change object is updated | [default to null]
 **Information** | **string** | Additional information | [optional] [default to null]
-**Data** | [***VirtualGatewayChangeOperation**](VirtualGatewayChangeOperation.md) |  | [optional] [default to null]
+**Data** | [***FabricGatewayChangeOperation**](FabricGatewayChangeOperation.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
