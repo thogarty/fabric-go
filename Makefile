@@ -17,9 +17,10 @@ GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
 PACKAGE_PREFIX=fabric
 PACKAGE_MAJOR=v4
+CRI=docker # nerdctl
 
-SWAGGER=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${IMAGE}
-VALIDATE=docker run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${VALIDATE_IMAGE}
+SWAGGER=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${IMAGE}
+VALIDATE=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${VALIDATE_IMAGE}
 
 GOLANGCI_LINT=golangci-lint
 
@@ -27,7 +28,7 @@ GOLANGCI_LINT=golangci-lint
 all: pull patch clean gen mod fmt patch-post docs move-other test stage
 
 pull:
-	docker pull ${IMAGE}
+	${CRI} pull ${IMAGE}
 
 fetch:
 	curl \
