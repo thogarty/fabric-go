@@ -5,7 +5,7 @@ CURRENT_GID := $(shell id -g)
 
 # https://github.com/OpenAPITools/openapi-generator-cli
 # SPEC_URL:="https://developer.equinix.com/sites/default/files/fabric-v4-catalog-fabric_v4_3.yaml"
-SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.3/swagger.yaml"
+SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.7/swagger.yaml"
 
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
@@ -25,7 +25,7 @@ VALIDATE=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${
 GOLANGCI_LINT=golangci-lint
 
 #all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
-all: pull patch clean gen mod fmt patch-post docs move-other test stage
+all: pull fetch patch clean gen mod fmt patch-post docs move-other test stage
 
 pull:
 	${CRI} pull ${IMAGE}
