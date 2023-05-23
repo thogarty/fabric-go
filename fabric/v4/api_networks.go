@@ -28,8 +28,9 @@ type NetworksApiService service
 /*
 NetworksApiService Create Network
 This API provides capability to create user&#x27;s Fabric Network
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return Network
 */
 func (a *NetworksApiService) CreateNetwork(ctx context.Context, body NetworkPostRequest) (Network, *http.Response, error) {
@@ -165,8 +166,9 @@ func (a *NetworksApiService) CreateNetwork(ctx context.Context, body NetworkPost
 /*
 NetworksApiService Delete Network By ID
 This API provides capability to delete user&#x27;s Fabric Network
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId Network UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param networkId Network UUID
+
 @return Network
 */
 func (a *NetworksApiService) DeleteNetworkByUuid(ctx context.Context, networkId string) (Network, *http.Response, error) {
@@ -291,8 +293,9 @@ func (a *NetworksApiService) DeleteNetworkByUuid(ctx context.Context, networkId 
 /*
 NetworksApiService Get Connections
 The API provides capability to get list of user&#x27;s Fabric Network connections
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId Network UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param networkId Network UUID
+
 @return NetworkConnections
 */
 func (a *NetworksApiService) GetConnectionsByNetworkUuid(ctx context.Context, networkId string) (NetworkConnections, *http.Response, error) {
@@ -417,8 +420,9 @@ func (a *NetworksApiService) GetConnectionsByNetworkUuid(ctx context.Context, ne
 /*
 NetworksApiService Get Network By ID
 This API provides capability to retrieve user&#x27;s Fabric Network
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId Network UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param networkId Network UUID
+
 @return Network
 */
 func (a *NetworksApiService) GetNetworkByUuid(ctx context.Context, networkId string) (Network, *http.Response, error) {
@@ -533,9 +537,10 @@ func (a *NetworksApiService) GetNetworkByUuid(ctx context.Context, networkId str
 /*
 NetworksApiService Get Change By ID
 This API provides capability to retrieve user&#x27;s Fabric Network Change
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId Network UUID
- * @param changeId Network Change UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param networkId Network UUID
+  - @param changeId Network Change UUID
+
 @return NetworkChange
 */
 func (a *NetworksApiService) GetNetworkChangeByUuid(ctx context.Context, networkId string, changeId string) (NetworkChange, *http.Response, error) {
@@ -661,8 +666,9 @@ func (a *NetworksApiService) GetNetworkChangeByUuid(ctx context.Context, network
 /*
 NetworksApiService Get Network Changes
 The API provides capability to get list of user&#x27;s Fabric Network changes
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId Network UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param networkId Network UUID
+
 @return NetworkChangeResponse
 */
 func (a *NetworksApiService) GetNetworkChanges(ctx context.Context, networkId string) (NetworkChangeResponse, *http.Response, error) {
@@ -787,8 +793,9 @@ func (a *NetworksApiService) GetNetworkChanges(ctx context.Context, networkId st
 /*
 NetworksApiService Search Network
 The API provides capability to get list of user&#x27;s Fabric Network using search criteria, including optional filtering, pagination and sorting
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return NetworkSearchResponse
 */
 func (a *NetworksApiService) SearchNetworks(ctx context.Context, body NetworkSearchRequest) (NetworkSearchResponse, *http.Response, error) {
@@ -914,9 +921,10 @@ func (a *NetworksApiService) SearchNetworks(ctx context.Context, body NetworkSea
 /*
 NetworksApiService Update Network By ID
 This API provides capability to update user&#x27;s Fabric Network
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param networkId Network UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param networkId Network UUID
+
 @return Network
 */
 func (a *NetworksApiService) UpdateNetworkByUuid(ctx context.Context, body []NetworkChangeOperation, networkId string) (Network, *http.Response, error) {

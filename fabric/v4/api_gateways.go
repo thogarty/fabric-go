@@ -30,8 +30,9 @@ type GatewaysApiService service
 /*
 GatewaysApiService Create Gateway
 This API provides capability to create user&#x27;s Fabric Gateways
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return VirtualGateway
 */
 func (a *GatewaysApiService) CreateGateway(ctx context.Context, body VirtualGatewayPostRequest) (VirtualGateway, *http.Response, error) {
@@ -157,9 +158,10 @@ func (a *GatewaysApiService) CreateGateway(ctx context.Context, body VirtualGate
 /*
 GatewaysApiService Route table actions
 This API provides capability to refresh route table and bgp session summary information
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param gatewayId Gateway UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param gatewayId Gateway UUID
+
 @return GatewayActionResponse
 */
 func (a *GatewaysApiService) CreateGatewayAction(ctx context.Context, body GatewayActionRequest, gatewayId string) (GatewayActionResponse, *http.Response, error) {
@@ -286,9 +288,8 @@ func (a *GatewaysApiService) CreateGatewayAction(ctx context.Context, body Gatew
 /*
 GatewaysApiService Delete Gateway
 This API provides capability to delete user&#x27;s Fabric Gateway
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param gatewayId Gateway UUID
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param gatewayId Gateway UUID
 */
 func (a *GatewaysApiService) DeleteGatewayByUuid(ctx context.Context, gatewayId string) (*http.Response, error) {
 	var (
@@ -529,8 +530,9 @@ func (a *GatewaysApiService) GetGatewayActions(ctx context.Context, gatewayId st
 /*
 GatewaysApiService Get Gateway
 This API provides capability to retrieve user&#x27;s Fabric Gateway
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param gatewayId Gateway UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param gatewayId Gateway UUID
+
 @return VirtualGateway
 */
 func (a *GatewaysApiService) GetGatewayByUuid(ctx context.Context, gatewayId string) (VirtualGateway, *http.Response, error) {
@@ -645,8 +647,9 @@ func (a *GatewaysApiService) GetGatewayByUuid(ctx context.Context, gatewayId str
 /*
 GatewaysApiService Get Package Details
 This API provides capability to retrieve user&#x27;s Fabric Gateway Package Details
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param gatewayPackageCode Equinix-assigned gateway package identifier
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param gatewayPackageCode Equinix-assigned gateway package identifier
+
 @return VirtualGatewayPackage
 */
 func (a *GatewaysApiService) GetGatewayPackageByCode(ctx context.Context, gatewayPackageCode GatewayPackageCode) (VirtualGatewayPackage, *http.Response, error) {
@@ -920,8 +923,9 @@ func (a *GatewaysApiService) GetGatewayPackages(ctx context.Context, localVarOpt
 /*
 GatewaysApiService Search Gateway
 The API provides capability to get list of user&#x27;s Fabric Gateways using search criteria, including optional filtering, pagination and sorting
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return SearchResponse
 */
 func (a *GatewaysApiService) SearchGateways(ctx context.Context, body VirtualGatewaySearchRequest) (SearchResponse, *http.Response, error) {
@@ -1047,9 +1051,10 @@ func (a *GatewaysApiService) SearchGateways(ctx context.Context, body VirtualGat
 /*
 GatewaysApiService Update Gateway
 This API provides capability to update user&#x27;s Fabric Gateway
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param gatewayId Gateway UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param gatewayId Gateway UUID
+
 @return VirtualGateway
 */
 func (a *GatewaysApiService) UpdateGatewayByUuid(ctx context.Context, body []VirtualGatewayChangeOperation, gatewayId string) (VirtualGateway, *http.Response, error) {

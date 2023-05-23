@@ -30,9 +30,10 @@ type PortsApiService service
 /*
 PortsApiService Add to Lag
 Add Physical Ports to Virtual Port.&lt;font color&#x3D;\&quot;red\&quot;&gt; &lt;sup color&#x3D;&#x27;red&#x27;&gt;Preview&lt;/sup&gt;&lt;/font&gt;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param portId Port UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param portId Port UUID
+
 @return AllPhysicalPortsResponse
 */
 func (a *PortsApiService) AddToLag(ctx context.Context, body BulkPhysicalPort, portId string) (AllPhysicalPortsResponse, *http.Response, error) {
@@ -149,8 +150,9 @@ func (a *PortsApiService) AddToLag(ctx context.Context, body BulkPhysicalPort, p
 /*
 PortsApiService Create Port
 Create Port creates Equinix Fabric™ Port.&lt;font color&#x3D;\&quot;red\&quot;&gt; &lt;sup color&#x3D;&#x27;red&#x27;&gt;Preview&lt;/sup&gt;&lt;/font&gt;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return AllPortsResponse
 */
 func (a *PortsApiService) CreateBulkPort(ctx context.Context, body BulkPort) (AllPortsResponse, *http.Response, error) {
@@ -236,8 +238,9 @@ func (a *PortsApiService) CreateBulkPort(ctx context.Context, body BulkPort) (Al
 /*
 PortsApiService Create Port
 Create Port creates Equinix Fabric™ Port.&lt;font color&#x3D;\&quot;red\&quot;&gt; &lt;sup color&#x3D;&#x27;red&#x27;&gt;Preview&lt;/sup&gt;&lt;/font&gt;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return AllPortsResponse
 */
 func (a *PortsApiService) CreatePort(ctx context.Context, body Port) (AllPortsResponse, *http.Response, error) {
@@ -343,8 +346,9 @@ func (a *PortsApiService) CreatePort(ctx context.Context, body Port) (AllPortsRe
 /*
 PortsApiService Get Port by uuid
 Get Port By uuid returns details of assigned and available Equinix Fabric port for the specified user credentials. The metro code attribute in the response shows the origin of the proposed connection.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param portId Port UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param portId Port UUID
+
 @return Port
 */
 func (a *PortsApiService) GetPortByUuid(ctx context.Context, portId string) (Port, *http.Response, error) {

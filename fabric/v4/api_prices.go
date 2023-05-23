@@ -27,8 +27,9 @@ type PricesApiService service
 /*
 PricesApiService
 Search prices by search criteria
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return PriceSearchResponse
 */
 func (a *PricesApiService) SearchPrices(ctx context.Context, body FilterBody) (PriceSearchResponse, *http.Response, error) {

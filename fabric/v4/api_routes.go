@@ -28,9 +28,10 @@ type RoutesApiService service
 /*
 RoutesApiService Search Route Table
 The API provides capability to get list of user&#x27;s Fabric Gateways route table entries using search criteria, including optional filtering, pagination and sorting
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param gatewayId Gateway UUID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param gatewayId Gateway UUID
+
 @return RouteTableEntrySearchResponse
 */
 func (a *RoutesApiService) SearchRoutes(ctx context.Context, body RouteTableEntrySearchRequest, gatewayId string) (RouteTableEntrySearchResponse, *http.Response, error) {
