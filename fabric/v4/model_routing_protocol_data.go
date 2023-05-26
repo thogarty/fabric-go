@@ -12,4 +12,5 @@ package v4
 type RoutingProtocolData struct {
 	// Routing protocol type
 	Type_ string `json:"type,omitempty"`
+	OneOfRoutingProtocolData
 }
