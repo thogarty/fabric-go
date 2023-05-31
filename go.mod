@@ -1,4 +1,4 @@
-module github.com/manu-equinix/fabric-go
+module github.com/equinix-labs/fabric-go
 
 go 1.20
 
