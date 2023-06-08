@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type_** | [***ServiceProfileTypeEnum**](ServiceProfileTypeEnum.md) |  | [default to null]
 **Name** | **string** | Customer-assigned service profile name | [default to null]
 **Uuid** | **string** | Equinix-assigned service profile identifier | [optional] [default to null]
-**Description** | **string** | User-provided service description | [default to null]
+**Description** | **string** | User-provided service description should be of maximum length 375 | [default to null]
 **Notifications** | [**[]SimplifiedNotification**](SimplifiedNotification.md) | Recipients of notifications on service profile change | [optional] [default to null]
 **Tags** | [***[]string**](array.md) |  | [optional] [default to null]
 **Visibility** | [***ServiceProfileVisibilityEnum**](ServiceProfileVisibilityEnum.md) |  | [optional] [default to null]
@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Metros** | [**[]ServiceMetro**](ServiceMetro.md) | Derived response attribute. | [optional] [default to null]
 **SelfProfile** | **bool** | response attribute indicates whether the profile belongs to the same organization as the api-invoker. | [optional] [default to null]
 **ProjectId** | **string** |  | [optional] [default to null]
+**Project** | [***Project**](Project.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

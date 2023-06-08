@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Location** | [***SimplifiedLocation**](SimplifiedLocation.md) |  | [optional] [default to null]
 **Port** | [***SimplifiedPort**](SimplifiedPort.md) |  | [optional] [default to null]
 **Profile** | [***SimplifiedServiceProfile**](SimplifiedServiceProfile.md) |  | [optional] [default to null]
-**Gateway** | [***VirtualGateway**](VirtualGateway.md) |  | [optional] [default to null]
+**Gateway** | [***FabricGateway**](FabricGateway.md) |  | [optional] [default to null]
 **LinkProtocol** | [***SimplifiedLinkProtocol**](SimplifiedLinkProtocol.md) |  | [optional] [default to null]
 **VirtualDevice** | [***VirtualDevice**](VirtualDevice.md) |  | [optional] [default to null]
 **Interface_** | [***ModelInterface**](Interface.md) |  | [optional] [default to null]
@@ -16,8 +16,6 @@ Name | Type | Description | Notes
 **SellerRegion** | **string** | Access point seller region | [optional] [default to null]
 **PeeringType** | [***PeeringType**](PeeringType.md) |  | [optional] [default to null]
 **AuthenticationKey** | **string** | Access point authentication key | [optional] [default to null]
-**RoutingProtocols** | [**[]RoutingProtocol**](RoutingProtocol.md) | Access point routing protocols configuration | [optional] [default to null]
-**AdditionalInfo** | [***AdditionalInfo**](AdditionalInfo.md) |  | [optional] [default to null]
 **ProviderConnectionId** | **string** | Provider assigned Connection Id | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

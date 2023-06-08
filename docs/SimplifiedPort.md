@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **DemarcationPoint** | [***PortDemarcationPoint**](PortDemarcationPoint.md) |  | [optional] [default to null]
 **Redundancy** | [***PortRedundancy**](PortRedundancy.md) |  | [optional] [default to null]
 **Encapsulation** | [***PortEncapsulation**](PortEncapsulation.md) |  | [optional] [default to null]
-**Lag** | [***PortLag**](PortLAG.md) |  | [optional] [default to null]
+**LagEnabled** | **bool** | If LAG enabled | [optional] [default to null]
 **Settings** | [***PortSettings**](PortSettings.md) |  | [optional] [default to null]
 **PhysicalPortQuantity** | **int32** | Number of physical ports | [optional] [default to null]
 **AdditionalInfo** | [**[]PortAdditionalInfo**](PortAdditionalInfo.md) | Port additional information | [optional] [default to null]

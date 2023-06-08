@@ -1,13 +1,13 @@
-diff --git b/fabric/v4/model_service_profile_access_point_type.go a/fabric/v4/model_service_profile_access_point_type.go
-index af750be..6fa525f 100644
---- b/fabric/v4/model_service_profile_access_point_type.go
-+++ a/fabric/v4/model_service_profile_access_point_type.go
-@@ -11,6 +11,27 @@ package v4
+diff --git a/fabric/v4/model_service_profile_access_point_type.go b/fabric/v4/model_service_profile_access_point_type.go
+index 20479f2..b8d35b2 100644
+--- a/fabric/v4/model_service_profile_access_point_type.go
++++ b/fabric/v4/model_service_profile_access_point_type.go
+@@ -10,4 +10,28 @@
+ package v4
  
  // Access Point Type
- type ServiceProfileAccessPointType struct {
--	Type_ *ServiceProfileAccessPointTypeEnum `json:"type"`
--	Uuid  string                             `json:"uuid,omitempty"`
+-type ServiceProfileAccessPointType struct{}
++type ServiceProfileAccessPointType struct {
 +	SupportedBandwidths *[]int32 `json:"supportedBandwidths,omitempty"`
 +	// Setting to allow or prohibit remote connections to the service profile.
 +	AllowRemoteConnections bool `json:"allowRemoteConnections,omitempty"`
@@ -31,4 +31,4 @@ index af750be..6fa525f 100644
 +	Metadata          *ServiceProfileMetadata            `json:"metadata,omitempty"`
 +	Type_             *ServiceProfileAccessPointTypeEnum `json:"type"`
 +	Uuid              string                             `json:"uuid,omitempty"`
- }
++}

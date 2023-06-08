@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type_** | [***ServiceProfileTypeEnum**](ServiceProfileTypeEnum.md) |  | [optional] [default to null]
 **Name** | **string** | Customer-assigned service profile name | [optional] [default to null]
 **Uuid** | **string** | Equinix-assigned service profile identifier | [optional] [default to null]
-**Description** | **string** | User-provided service description | [optional] [default to null]
+**Description** | **string** | User-provided service description should be of maximum length 375 | [optional] [default to null]
 **Notifications** | [**[]SimplifiedNotification**](SimplifiedNotification.md) | Recipients of notifications on service profile change | [optional] [default to null]
 **Tags** | [***[]string**](array.md) |  | [optional] [default to null]
 **Visibility** | [***ServiceProfileVisibilityEnum**](ServiceProfileVisibilityEnum.md) |  | [optional] [default to null]

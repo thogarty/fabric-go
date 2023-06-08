@@ -1,14 +1,15 @@
-diff --git b/fabric/v4/model_json_patch_operation.go a/fabric/v4/model_json_patch_operation.go
-index 0b5bb32..deae237 100644
+diff --git a/fabric/v4/model_json_patch_operation.go b/fabric/v4/model_json_patch_operation.go
+index 69549e7..285c316 100644
 --- b/fabric/v4/model_json_patch_operation.go
 +++ a/fabric/v4/model_json_patch_operation.go
-@@ -12,6 +12,7 @@ package v4
+@@ -10,4 +10,9 @@
+ package v4
+ 
  // Service Profile Access Points
- type JsonPatchOperation struct {
- 	// the operation to be performed
--	Op   string `json:"op"`
--	Path string `json:"path"`
+-type JsonPatchOperation struct{}
++type JsonPatchOperation struct {
++	// the operation to be performed
 +	Op    string      `json:"op"`
 +	Path  string      `json:"path"`
 +	Value interface{} `json:"value"`
- }
++}

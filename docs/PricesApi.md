@@ -4,11 +4,11 @@ All URIs are relative to *https://api.equinix.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SearchPrices**](PricesApi.md#SearchPrices) | **Post** /fabric/v4/prices/search | 
+[**SearchPrices**](PricesApi.md#SearchPrices) | **Post** /fabric/v4/prices/search | Get Prices
 
 # **SearchPrices**
 > PriceSearchResponse SearchPrices(ctx, body)
-
+Get Prices
 
 Search prices by search criteria
 
