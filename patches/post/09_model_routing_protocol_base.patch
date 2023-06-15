@@ -1,0 +1,10 @@
+diff --git a/fabric/v4/model_routing_protocol_base.go b/fabric/v4/model_routing_protocol_base.go
+index 5020469..0523e39 100644
+--- a/fabric/v4/model_routing_protocol_base.go
++++ b/fabric/v4/model_routing_protocol_base.go
+@@ -12,4 +12,5 @@ package v4
+ type RoutingProtocolBase struct {
+ 	// Routing protocol type
+ 	Type_ string `json:"type,omitempty"`
++	OneOfRoutingProtocolBase
+ }
