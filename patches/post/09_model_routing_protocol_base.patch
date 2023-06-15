@@ -7,6 +7,4 @@ index 5020469..0523e39 100644
  	// Routing protocol type
  	Type_ string `json:"type,omitempty"`
 +	OneOfRoutingProtocolBase
--}
-+}
-+
+ }
