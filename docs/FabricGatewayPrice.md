@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Uuid** | **string** | Unique identifier assigned to the Fabric Gateway | [optional] [default to null]
+**Uuid** | **string** | Unique identifier assigned to the Cloud Router | [optional] [default to null]
 **Location** | [***PriceLocation**](PriceLocation.md) |  | [optional] [default to null]
 **Package_** | [***FabricGatewayPackages**](FabricGatewayPackages.md) |  | [optional] [default to null]
 

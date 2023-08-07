@@ -5,7 +5,7 @@ CURRENT_GID := $(shell id -g)
 
 # https://github.com/OpenAPITools/openapi-generator-cli
 # SPEC_URL:="https://developer.equinix.com/sites/default/files/fabric-v4-catalog-fabric_v4_3.yaml"
-SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.7/swagger.yaml"
+SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.9/swagger.yaml"
 
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml

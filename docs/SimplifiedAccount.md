@@ -4,7 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountNumber** | **int64** | Account number | [optional] [default to null]
-**AccountReferenceId** | **string** | Account ReferenceId | [optional] [default to null]
 **AccountName** | **string** | Account name | [optional] [default to null]
 **OrgId** | **int64** | Customer organization identifier | [optional] [default to null]
 **OrganizationName** | **string** | Customer organization name | [optional] [default to null]
