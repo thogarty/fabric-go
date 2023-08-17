@@ -16,18 +16,20 @@ info:
   license:
     name: Equinix Inc
     url: https://developer.equinix.com/agreement
-  version: "4.7"
+  version: "4.9"
 externalDocs:
   description: Find more information on Equinix Developer Portal
   url: https://developer.equinix.com
 servers:
 - url: https://api.equinix.com
   description: Equinix Inc
+security:
+- BearerAuth: []
 tags:
+- name: Cloud Routers
+  description: Cloud Routers <font color="red"> <sup color='red'>Preview</sup></font>
 - name: Connections
   description: Connections
-- name: Gateways
-  description: Gateways
 - name: Metros
   description: Metros
 - name: Ports
@@ -113,18 +115,28 @@ paths:
                 $ref: '#/components/examples/Vd2ColoUntagged'
               Vd2ServiceToken:
                 $ref: '#/components/examples/Vd2ServiceToken'
-              Gw2Colo:
-                $ref: '#/components/examples/Gw2Colo'
-              Gw2Sp-Google:
-                $ref: '#/components/examples/Gw2Sp-Google'
-              Gw2Sp-Azure:
-                $ref: '#/components/examples/Gw2Sp-Azure'
-              Gw2Sp-Generic:
-                $ref: '#/components/examples/Gw2Sp-Generic'
-              Gw2Sp-Aws:
-                $ref: '#/components/examples/Gw2Sp-Aws'
-              Gw2Vd:
-                $ref: '#/components/examples/Gw2Vd'
+              Fcr2Colo:
+                $ref: '#/components/examples/Fcr2Colo'
+              Fcr2Sp-Google:
+                $ref: '#/components/examples/Fcr2Sp-Google'
+              Fcr2Sp-Azure:
+                $ref: '#/components/examples/Fcr2Sp-Azure'
+              Fcr2Sp-Generic:
+                $ref: '#/components/examples/Fcr2Sp-Generic'
+              Fcr2Sp-Generic-Redundant-Primary:
+                $ref: '#/components/examples/Fcr2Sp-Generic'
+              Fcr2Sp-Generic-Redundant-Secondary:
+                $ref: '#/components/examples/Fcr2Sp-Generic-Redundant-Secondary'
+              Fcr2Sp-Generic-Redundant-Primary-re-add:
+                $ref: '#/components/examples/Fcr2Sp-Generic-Redundant-Primary'
+              Fcr2Sp-Aws:
+                $ref: '#/components/examples/Fcr2Sp-Aws'
+              Fcr2Sp-Oracle:
+                $ref: '#/components/examples/Fcr2Sp-Oracle'
+              Fcr2Vd:
+                $ref: '#/components/examples/Fcr2Vd'
+              Fcr2IpWan:
+                $ref: '#/components/examples/Fcr2IpWan'
               AsideServiceToken2ColoWithDot1q:
                 $ref: '#/components/examples/AsideServiceToken2PortWithDot1q'
               AsideServiceToken2ColoWithQinq:
@@ -154,10 +166,12 @@ paths:
                   $ref: '#/components/examples/Vd2Colo-VlanTagResponse'
                 Vd2ColoUntagged:
                   $ref: '#/components/examples/Vd2ColoUntagged-Response'
-                Gw2Sp:
-                  $ref: '#/components/examples/Gw2Sp-Response'
-                Gw2Colo:
-                  $ref: '#/components/examples/Gw2Colo-ResponseExample'
+                Fcr2Sp:
+                  $ref: '#/components/examples/Fcr2Sp-Response'
+                Fcr2Colo:
+                  $ref: '#/components/examples/Fcr2Colo-ResponseExample'
+                Fcr2IpWan:
+                  $ref: '#/components/examples/Fcr2IpWan-response'
                 ServiceToken2PortResponseDot1Q:
                   $ref: '#/components/examples/AsideServiceToken2PortResponseWithDot1q'
                 ServiceToken2PortResponseQinQ:
@@ -198,8 +212,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/405'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}:
     get:
       tags:
@@ -265,8 +277,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
     delete:
       tags:
       - Connections
@@ -337,8 +347,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/405'
-      security:
-      - BearerAuth: []
     patch:
       tags:
       - Connections
@@ -368,14 +376,12 @@ paths:
                 $ref: '#/components/examples/ConnectionAddAccessAndSecretKeyAWSRequest'
               ConnectionAddRoutingRequest:
                 $ref: '#/components/examples/ConnectionAddRoutingRequest'
-              ConnectionResendInvitationRequest:
-                $ref: '#/components/examples/ConnectionResendInvitationRequest'
-              ConnectionForwardInvitationRequest:
-                $ref: '#/components/examples/ConnectionForwardInvitationRequest'
               ConnectionMigrationAsideRequest:
                 $ref: '#/components/examples/ConnectionMigrationAsideRequest'
               ConnectionUpdateNotificationEmailRequest:
                 $ref: '#/components/examples/ConnectionUpdateNotificationEmailRequest'
+              ConnectionMigrationAsideRequestForVirtualDevice:
+                $ref: '#/components/examples/ConnectionMigrationAsideVirtualDeviceRequest'
         required: true
       responses:
         "202":
@@ -416,8 +422,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/actions:
     post:
       tags:
@@ -500,8 +504,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols:
     get:
       tags:
@@ -591,8 +593,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
     post:
       tags:
       - Routing Protocols
@@ -614,14 +614,14 @@ paths:
             schema:
               $ref: '#/components/schemas/RoutingProtocolBase'
             examples:
-              Gw2ColoDirectRoutingOnly:
-                $ref: '#/components/examples/Gw2ColoCreateDirect'
-              Gw2ColoBGPRoutingOnly:
-                $ref: '#/components/examples/Gw2ColoCreateBGP'
-              Gw2GcpDirectRoutingOnly:
-                $ref: '#/components/examples/Gw2GcpCreateDirect'
-              Gw2GcpBGPRoutingOnly:
-                $ref: '#/components/examples/Gw2GcpCreateBGP'
+              Fcr2ColoDirectRoutingOnly:
+                $ref: '#/components/examples/Fcr2ColoCreateDirect'
+              Fcr2ColoBGPRoutingOnly:
+                $ref: '#/components/examples/Fcr2ColoCreateBGP'
+              Fcr2GcpDirectRoutingOnly:
+                $ref: '#/components/examples/Fcr2GcpCreateDirect'
+              Fcr2GcpBGPRoutingOnly:
+                $ref: '#/components/examples/Fcr2GcpCreateBGP'
         required: true
       responses:
         "202":
@@ -689,8 +689,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols/bulk:
     post:
       tags:
@@ -784,8 +782,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}:
     get:
       tags:
@@ -876,8 +872,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
     put:
       tags:
       - Routing Protocols
@@ -979,8 +973,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
     delete:
       tags:
       - Routing Protocols
@@ -1071,8 +1063,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
     patch:
       tags:
       - Routing Protocols
@@ -1178,8 +1168,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/actions:
     get:
       tags:
@@ -1286,8 +1274,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
     post:
       tags:
       - Routing Protocols
@@ -1405,8 +1391,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/actions/{actionId}:
     get:
       tags:
@@ -1494,8 +1478,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/changes/{changeId}:
     get:
       tags:
@@ -1584,8 +1566,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/changes:
     get:
       tags:
@@ -1684,8 +1664,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/search:
     post:
       tags:
@@ -1866,8 +1844,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
   /fabric/v4/prices/search:
     post:
       tags:
@@ -1888,11 +1864,11 @@ paths:
                 $ref: '#/components/examples/VirtualConnectionProductEvplVcTypeFromColoToColoByPortUuid'
               virtualConnectionProductEvplVcTypeFromColoToSP:
                 $ref: '#/components/examples/VirtualConnectionProductEvplVcTypeFromColoToSP'
-              virtualConnectionProductGwVcTypeFromGWToSP:
+              virtualConnectionProductFcrVcTypeFromGWToSP:
                 $ref: '#/components/examples/VirtualConnectionProductGwVcTypeFromGWToSP'
-              virtualConnectionProductGwVcTypeFromGWToColo:
+              virtualConnectionProductFcrVcTypeFromGWToColo:
                 $ref: '#/components/examples/VirtualConnectionProductGwVcTypeFromGWToColo'
-              virtualConnectionProductGwVcTypeFromVDToColo:
+              virtualConnectionProductFcrVcTypeFromVDToColo:
                 $ref: '#/components/examples/VirtualConnectionProductGwVcTypeFromVDToColo'
               virtualConnectionProductEvplVcTypeFromVDToColo:
                 $ref: '#/components/examples/VirtualConnectionProductEvplVcTypeFromVDToColo'
@@ -1900,7 +1876,9 @@ paths:
                 $ref: '#/components/examples/VirtualConnectionProductVdChainTypeFromVDToChaingroup'
               virtualConnectionProductOfflineEvplVcTypeFromColoToSp:
                 $ref: '#/components/examples/VirtualConnectionProductOfflineEvplVcTypeFromColoToSp'
-              fabricGatewayProduct:
+              virtualConnectionProductOfflineEvpLanVcTypeFromColoToNetwork:
+                $ref: '#/components/examples/VirtualConnectionProductEvpLanVcTypeFromColoToNetwork'
+              cloudRouterProduct:
                 $ref: '#/components/examples/FabricGatewayProduct'
               ipBlockProduct:
                 $ref: '#/components/examples/IpBlockProduct'
@@ -1919,7 +1897,7 @@ paths:
                   $ref: '#/components/examples/VirtualConnection'
                 ipBlock:
                   $ref: '#/components/examples/IpBlock'
-                fabricGateway:
+                cloudRouter:
                   $ref: '#/components/examples/FabricGateway'
                 virtualPort:
                   $ref: '#/components/examples/VirtualPort'
@@ -2014,8 +1992,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
   /fabric/v4/ports/stats:
     get:
       tags:
@@ -2115,8 +2091,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/{connectionId}/stats:
     get:
       tags:
@@ -2190,8 +2164,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceProfiles:
     get:
       tags:
@@ -2279,8 +2251,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
     post:
       tags:
       - Service Profiles
@@ -2348,8 +2318,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceProfiles/search:
     post:
       tags:
@@ -2404,8 +2372,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceProfiles/{serviceProfileId}:
     get:
       tags:
@@ -2486,8 +2452,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
     put:
       tags:
       - Service Profiles
@@ -2521,7 +2485,7 @@ paths:
                 $ref: '#/components/examples/ServiceProfileUpdate'
         required: true
       responses:
-        "200":
+        "202":
           description: Successful Put operation
           headers:
             ETag:
@@ -2578,8 +2542,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
     delete:
       tags:
       - Service Profiles
@@ -2653,8 +2615,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
     patch:
       tags:
       - Service Profiles
@@ -2754,8 +2714,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/sp-500'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceTokens/{serviceTokenId}:
     get:
       tags:
@@ -2813,8 +2771,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
     delete:
       tags:
       - Service Tokens
@@ -2852,8 +2808,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/401'
-      security:
-      - BearerAuth: []
     patch:
       tags:
       - Service Tokens
@@ -2918,8 +2872,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceTokens:
     get:
       tags:
@@ -2966,8 +2918,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403'
-      security:
-      - BearerAuth: []
     post:
       tags:
       - Service Tokens
@@ -3031,8 +2981,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceTokens/{serviceTokenId}/actions:
     post:
       tags:
@@ -3101,8 +3049,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
   /fabric/v4/serviceTokens/search:
     post:
       tags:
@@ -3167,8 +3113,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_internal_error'
-      security:
-      - BearerAuth: []
   /fabric/v4/metros:
     get:
       tags:
@@ -3242,8 +3186,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_metros'
-      security:
-      - BearerAuth: []
   /fabric/v4/metros/{metroCode}:
     get:
       tags:
@@ -3298,8 +3240,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_metros'
-      security:
-      - BearerAuth: []
   /fabric/v4/ports:
     get:
       tags:
@@ -3337,8 +3277,154 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403'
-      security:
-      - BearerAuth: []
+    post:
+      tags:
+      - Ports
+      summary: Create Port
+      description: Creates Equinix Fabric? Port.
+      operationId: createPort
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Port'
+            examples:
+              COLOSinglePortNonLag:
+                $ref: '#/components/examples/COLOSinglePortNonLag'
+              COLOSinglePortLag:
+                $ref: '#/components/examples/COLOSinglePortLag'
+              COLOLagPortNewGroup:
+                $ref: '#/components/examples/COLOLagPortNewGroup'
+              COLOAddSecondaryPort:
+                $ref: '#/components/examples/COLOAddSecondaryPort'
+              REMOTESinglePortLag:
+                $ref: '#/components/examples/REMOTESinglePortNewGroupLagRequest'
+              BMMRSinglePortLag:
+                $ref: '#/components/examples/BMMRSinglePortLag'
+              BMMRSinglePortNoLag:
+                $ref: '#/components/examples/BMMRSinglePortNoLag'
+              BMMRAddSecondaryPort:
+                $ref: '#/components/examples/BMMRAddSecondaryPort'
+              BMMRLagPortNewGroup:
+                $ref: '#/components/examples/BMMRLagPortNewGroup'
+        required: true
+      responses:
+        "201":
+          description: Successful operation for COLO Single Port Non Lag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/COLOSinglePortNonLagResponse'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/port-400'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/port-500'
+  /fabric/v4/ports/bulk:
+    post:
+      tags:
+      - Ports
+      summary: Create Port
+      description: Create Port creates Equinix Fabric? Port.<font color="red"> <sup
+        color='red'>Preview</sup></font>
+      operationId: createBulkPort
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPort'
+            examples:
+              COLOBulkPort:
+                $ref: '#/components/examples/COLOBulkPort'
+        required: true
+      responses:
+        "201":
+          description: Successful operation for COLO Bulk Port
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPortsResponse'
+              examples:
+                bulkPortExample:
+                  $ref: '#/components/examples/COLOBulkPortResponse'
+  /fabric/v4/ports/{portId}/physicalPorts/bulk:
+    post:
+      tags:
+      - Ports
+      summary: Add to Lag
+      description: Add Physical Ports to Virtual Port.<font color="red"> <sup color='red'>Preview</sup></font>
+      operationId: addToLag
+      parameters:
+      - name: portId
+        in: path
+        description: Port UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPhysicalPort'
+            examples:
+              COLOAddToLag:
+                $ref: '#/components/examples/COLOAddToLag'
+              REMOTEAddToLag:
+                $ref: '#/components/examples/REMOTEAddToLag'
+              BMMRAddToLag:
+                $ref: '#/components/examples/BMMRAddToLag'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPhysicalPortsResponse'
+              examples:
+                COLOAddToLag:
+                  $ref: '#/components/examples/COLOAddToLagResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
   /fabric/v4/ports/{portId}:
     get:
       tags:
@@ -3394,8 +3480,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
   /fabric/v4/ports/{portUuid}/linkProtocols:
     get:
       tags:
@@ -3444,21 +3528,19 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/403-port-access'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gateways:
+  /fabric/v4/routers:
     post:
       tags:
-      - Gateways
-      summary: Create Gateway
-      description: This API provides capability to create user's Fabric Gateways
+      - Cloud Routers
+      summary: Create Routers
+      description: This API provides capability to create user's Cloud Routers
       operationId: createGateway
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FabricGatewayPostRequest'
+              $ref: '#/components/schemas/CloudRouterPostRequest'
             examples:
               CreateLabPackage:
                 $ref: '#/components/examples/CreateLabPackage'
@@ -3467,14 +3549,14 @@ paths:
         required: true
       responses:
         "200":
-          description: Fabric Gateway Access point object
+          description: Fabric Cloud Router object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FabricGateway'
+                $ref: '#/components/schemas/CloudRouter'
               examples:
-                gatewayResponse:
-                  $ref: '#/components/examples/GatewayPostResponseExample'
+                cloudRouterResponse:
+                  $ref: '#/components/examples/CloudRouterPostResponseExample'
         "400":
           description: Bad request
           content:
@@ -3520,34 +3602,32 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gateways/{gatewayId}:
+  /fabric/v4/routers/{routerId}:
     get:
       tags:
-      - Gateways
-      summary: Get Gateway
-      description: This API provides capability to retrieve user's Fabric Gateway
+      - Cloud Routers
+      summary: Get Routers
+      description: This API provides capability to retrieve user's Cloud Routers
       operationId: getGatewayByUuid
       parameters:
-      - name: gatewayId
+      - name: routerId
         in: path
-        description: Gateway UUID
+        description: Cloud Router UUID
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayId'
+          $ref: '#/components/schemas/RouterId'
       responses:
         "200":
-          description: Fabric Gateway Access point object
+          description: Fabric Cloud Router object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FabricGateway'
+                $ref: '#/components/schemas/CloudRouter'
               examples:
-                gatewayResponse:
-                  $ref: '#/components/examples/GatewayResponseExample'
+                cloudRouterResponse:
+                  $ref: '#/components/examples/CloudRouterResponseExample'
         "401":
           description: Unauthorized
           content:
@@ -3584,26 +3664,24 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
     delete:
       tags:
-      - Gateways
-      summary: Delete Gateway
-      description: This API provides capability to delete user's Fabric Gateway
+      - Cloud Routers
+      summary: Delete Routers
+      description: This API provides capability to delete user's Cloud Routers
       operationId: deleteGatewayByUuid
       parameters:
-      - name: gatewayId
+      - name: routerId
         in: path
-        description: Gateway UUID
+        description: Cloud Router UUID
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayId'
+          $ref: '#/components/schemas/RouterId'
       responses:
         "204":
-          description: Deleted Gateway Successfully
+          description: Deleted Cloud Router Successfully
         "400":
           description: Bad request
           content:
@@ -3649,28 +3727,26 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
     patch:
       tags:
-      - Gateways
-      summary: Update Gateway
-      description: This API provides capability to update user's Fabric Gateway
+      - Cloud Routers
+      summary: Update Routers
+      description: This API provides capability to update user's Cloud Routers
       operationId: updateGatewayByUuid
       parameters:
-      - name: gatewayId
+      - name: routerId
         in: path
-        description: Gateway UUID
+        description: Cloud Router UUID
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayId'
+          $ref: '#/components/schemas/RouterId'
       requestBody:
         content:
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/FabricGatewayUpdateRequest'
+              $ref: '#/components/schemas/CloudRouterUpdateRequest'
             examples:
               UpdatePackage:
                 $ref: '#/components/examples/UpdatePackage'
@@ -3681,14 +3757,14 @@ paths:
         required: true
       responses:
         "200":
-          description: Fabric Gateway Access point object
+          description: Fabric Cloud Router object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FabricGateway'
+                $ref: '#/components/schemas/CloudRouter'
               examples:
-                gatewayResponse:
-                  $ref: '#/components/examples/GatewayPatchResponseExample'
+                cloudRouterResponse:
+                  $ref: '#/components/examples/CloudRouterPatchResponseExample'
         "400":
           description: Bad request
           content:
@@ -3743,24 +3819,22 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gateways/{gatewayId}/actions:
+  /fabric/v4/routers/{routerId}/actions:
     get:
       tags:
-      - Gateways
+      - Cloud Routers
       summary: Get actions
       description: This API provides capability to fetch action status
       operationId: getGatewayActions
       parameters:
-      - name: gatewayId
+      - name: routerId
         in: path
-        description: Gateway UUID
+        description: Router UUID
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayId'
+          $ref: '#/components/schemas/RouterId_1'
       - name: state
         in: query
         description: Action state
@@ -3777,7 +3851,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GatewayActionResponse'
               examples:
-                gatewayActionExample:
+                routerActionExample:
                   $ref: '#/components/examples/GatewayActionResponse'
         "400":
           description: Bad request
@@ -3833,24 +3907,22 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
     post:
       tags:
-      - Gateways
+      - Cloud Routers
       summary: Route table actions
       description: This API provides capability to refresh route table and bgp session
         summary information
       operationId: createGatewayAction
       parameters:
-      - name: gatewayId
+      - name: routerId
         in: path
-        description: Gateway UUID
+        description: Router UUID
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayId'
+          $ref: '#/components/schemas/RouterId_1'
       requestBody:
         content:
           application/json:
@@ -3924,26 +3996,24 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gateways/{gatewayId}/routes/search:
+  /fabric/v4/routers/{routerId}/routes/search:
     post:
       tags:
       - Routes
       summary: Search Route Table
-      description: "The API provides capability to get list of user's Fabric Gateways\
-        \ route table entries using search criteria, including optional filtering,\
+      description: "The API provides capability to get list of user's Fabric Cloud\
+        \ Router route table entries using search criteria, including optional filtering,\
         \ pagination and sorting"
       operationId: searchRoutes
       parameters:
-      - name: gatewayId
+      - name: routerId
         in: path
-        description: Gateway UUID
+        description: Router UUID
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayId'
+          $ref: '#/components/schemas/RouterId_1'
       requestBody:
         content:
           application/json:
@@ -4022,14 +4092,12 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gateways/search:
+  /fabric/v4/routers/search:
     post:
       tags:
-      - Gateways
-      summary: Search Gateway
-      description: "The API provides capability to get list of user's Fabric Gateways\
+      - Cloud Routers
+      summary: Search Routers
+      description: "The API provides capability to get list of user's Cloud Routers\
         \ using search criteria, including optional filtering, pagination and sorting"
       operationId: searchGateways
       parameters: []
@@ -4037,7 +4105,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FabricGatewaySearchRequest'
+              $ref: '#/components/schemas/CloudRouterSearchRequest'
             examples:
               SearchFilterByStatus:
                 $ref: '#/components/examples/SearchFilterByStatus'
@@ -4101,15 +4169,12 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gatewayPackages:
+  /fabric/v4/routerPackages:
     get:
       tags:
-      - Gateways
+      - Cloud Routers
       summary: List Packages
-      description: This API provides capability to retrieve user's Fabric Gateway
-        Packages
+      description: This API provides capability to retrieve user's Cloud Routers Packages
       operationId: getGatewayPackages
       parameters:
       - name: offset
@@ -4132,14 +4197,14 @@ paths:
         example: 10
       responses:
         "200":
-          description: Fabric Gateway Packages
+          description: Fabric Cloud Router Packages
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackageResponse'
               examples:
                 Example:
-                  $ref: '#/components/examples/ListFGPackagesResponse'
+                  $ref: '#/components/examples/ListFCRPackagesResponse'
         "401":
           description: Unauthorized
           content:
@@ -4176,32 +4241,30 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
-  /fabric/v4/gatewayPackages/{gatewayPackageCode}:
+  /fabric/v4/routerPackages/{routerPackageCode}:
     get:
       tags:
-      - Gateways
+      - Cloud Routers
       summary: Get Package Details
-      description: This API provides capability to retrieve user's Fabric Gateway
-        Package Details
+      description: This API provides capability to retrieve user's Cloud Routers Package
+        Details
       operationId: getGatewayPackageByCode
       parameters:
-      - name: gatewayPackageCode
+      - name: routerPackageCode
         in: path
-        description: Equinix-assigned gateway package identifier
+        description: Equinix-assigned Cloud Router package identifier
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/GatewayPackageCode'
+          $ref: '#/components/schemas/RouterPackageCode'
       responses:
         "200":
-          description: Fabric Gateway Package details
+          description: Fabric Cloud Router Package details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FabricGatewayPackage'
+                $ref: '#/components/schemas/CloudRouterPackage'
         "400":
           description: Bad request
           content:
@@ -4247,8 +4310,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
   /fabric/v4/health:
     get:
       tags:
@@ -4268,8 +4329,6 @@ paths:
               examples:
                 metroExample:
                   $ref: '#/components/examples/healthResponse'
-      security:
-      - BearerAuth: []
   /fabric/v4/connections/validate:
     post:
       tags:
@@ -4344,8 +4403,6 @@ paths:
               examples:
                 Bad Request:
                   $ref: '#/components/examples/error-400'
-      security:
-      - BearerAuth: []
   /fabric/v4/networks:
     post:
       tags:
@@ -4420,8 +4477,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500'
-      security:
-      - BearerAuth: []
   /fabric/v4/networks/{networkId}:
     get:
       tags:
@@ -4475,8 +4530,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
     delete:
       tags:
       - Networks
@@ -4538,8 +4591,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
     patch:
       tags:
       - Networks
@@ -4621,8 +4672,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/415'
-      security:
-      - BearerAuth: []
   /fabric/v4/networks/search:
     post:
       tags:
@@ -4689,8 +4738,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/415'
-      security:
-      - BearerAuth: []
   /fabric/v4/networks/{networkId}/connections:
     get:
       tags:
@@ -4754,8 +4801,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/415'
-      security:
-      - BearerAuth: []
   /fabric/v4/networks/{networkId}/changes:
     get:
       tags:
@@ -4819,8 +4864,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/415'
-      security:
-      - BearerAuth: []
   /fabric/v4/networks/{networkId}/changes/{changeId}:
     get:
       tags:
@@ -4892,8 +4935,6 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/404'
-      security:
-      - BearerAuth: []
 components:
   schemas:
     ConnectionPostRequest:
@@ -4913,7 +4954,7 @@ components:
           items:
             $ref: '#/components/schemas/SimplifiedNotification'
         bandwidth:
-          maximum: 10000
+          maximum: 50000
           minimum: 0
           type: integer
           description: Connection bandwidth in Mbps
@@ -5187,6 +5228,27 @@ components:
               operation:
                 equinixStatus: PROVISIONING
               account: null
+            router:
+              bgpIpv4RoutesCount: 0
+              equinixAsn: 30000
+              change:
+                data:
+                  op: replace
+                  path: path
+                  value: {}
+                createdDateTime: 2020-11-06T07:00:00Z
+                information: information
+                type: ROUTER_UPDATE
+                uuid: uuid
+                status: COMPLETED
+                updatedDateTime: 2020-11-06T07:00:00Z
+              name: test-fg-1
+              changeLog: null
+              href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+              state: PROVISIONED
+              bgpIpv6RoutesCount: 0
+              uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+              connectionsCount: 0
             port:
               serviceType: EPL
               encapsulation:
@@ -5226,10 +5288,11 @@ components:
                 placeVcOrderPermission: true
                 sharedPortType: true
                 packageType: STANDARD
-                sharedPortProduct: sharedPortProduct
+                sharedPortProduct: NETWORK_EDGE
               availableBandwidth: 0
               demarcationPoint:
                 patchPanel: patchPanel
+                patchPanelName: patchPanelName
                 connectorType: connectorType
                 cabinetUniqueSpaceId: cabinetUniqueSpaceId
                 patchPanelPortB: patchPanelPortB
@@ -5274,7 +5337,7 @@ components:
                       firstName: firstName
                       lastName: lastName
                       email: email
-                    signatory: ECHOSIGN
+                    signatory: DELEGATE
                   purchaseOrder:
                     number: number
                     amount: amount
@@ -5311,7 +5374,7 @@ components:
                       firstName: firstName
                       lastName: lastName
                       email: email
-                    signatory: ECHOSIGN
+                    signatory: DELEGATE
                   purchaseOrder:
                     number: number
                     amount: amount
@@ -5340,27 +5403,6 @@ components:
               region: "AMER, APAC, EMEA"
               ibx: AM1
             account: null
-            gateway:
-              bgpIpv4RoutesCount: 0
-              equinixAsn: 30000
-              change:
-                data:
-                  op: replace
-                  path: path
-                  value: {}
-                createdDateTime: 2020-11-06T07:00:00Z
-                information: information
-                type: GATEWAY_UPDATE
-                uuid: uuid
-                status: COMPLETED
-                updatedDateTime: 2020-11-06T07:00:00Z
-              name: test-fg-1
-              changeLog: null
-              href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-              state: PROVISIONED
-              bgpIpv6RoutesCount: 0
-              uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-              connectionsCount: 0
             peeringType: PRIVATE
             linkProtocol:
               vlanTag: 4078
@@ -5453,17 +5495,16 @@ components:
         account:
           resellerOrgId: 5
           organizationName: organizationName
+          resellerAccountNumber: 1
           accountName: accountName
           ucmId: ucmId
-          accountReferenceId: accountReferenceId
+          resellerUcmId: resellerUcmId
           globalOrganizationName: globalOrganizationName
           globalOrgId: globalOrgId
-          accountNumber: 0
-          orgId: 6
-          resellerAccountNumber: 1
-          resellerUcmId: resellerUcmId
           resellerAccountName: resellerAccountName
+          accountNumber: 0
           globalCustId: globalCustId
+          orgId: 6
         order:
           orderNumber: orderNumber
           orderId: orderId
@@ -5724,6 +5765,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -5763,10 +5825,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -5811,7 +5874,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -5848,7 +5911,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -5877,27 +5940,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -6292,7 +6334,7 @@ components:
       - /account/orgId
       - /aSide/accessPoint/account/accountName
       - /aSide/accessPoint/account/accountNumber
-      - /aSide/accessPoint/gateway/uuid
+      - /aSide/accessPoint/router/uuid
       - /aSide/accessPoint/linkProtocol/vlanCTag
       - /aSide/accessPoint/linkProtocol/vlanSTag
       - /aSide/accessPoint/linkProtocol/vlanTagMin
@@ -6547,6 +6589,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -6586,10 +6649,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -6634,7 +6698,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -6671,7 +6735,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -6700,27 +6764,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -6813,17 +6856,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -7018,6 +7060,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -7057,10 +7120,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -7105,7 +7169,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -7142,7 +7206,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -7171,27 +7235,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -7284,17 +7327,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -7378,6 +7420,11 @@ components:
             type: MONTHLY_RECURRING
           - price: 0.08008281904610115
             type: MONTHLY_RECURRING
+          router:
+            package:
+              code: LAB
+            location: null
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           termLength: 6
           port:
             serviceType: MSP
@@ -7425,22 +7472,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
-          gateway:
-            package:
-              code: LAB
-            location: null
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            orgId: 6
         - code: code
           catgory: COUNTRY
           ipBlock:
@@ -7455,6 +7496,11 @@ components:
             type: MONTHLY_RECURRING
           - price: 0.08008281904610115
             type: MONTHLY_RECURRING
+          router:
+            package:
+              code: LAB
+            location: null
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           termLength: 6
           port:
             serviceType: MSP
@@ -7502,22 +7548,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
-          gateway:
-            package:
-              code: LAB
-            location: null
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            orgId: 6
     PriceErrorList:
       type: array
       items:
@@ -8850,34 +8890,40 @@ components:
           equinixAsn: 0
           name: name
           connectedMetros:
-          - code: code
-            avgLatency: 5.962133916683182
+          - remoteVCBandwidthMax: 2
+            code: code
+            avgLatency: 5.637376656633329
             href: href
-          - code: code
-            avgLatency: 5.962133916683182
+          - remoteVCBandwidthMax: 2
+            code: code
+            avgLatency: 5.637376656633329
             href: href
           href: href
           geoCoordinates:
-            latitude: 6.027456183070403
-            longitude: 1.4658129805029452
+            latitude: 1.4658129805029452
+            longitude: 5.962133916683182
           type: type
           region: region
+          localVCBandwidthMax: 6
         - code: code
           equinixAsn: 0
           name: name
           connectedMetros:
-          - code: code
-            avgLatency: 5.962133916683182
+          - remoteVCBandwidthMax: 2
+            code: code
+            avgLatency: 5.637376656633329
             href: href
-          - code: code
-            avgLatency: 5.962133916683182
+          - remoteVCBandwidthMax: 2
+            code: code
+            avgLatency: 5.637376656633329
             href: href
           href: href
           geoCoordinates:
-            latitude: 6.027456183070403
-            longitude: 1.4658129805029452
+            latitude: 1.4658129805029452
+            longitude: 5.962133916683182
           type: type
           region: region
+          localVCBandwidthMax: 6
     Metro:
       type: object
       properties:
@@ -8904,6 +8950,10 @@ components:
             and exchanges that data with other internal systems via border gateway
             protocol.
           format: int64
+        localVCBandwidthMax:
+          type: integer
+          description: This field holds Max Connection speed with in the metro
+          format: int64
         geoCoordinates:
           $ref: '#/components/schemas/GeoCoordinates'
         connectedMetros:
@@ -8919,18 +8969,21 @@ components:
         equinixAsn: 0
         name: name
         connectedMetros:
-        - code: code
-          avgLatency: 5.962133916683182
+        - remoteVCBandwidthMax: 2
+          code: code
+          avgLatency: 5.637376656633329
           href: href
-        - code: code
-          avgLatency: 5.962133916683182
+        - remoteVCBandwidthMax: 2
+          code: code
+          avgLatency: 5.637376656633329
           href: href
         href: href
         geoCoordinates:
-          latitude: 6.027456183070403
-          longitude: 1.4658129805029452
+          latitude: 1.4658129805029452
+          longitude: 5.962133916683182
         type: type
         region: region
+        localVCBandwidthMax: 6
     GeoCoordinates:
       type: object
       properties:
@@ -8944,8 +8997,8 @@ components:
           format: double
       description: Geographic location data of Fabric Metro
       example:
-        latitude: 6.027456183070403
-        longitude: 1.4658129805029452
+        latitude: 1.4658129805029452
+        longitude: 5.962133916683182
     ConnectedMetro:
       type: object
       properties:
@@ -8960,10 +9013,15 @@ components:
           type: number
           description: "Average latency (in milliseconds[ms]) between two specified\
             \ metros."
+        remoteVCBandwidthMax:
+          type: integer
+          description: This field holds the Max Connection speed with connected metros
+          format: int64
       description: Arrays of objects containing latency data for the specified metros
       example:
+        remoteVCBandwidthMax: 2
         code: code
-        avgLatency: 5.962133916683182
+        avgLatency: 5.637376656633329
         href: href
     MetroErrorList:
       type: array
@@ -9052,6 +9110,11 @@ components:
           connectionsCount: 0
           connectivitySourceType: COLO
           physicalPortQuantity: 3
+          lag:
+            name: name
+            memberStatus: memberStatus
+            id: id
+            enabled: true
           usedBandwidth: 0
           additionalInfo:
           - value: value
@@ -9065,6 +9128,7 @@ components:
             priority: PRIMARY
             enabled: true
             group: group
+          demarcationPointIbx: demarcationPointIbx
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -9073,7 +9137,7 @@ components:
                 firstName: firstName
                 lastName: lastName
                 email: email
-              signatory: ECHOSIGN
+              signatory: DELEGATE
             purchaseOrder:
               number: number
               amount: amount
@@ -9091,11 +9155,12 @@ components:
             placeVcOrderPermission: true
             sharedPortType: true
             packageType: STANDARD
-            sharedPortProduct: sharedPortProduct
+            sharedPortProduct: NETWORK_EDGE
           availableBandwidth: 0
           bmmrType: SELF
           demarcationPoint:
             patchPanel: patchPanel
+            patchPanelName: patchPanelName
             connectorType: connectorType
             cabinetUniqueSpaceId: cabinetUniqueSpaceId
             patchPanelPortB: patchPanelPortB
@@ -9133,7 +9198,7 @@ components:
                   firstName: firstName
                   lastName: lastName
                   email: email
-                signatory: ECHOSIGN
+                signatory: DELEGATE
               purchaseOrder:
                 number: number
                 amount: amount
@@ -9170,7 +9235,7 @@ components:
                   firstName: firstName
                   lastName: lastName
                   email: email
-                signatory: ECHOSIGN
+                signatory: DELEGATE
               purchaseOrder:
                 number: number
                 amount: amount
@@ -9192,7 +9257,7 @@ components:
             deletedBy: johnsmith
             deletedByEmail: john.smith@example.com
             updatedDateTime: 2020-11-06T07:00:00Z
-          physicalPortsType: physicalPortsType
+          physicalPortsType: 1000BASE_LX
           cvpId: cvpId
           physicalPortsCount: 5
           name: name
@@ -9215,17 +9280,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           notifications:
           - registeredUsers:
             - registeredUsers
@@ -9260,6 +9324,11 @@ components:
           connectionsCount: 0
           connectivitySourceType: COLO
           physicalPortQuantity: 3
+          lag:
+            name: name
+            memberStatus: memberStatus
+            id: id
+            enabled: true
           usedBandwidth: 0
           additionalInfo:
           - value: value
@@ -9273,6 +9342,7 @@ components:
             priority: PRIMARY
             enabled: true
             group: group
+          demarcationPointIbx: demarcationPointIbx
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -9281,7 +9351,7 @@ components:
                 firstName: firstName
                 lastName: lastName
                 email: email
-              signatory: ECHOSIGN
+              signatory: DELEGATE
             purchaseOrder:
               number: number
               amount: amount
@@ -9299,11 +9369,12 @@ components:
             placeVcOrderPermission: true
             sharedPortType: true
             packageType: STANDARD
-            sharedPortProduct: sharedPortProduct
+            sharedPortProduct: NETWORK_EDGE
           availableBandwidth: 0
           bmmrType: SELF
           demarcationPoint:
             patchPanel: patchPanel
+            patchPanelName: patchPanelName
             connectorType: connectorType
             cabinetUniqueSpaceId: cabinetUniqueSpaceId
             patchPanelPortB: patchPanelPortB
@@ -9341,7 +9412,7 @@ components:
                   firstName: firstName
                   lastName: lastName
                   email: email
-                signatory: ECHOSIGN
+                signatory: DELEGATE
               purchaseOrder:
                 number: number
                 amount: amount
@@ -9378,7 +9449,7 @@ components:
                   firstName: firstName
                   lastName: lastName
                   email: email
-                signatory: ECHOSIGN
+                signatory: DELEGATE
               purchaseOrder:
                 number: number
                 amount: amount
@@ -9400,7 +9471,7 @@ components:
             deletedBy: johnsmith
             deletedByEmail: john.smith@example.com
             updatedDateTime: 2020-11-06T07:00:00Z
-          physicalPortsType: physicalPortsType
+          physicalPortsType: 1000BASE_LX
           cvpId: cvpId
           physicalPortsCount: 5
           name: name
@@ -9423,17 +9494,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           notifications:
           - registeredUsers:
             - registeredUsers
@@ -9448,7 +9518,6 @@ components:
       - account
       - connectivitySourceType
       - encapsulation
-      - lag
       - location
       - physicalPortsSpeed
       - physicalPortsType
@@ -9488,6 +9557,12 @@ components:
         physicalPortsType:
           type: string
           description: Physical Ports Type
+          enum:
+          - 1000BASE_LX
+          - 10GBASE_LR
+          - 100GBASE_LR4
+          - 10GBASE_ER
+          - 1000BASE_SX
         physicalPortsCount:
           type: integer
         connectivitySourceType:
@@ -9544,6 +9619,9 @@ components:
           $ref: '#/components/schemas/PortDevice'
         interface:
           $ref: '#/components/schemas/PortInterface'
+        demarcationPointIbx:
+          type: string
+          description: A-side/Equinix ibx
         tetherIbx:
           type: string
           description: z-side/Equinix ibx
@@ -9556,6 +9634,8 @@ components:
         lagEnabled:
           type: boolean
           description: If LAG enabled
+        lag:
+          $ref: '#/components/schemas/PortLag'
         asn:
           type: integer
           description: Port ASN
@@ -9611,6 +9691,11 @@ components:
         connectionsCount: 0
         connectivitySourceType: COLO
         physicalPortQuantity: 3
+        lag:
+          name: name
+          memberStatus: memberStatus
+          id: id
+          enabled: true
         usedBandwidth: 0
         additionalInfo:
         - value: value
@@ -9624,6 +9709,7 @@ components:
           priority: PRIMARY
           enabled: true
           group: group
+        demarcationPointIbx: demarcationPointIbx
         order:
           orderNumber: orderNumber
           orderId: orderId
@@ -9632,7 +9718,7 @@ components:
               firstName: firstName
               lastName: lastName
               email: email
-            signatory: ECHOSIGN
+            signatory: DELEGATE
           purchaseOrder:
             number: number
             amount: amount
@@ -9650,11 +9736,12 @@ components:
           placeVcOrderPermission: true
           sharedPortType: true
           packageType: STANDARD
-          sharedPortProduct: sharedPortProduct
+          sharedPortProduct: NETWORK_EDGE
         availableBandwidth: 0
         bmmrType: SELF
         demarcationPoint:
           patchPanel: patchPanel
+          patchPanelName: patchPanelName
           connectorType: connectorType
           cabinetUniqueSpaceId: cabinetUniqueSpaceId
           patchPanelPortB: patchPanelPortB
@@ -9692,7 +9779,7 @@ components:
                 firstName: firstName
                 lastName: lastName
                 email: email
-              signatory: ECHOSIGN
+              signatory: DELEGATE
             purchaseOrder:
               number: number
               amount: amount
@@ -9729,7 +9816,7 @@ components:
                 firstName: firstName
                 lastName: lastName
                 email: email
-              signatory: ECHOSIGN
+              signatory: DELEGATE
             purchaseOrder:
               number: number
               amount: amount
@@ -9751,7 +9838,7 @@ components:
           deletedBy: johnsmith
           deletedByEmail: john.smith@example.com
           updatedDateTime: 2020-11-06T07:00:00Z
-        physicalPortsType: physicalPortsType
+        physicalPortsType: 1000BASE_LX
         cvpId: cvpId
         physicalPortsCount: 5
         name: name
@@ -9774,17 +9861,16 @@ components:
         account:
           resellerOrgId: 5
           organizationName: organizationName
+          resellerAccountNumber: 1
           accountName: accountName
           ucmId: ucmId
-          accountReferenceId: accountReferenceId
+          resellerUcmId: resellerUcmId
           globalOrganizationName: globalOrganizationName
           globalOrgId: globalOrgId
-          accountNumber: 0
-          orgId: 6
-          resellerAccountNumber: 1
-          resellerUcmId: resellerUcmId
           resellerAccountName: resellerAccountName
+          accountNumber: 0
           globalCustId: globalCustId
+          orgId: 6
         notifications:
         - registeredUsers:
           - registeredUsers
@@ -9867,7 +9953,7 @@ components:
               firstName: firstName
               lastName: lastName
               email: email
-            signatory: ECHOSIGN
+            signatory: DELEGATE
           purchaseOrder:
             number: number
             amount: amount
@@ -9876,6 +9962,116 @@ components:
             attachmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             startDate: startDate
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+    BulkPort:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Port'
+      description: Create bulk port request
+    BulkPhysicalPort:
+      type: object
+      properties:
+        data:
+          type: array
+          description: add physical ports to virtual port
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+      description: Add to Lag request
+    AllPhysicalPortsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: GET All Physical Ports
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+      description: GET All Physical Ports
+      example:
+        pagination:
+          next: next
+          total: 0
+          offset: 0
+          previous: previous
+          limit: 0
+        data:
+        - demarcationPoint: null
+          tether: null
+          loas:
+          - href: http://example.com/aeiou
+            type: CTR_LOA
+            uuid: uuid
+          - href: http://example.com/aeiou
+            type: CTR_LOA
+            uuid: uuid
+          type: XF_PHYSICAL_PORT
+          interfaceType: interfaceType
+          additionalInfo:
+          - null
+          - null
+          id: 6
+          href: http://example.com/aeiou
+          state: null
+          operation: null
+          account: null
+          interfaceSpeed: 0
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: DELEGATE
+            purchaseOrder:
+              number: number
+              amount: amount
+              selectionType: EXEMPTION
+              endDate: endDate
+              attachmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              startDate: startDate
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - demarcationPoint: null
+          tether: null
+          loas:
+          - href: http://example.com/aeiou
+            type: CTR_LOA
+            uuid: uuid
+          - href: http://example.com/aeiou
+            type: CTR_LOA
+            uuid: uuid
+          type: XF_PHYSICAL_PORT
+          interfaceType: interfaceType
+          additionalInfo:
+          - null
+          - null
+          id: 6
+          href: http://example.com/aeiou
+          state: null
+          operation: null
+          account: null
+          interfaceSpeed: 0
+          order:
+            orderNumber: orderNumber
+            orderId: orderId
+            signature:
+              delegate:
+                firstName: firstName
+                lastName: lastName
+                email: email
+              signatory: DELEGATE
+            purchaseOrder:
+              number: number
+              amount: amount
+              selectionType: EXEMPTION
+              endDate: endDate
+              attachmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              startDate: startDate
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     LinkProtocolGetResponse:
       type: object
       properties:
@@ -9927,7 +10123,7 @@ components:
             bandwidth: 100
             href: http://example.com/aeiou
             type: EVPL_VC
-            uuid: cd67f685-41b0-1b07-6de0-0320a5c00abe
+            uuid: cd67f685-41b0-1b07-6de0-320a5c00abe
           state: RESERVED
           vlanTagMax: 200
           serviceToken:
@@ -9969,7 +10165,7 @@ components:
             bandwidth: 100
             href: http://example.com/aeiou
             type: EVPL_VC
-            uuid: cd67f685-41b0-1b07-6de0-0320a5c00abe
+            uuid: cd67f685-41b0-1b07-6de0-320a5c00abe
           state: RESERVED
           vlanTagMax: 200
           serviceToken:
@@ -9978,20 +10174,54 @@ components:
             type: TOKEN
             uuid: cd67f685-41b0-1b07-6de0-0320a5c00abe
           vlanCTagMax: 200
-    FabricGatewayPostRequest:
+    PortExpression:
+      type: object
+      properties:
+        and:
+          $ref: '#/components/schemas/PortExpressions'
+        or:
+          $ref: '#/components/schemas/PortExpressions'
+        property:
+          $ref: '#/components/schemas/PortSearchFieldName'
+        operator:
+          type: string
+          enum:
+          - =
+        values:
+          type: array
+          items:
+            type: string
+    PortExpressions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortExpression'
+      x-schema-name: PortExpressions
+    PortSearchFieldName:
+      type: string
+      description: Possible field names to use on filters
+      enum:
+      - /project/projectId
+    PortSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/PortSortDirection'
+        property:
+          $ref: '#/components/schemas/PortSortBy'
+    CloudRouterPostRequest:
       type: object
       properties:
         type:
           type: string
           enum:
-          - XF_GATEWAY
+          - XF_ROUTER
         name:
           type: string
-          description: Customer-provided Fabric Gateway name
+          description: Customer-provided Cloud Router name
         location:
           $ref: '#/components/schemas/SimplifiedLocationWithoutIBX'
         package:
-          $ref: '#/components/schemas/FabricGatewayPackageType'
+          $ref: '#/components/schemas/CloudRouterPackageType'
         order:
           $ref: '#/components/schemas/Order'
         project:
@@ -10004,16 +10234,16 @@ components:
             status changes
           items:
             $ref: '#/components/schemas/SimplifiedNotification'
-      description: Create Fabric Gateway
-    FabricGateway:
+      description: Create Cloud Router
+    CloudRouter:
       type: object
       properties:
         href:
           type: string
-          description: Fabric Gateway URI
+          description: Cloud Routers URI
           format: uri
           readOnly: true
-          example: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          example: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
         uuid:
           type: string
           description: Equinix-assigned access point identifier
@@ -10021,11 +10251,11 @@ components:
           example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
         name:
           type: string
-          description: Customer-provided Fabric Gateway name
+          description: Customer-provided Cloud Router name
           format: string
           example: test-fg-1
         state:
-          $ref: '#/components/schemas/FabricGatewayAccessPointState'
+          $ref: '#/components/schemas/CloudRouterAccessPointState'
         equinixAsn:
           type: integer
           description: Equinix ASN
@@ -10046,8 +10276,8 @@ components:
         changeLog:
           $ref: '#/components/schemas/Changelog'
         change:
-          $ref: '#/components/schemas/GatewayChange'
-      description: Fabric Gateway Access point object
+          $ref: '#/components/schemas/CloudRouterChange'
+      description: Fabric Cloud Router object
       example:
         bgpIpv4RoutesCount: 0
         equinixAsn: 30000
@@ -10058,35 +10288,40 @@ components:
             value: {}
           createdDateTime: 2020-11-06T07:00:00Z
           information: information
-          type: GATEWAY_UPDATE
+          type: ROUTER_UPDATE
           uuid: uuid
           status: COMPLETED
           updatedDateTime: 2020-11-06T07:00:00Z
         name: test-fg-1
         changeLog: null
-        href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
         state: PROVISIONED
         bgpIpv6RoutesCount: 0
         uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
         connectionsCount: 0
       allOf:
-      - $ref: '#/components/schemas/FabricGatewayPostRequest'
-    GatewayId:
+      - $ref: '#/components/schemas/CloudRouterPostRequest'
+    RouterId:
       type: string
-      description: Gateway UUID
+      description: Cloud Router UUID
       format: uuid
       example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    FabricGatewayUpdateRequest:
+    CloudRouterUpdateRequest:
       minItems: 1
       type: array
-      description: Fabric Gateway Update Request
+      description: Fabric Cloud Router Update Request
       items:
-        $ref: '#/components/schemas/FabricGatewayChangeOperation'
+        $ref: '#/components/schemas/CloudRouterChangeOperation'
+    RouterId_1:
+      type: string
+      description: Router UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
     ActionState:
       $ref: '#/components/schemas/GatewayActionState'
     GatewayActionState:
       type: string
-      description: Gateway action state
+      description: Cloud Router action state
       enum:
       - DONE
       - FAILED
@@ -10112,7 +10347,7 @@ components:
           $ref: '#/components/schemas/GatewayActionState'
         changeLog:
           $ref: '#/components/schemas/Changelog'
-      description: Gateway actions response object
+      description: Cloud Router actions response object
       example:
         description: description
         changeLog:
@@ -10302,32 +10537,32 @@ components:
           state: ACTIVE
           type: IPv4_BGP_ROUTE
           age: PT5M30S
-    FabricGatewaySearchRequest:
+    CloudRouterSearchRequest:
       type: object
       properties:
         filter:
-          $ref: '#/components/schemas/FabricGatewayFilters'
+          $ref: '#/components/schemas/CloudRouterFilters'
         pagination:
           $ref: '#/components/schemas/PaginationRequest'
         sort:
           type: array
           items:
-            $ref: '#/components/schemas/FabricGatewaySortCriteria'
+            $ref: '#/components/schemas/CloudRouterSortCriteria'
       description: Search requests containing criteria
-    FabricGatewayFilters:
+    CloudRouterFilters:
       type: object
       properties:
         and:
           maxItems: 8
           type: array
           items:
-            $ref: '#/components/schemas/FabricGatewayFilter'
-    FabricGatewayFilter:
+            $ref: '#/components/schemas/CloudRouterFilter'
+    CloudRouterFilter:
       type: object
       anyOf:
-      - $ref: '#/components/schemas/FabricGatewaySimpleExpression'
-      - $ref: '#/components/schemas/FabricGatewayOrFilter'
-    FabricGatewaySimpleExpression:
+      - $ref: '#/components/schemas/CloudRouterSimpleExpression'
+      - $ref: '#/components/schemas/CloudRouterOrFilter'
+    CloudRouterSimpleExpression:
       type: object
       properties:
         property:
@@ -10335,12 +10570,12 @@ components:
           description: |
             Possible field names to use on filters:
              * `/project/projectId` - project id (mandatory)
-             * `/name` - Fabric Gateway name
-             * `/uuid` - Fabric Gateway uuid
-             * `/state` - Fabric Gateway status
-             * `/location/metroCode` - Fabric Gateway metro code
-             * `/location/metroName` - Fabric Gateway metro name
-             * `/package/code` - Fabric Gateway package
+             * `/name` - Fabric Cloud Router name
+             * `/uuid` - Fabric Cloud Router uuid
+             * `/state` - Fabric Cloud Router status
+             * `/location/metroCode` - Fabric Cloud Router metro code
+             * `/location/metroName` - Fabric Cloud Router metro name
+             * `/package/code` - Fabric Cloud Router package
              * `/*` - all-category search
           example: /name
         operator:
@@ -10362,30 +10597,30 @@ components:
           type: array
           items:
             type: string
-            example: FabricGateway-1
-    FabricGatewayOrFilter:
+            example: FabricCloudRouter-1
+    CloudRouterOrFilter:
       type: object
       properties:
         or:
           maxItems: 3
           type: array
           items:
-            $ref: '#/components/schemas/FabricGatewaySimpleExpression'
-    FabricGatewaySortCriteria:
+            $ref: '#/components/schemas/CloudRouterSimpleExpression'
+    CloudRouterSortCriteria:
       type: object
       properties:
         direction:
-          $ref: '#/components/schemas/FabricGatewaySortDirection'
+          $ref: '#/components/schemas/CloudRouterSortDirection'
         property:
-          $ref: '#/components/schemas/FabricGatewaySortBy'
-    FabricGatewaySortDirection:
+          $ref: '#/components/schemas/CloudRouterSortBy'
+    CloudRouterSortDirection:
       type: string
       description: Sorting direction
       default: DESC
       enum:
       - DESC
       - ASC
-    FabricGatewaySortBy:
+    CloudRouterSortBy:
       type: string
       description: Possible field names to use on sorting
       default: /changeLog/updatedDateTime
@@ -10407,7 +10642,7 @@ components:
           type: array
           description: Data returned from the API call.
           items:
-            $ref: '#/components/schemas/FabricGateway'
+            $ref: '#/components/schemas/CloudRouter'
       example:
         pagination:
           next: next
@@ -10425,13 +10660,13 @@ components:
               value: {}
             createdDateTime: 2020-11-06T07:00:00Z
             information: information
-            type: GATEWAY_UPDATE
+            type: ROUTER_UPDATE
             uuid: uuid
             status: COMPLETED
             updatedDateTime: 2020-11-06T07:00:00Z
           name: test-fg-1
           changeLog: null
-          href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
           state: PROVISIONED
           bgpIpv6RoutesCount: 0
           uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
@@ -10445,13 +10680,13 @@ components:
               value: {}
             createdDateTime: 2020-11-06T07:00:00Z
             information: information
-            type: GATEWAY_UPDATE
+            type: ROUTER_UPDATE
             uuid: uuid
             status: COMPLETED
             updatedDateTime: 2020-11-06T07:00:00Z
           name: test-fg-1
           changeLog: null
-          href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
           state: PROVISIONED
           bgpIpv6RoutesCount: 0
           uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
@@ -10465,7 +10700,7 @@ components:
           type: array
           description: Data returned from the API call.
           items:
-            $ref: '#/components/schemas/FabricGatewayPackage'
+            $ref: '#/components/schemas/CloudRouterPackage'
       example:
         pagination:
           next: next
@@ -10479,144 +10714,146 @@ components:
           code: LAB
           natType: STATIC_NAT
           description: description
+          crCountMax: 3
           changeLog:
             createdDateTime: 2020-11-06T07:00:00Z
             updatedDateTime: 2020-11-06T07:00:00Z
-          type: GATEWAY_PACKAGE
-          maxGwLimit: 3
-          maxConnLimit: 10
-          maxBwLimit: 50
+          type: ROUTER_PACKAGE
           totalIPv4RoutesMax: 50
           haSupported: true
           staticIPv4RoutesMax: 3
+          vcBandwidthMax: 50
           naclsMax: 2
           totalIPv6RoutesMax: 50
-          href: https://api.equinix.com/fabric/v4/gatewayPackages/LAB
+          href: https://api.equinix.com/fabric/v4/routerPackages/LAB
+          vcCountMax: 10
           routeFilterSupported: true
         - staticIPv6RoutesMax: 0
           naclRulesMax: 5
           code: LAB
           natType: STATIC_NAT
           description: description
+          crCountMax: 3
           changeLog:
             createdDateTime: 2020-11-06T07:00:00Z
             updatedDateTime: 2020-11-06T07:00:00Z
-          type: GATEWAY_PACKAGE
-          maxGwLimit: 3
-          maxConnLimit: 10
-          maxBwLimit: 50
+          type: ROUTER_PACKAGE
           totalIPv4RoutesMax: 50
           haSupported: true
           staticIPv4RoutesMax: 3
+          vcBandwidthMax: 50
           naclsMax: 2
           totalIPv6RoutesMax: 50
-          href: https://api.equinix.com/fabric/v4/gatewayPackages/LAB
+          href: https://api.equinix.com/fabric/v4/routerPackages/LAB
+          vcCountMax: 10
           routeFilterSupported: true
-    GatewayPackageCode:
+    RouterPackageCode:
       type: string
-      description: Gateway package code
+      description: Router package code
       enum:
       - LAB
+      - BASIC
       - PRO
-    FabricGatewayPackage:
+      - PREMIUM
+    CloudRouterPackage:
       type: object
       properties:
         href:
           type: string
-          description: Gateway package URI
+          description: Cloud Router package URI
           format: uri
           readOnly: true
-          example: https://api.equinix.com/fabric/v4/gatewayPackages/LAB
+          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
         type:
           type: string
-          description: Type of Gateway package
-          example: GATEWAY_PACKAGE
+          description: Type of Router package
+          example: ROUTER_PACKAGE
           enum:
-          - GATEWAY_PACKAGE
+          - ROUTER_PACKAGE
         code:
           $ref: '#/components/schemas/code'
         description:
           type: string
-          description: Fabric Gateway Package description
+          description: Fabric Cloud Router Package description
         totalIPv4RoutesMax:
           minimum: 0
           type: integer
-          description: Gateway package BGP IPv4 routes limit
+          description: Cloud Router package BGP IPv4 routes limit
           example: 50
         totalIPv6RoutesMax:
           minimum: 0
           type: integer
-          description: Gateway package BGP IPv6 routes limit
+          description: Cloud Router package BGP IPv6 routes limit
           example: 50
         staticIPv4RoutesMax:
           minimum: 0
           type: integer
-          description: Gateway package static IPv4 routes limit
+          description: CloudRouter package static IPv4 routes limit
           example: 3
         staticIPv6RoutesMax:
           minimum: 0
           type: integer
-          description: Gateway package static IPv6 routes limit
+          description: CloudRouter package static IPv6 routes limit
         naclsMax:
           minimum: 0
           type: integer
-          description: Gateway package NACLs limit
+          description: CloudRouter package NACLs limit
           example: 2
         naclRulesMax:
           minimum: 0
           type: integer
-          description: Gateway package NACLs rules limit
+          description: CloudRouter package NACLs rules limit
           example: 5
         haSupported:
           type: boolean
-          description: Gateway package high-available configuration support
+          description: CloudRouter package high-available configuration support
           example: true
         routeFilterSupported:
           type: boolean
-          description: Gateway package route filter support
+          description: CloudRouter package route filter support
         natType:
           type: string
-          description: Gateway package NAT supported type
+          description: CloudRouter package NAT supported type
           example: STATIC_NAT
           enum:
           - STATIC_NAT
-        maxConnLimit:
+        vcCountMax:
           minimum: 0
           type: integer
-          description: Gateway package Max Connection limit
+          description: CloudRouter package Max Connection limit
           example: 10
-        maxGwLimit:
+        crCountMax:
           minimum: 0
           type: integer
-          description: Gateway package Max Gateways limit
+          description: CloudRouter package Max CloudRouter limit
           example: 3
-        maxBwLimit:
+        vcBandwidthMax:
           minimum: 0
           type: integer
-          description: Gateway package Max Bandwidth limit
+          description: CloudRouter package Max Bandwidth limit
           example: 50
         changeLog:
           $ref: '#/components/schemas/PackageChangeLog'
-      description: Fabric Gateway Package
+      description: Fabric Cloud Router Package
       example:
         staticIPv6RoutesMax: 0
         naclRulesMax: 5
         code: LAB
         natType: STATIC_NAT
         description: description
+        crCountMax: 3
         changeLog:
           createdDateTime: 2020-11-06T07:00:00Z
           updatedDateTime: 2020-11-06T07:00:00Z
-        type: GATEWAY_PACKAGE
-        maxGwLimit: 3
-        maxConnLimit: 10
-        maxBwLimit: 50
+        type: ROUTER_PACKAGE
         totalIPv4RoutesMax: 50
         haSupported: true
         staticIPv4RoutesMax: 3
+        vcBandwidthMax: 50
         naclsMax: 2
         totalIPv6RoutesMax: 50
-        href: https://api.equinix.com/fabric/v4/gatewayPackages/LAB
+        href: https://api.equinix.com/fabric/v4/routerPackages/LAB
+        vcCountMax: 10
         routeFilterSupported: true
     HealthResponse:
       type: object
@@ -10855,6 +11092,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -10894,10 +11152,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -10942,7 +11201,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -10979,7 +11238,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -11008,27 +11267,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -11121,17 +11359,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -11326,6 +11563,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -11365,10 +11623,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -11413,7 +11672,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -11450,7 +11709,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -11479,27 +11738,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -11592,17 +11830,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -11763,6 +12000,8 @@ components:
           - NOT BETWEEN
           - LIKE
           - NOT LIKE
+          - ILIKE
+          - NOT ILIKE
           - IN
           - NOT IN
         values:
@@ -12052,6 +12291,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -12091,10 +12351,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -12139,7 +12400,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -12176,7 +12437,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -12205,27 +12466,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -12318,17 +12558,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -12523,6 +12762,27 @@ components:
                 operation:
                   equinixStatus: PROVISIONING
                 account: null
+              router:
+                bgpIpv4RoutesCount: 0
+                equinixAsn: 30000
+                change:
+                  data:
+                    op: replace
+                    path: path
+                    value: {}
+                  createdDateTime: 2020-11-06T07:00:00Z
+                  information: information
+                  type: ROUTER_UPDATE
+                  uuid: uuid
+                  status: COMPLETED
+                  updatedDateTime: 2020-11-06T07:00:00Z
+                name: test-fg-1
+                changeLog: null
+                href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                state: PROVISIONED
+                bgpIpv6RoutesCount: 0
+                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+                connectionsCount: 0
               port:
                 serviceType: EPL
                 encapsulation:
@@ -12562,10 +12822,11 @@ components:
                   placeVcOrderPermission: true
                   sharedPortType: true
                   packageType: STANDARD
-                  sharedPortProduct: sharedPortProduct
+                  sharedPortProduct: NETWORK_EDGE
                 availableBandwidth: 0
                 demarcationPoint:
                   patchPanel: patchPanel
+                  patchPanelName: patchPanelName
                   connectorType: connectorType
                   cabinetUniqueSpaceId: cabinetUniqueSpaceId
                   patchPanelPortB: patchPanelPortB
@@ -12610,7 +12871,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -12647,7 +12908,7 @@ components:
                         firstName: firstName
                         lastName: lastName
                         email: email
-                      signatory: ECHOSIGN
+                      signatory: DELEGATE
                     purchaseOrder:
                       number: number
                       amount: amount
@@ -12676,27 +12937,6 @@ components:
                 region: "AMER, APAC, EMEA"
                 ibx: AM1
               account: null
-              gateway:
-                bgpIpv4RoutesCount: 0
-                equinixAsn: 30000
-                change:
-                  data:
-                    op: replace
-                    path: path
-                    value: {}
-                  createdDateTime: 2020-11-06T07:00:00Z
-                  information: information
-                  type: GATEWAY_UPDATE
-                  uuid: uuid
-                  status: COMPLETED
-                  updatedDateTime: 2020-11-06T07:00:00Z
-                name: test-fg-1
-                changeLog: null
-                href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                state: PROVISIONED
-                bgpIpv6RoutesCount: 0
-                uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-                connectionsCount: 0
               peeringType: PRIVATE
               linkProtocol:
                 vlanTag: 4078
@@ -12789,17 +13029,16 @@ components:
           account:
             resellerOrgId: 5
             organizationName: organizationName
+            resellerAccountNumber: 1
             accountName: accountName
             ucmId: ucmId
-            accountReferenceId: accountReferenceId
+            resellerUcmId: resellerUcmId
             globalOrganizationName: globalOrganizationName
             globalOrgId: globalOrgId
-            accountNumber: 0
-            orgId: 6
-            resellerAccountNumber: 1
-            resellerUcmId: resellerUcmId
             resellerAccountName: resellerAccountName
+            accountNumber: 0
             globalCustId: globalCustId
+            orgId: 6
           order:
             orderNumber: orderNumber
             orderId: orderId
@@ -12914,6 +13153,7 @@ components:
       - EIA_VC
       - EVPLAN_VC
       - EPLAN_VC
+      - IPWAN_VC
     Order:
       type: object
       properties:
@@ -13191,6 +13431,27 @@ components:
             operation:
               equinixStatus: PROVISIONING
             account: null
+          router:
+            bgpIpv4RoutesCount: 0
+            equinixAsn: 30000
+            change:
+              data:
+                op: replace
+                path: path
+                value: {}
+              createdDateTime: 2020-11-06T07:00:00Z
+              information: information
+              type: ROUTER_UPDATE
+              uuid: uuid
+              status: COMPLETED
+              updatedDateTime: 2020-11-06T07:00:00Z
+            name: test-fg-1
+            changeLog: null
+            href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            state: PROVISIONED
+            bgpIpv6RoutesCount: 0
+            uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            connectionsCount: 0
           port:
             serviceType: EPL
             encapsulation:
@@ -13230,10 +13491,11 @@ components:
               placeVcOrderPermission: true
               sharedPortType: true
               packageType: STANDARD
-              sharedPortProduct: sharedPortProduct
+              sharedPortProduct: NETWORK_EDGE
             availableBandwidth: 0
             demarcationPoint:
               patchPanel: patchPanel
+              patchPanelName: patchPanelName
               connectorType: connectorType
               cabinetUniqueSpaceId: cabinetUniqueSpaceId
               patchPanelPortB: patchPanelPortB
@@ -13278,7 +13540,7 @@ components:
                     firstName: firstName
                     lastName: lastName
                     email: email
-                  signatory: ECHOSIGN
+                  signatory: DELEGATE
                 purchaseOrder:
                   number: number
                   amount: amount
@@ -13315,7 +13577,7 @@ components:
                     firstName: firstName
                     lastName: lastName
                     email: email
-                  signatory: ECHOSIGN
+                  signatory: DELEGATE
                 purchaseOrder:
                   number: number
                   amount: amount
@@ -13344,27 +13606,6 @@ components:
             region: "AMER, APAC, EMEA"
             ibx: AM1
           account: null
-          gateway:
-            bgpIpv4RoutesCount: 0
-            equinixAsn: 30000
-            change:
-              data:
-                op: replace
-                path: path
-                value: {}
-              createdDateTime: 2020-11-06T07:00:00Z
-              information: information
-              type: GATEWAY_UPDATE
-              uuid: uuid
-              status: COMPLETED
-              updatedDateTime: 2020-11-06T07:00:00Z
-            name: test-fg-1
-            changeLog: null
-            href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-            state: PROVISIONED
-            bgpIpv6RoutesCount: 0
-            uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-            connectionsCount: 0
           peeringType: PRIVATE
           linkProtocol:
             vlanTag: 4078
@@ -13521,9 +13762,6 @@ components:
           type: integer
           description: Account number
           format: int64
-        accountReferenceId:
-          type: string
-          description: Account ReferenceId
         accountName:
           type: string
           description: Account name
@@ -13563,17 +13801,16 @@ components:
       example:
         resellerOrgId: 5
         organizationName: organizationName
+        resellerAccountNumber: 1
         accountName: accountName
         ucmId: ucmId
-        accountReferenceId: accountReferenceId
+        resellerUcmId: resellerUcmId
         globalOrganizationName: globalOrganizationName
         globalOrgId: globalOrgId
-        accountNumber: 0
-        orgId: 6
-        resellerAccountNumber: 1
-        resellerUcmId: resellerUcmId
         resellerAccountName: resellerAccountName
+        accountNumber: 0
         globalCustId: globalCustId
+        orgId: 6
     Changelog:
       type: object
       properties:
@@ -13907,6 +14144,27 @@ components:
               operation:
                 equinixStatus: PROVISIONING
               account: null
+            router:
+              bgpIpv4RoutesCount: 0
+              equinixAsn: 30000
+              change:
+                data:
+                  op: replace
+                  path: path
+                  value: {}
+                createdDateTime: 2020-11-06T07:00:00Z
+                information: information
+                type: ROUTER_UPDATE
+                uuid: uuid
+                status: COMPLETED
+                updatedDateTime: 2020-11-06T07:00:00Z
+              name: test-fg-1
+              changeLog: null
+              href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+              state: PROVISIONED
+              bgpIpv6RoutesCount: 0
+              uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+              connectionsCount: 0
             port:
               serviceType: EPL
               encapsulation:
@@ -13946,10 +14204,11 @@ components:
                 placeVcOrderPermission: true
                 sharedPortType: true
                 packageType: STANDARD
-                sharedPortProduct: sharedPortProduct
+                sharedPortProduct: NETWORK_EDGE
               availableBandwidth: 0
               demarcationPoint:
                 patchPanel: patchPanel
+                patchPanelName: patchPanelName
                 connectorType: connectorType
                 cabinetUniqueSpaceId: cabinetUniqueSpaceId
                 patchPanelPortB: patchPanelPortB
@@ -13994,7 +14253,7 @@ components:
                       firstName: firstName
                       lastName: lastName
                       email: email
-                    signatory: ECHOSIGN
+                    signatory: DELEGATE
                   purchaseOrder:
                     number: number
                     amount: amount
@@ -14031,7 +14290,7 @@ components:
                       firstName: firstName
                       lastName: lastName
                       email: email
-                    signatory: ECHOSIGN
+                    signatory: DELEGATE
                   purchaseOrder:
                     number: number
                     amount: amount
@@ -14060,27 +14319,6 @@ components:
               region: "AMER, APAC, EMEA"
               ibx: AM1
             account: null
-            gateway:
-              bgpIpv4RoutesCount: 0
-              equinixAsn: 30000
-              change:
-                data:
-                  op: replace
-                  path: path
-                  value: {}
-                createdDateTime: 2020-11-06T07:00:00Z
-                information: information
-                type: GATEWAY_UPDATE
-                uuid: uuid
-                status: COMPLETED
-                updatedDateTime: 2020-11-06T07:00:00Z
-              name: test-fg-1
-              changeLog: null
-              href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-              state: PROVISIONED
-              bgpIpv6RoutesCount: 0
-              uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-              connectionsCount: 0
             peeringType: PRIVATE
             linkProtocol:
               vlanTag: 4078
@@ -14409,7 +14647,7 @@ components:
           $ref: '#/components/schemas/VirtualConnectionPrice'
         ipBlock:
           $ref: '#/components/schemas/IpBlockPrice'
-        gateway:
+        router:
           $ref: '#/components/schemas/FabricGatewayPrice'
         port:
           $ref: '#/components/schemas/VirtualPortPrice'
@@ -14428,6 +14666,11 @@ components:
           type: MONTHLY_RECURRING
         - price: 0.08008281904610115
           type: MONTHLY_RECURRING
+        router:
+          package:
+            code: LAB
+          location: null
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         termLength: 6
         port:
           serviceType: MSP
@@ -14475,22 +14718,16 @@ components:
         account:
           resellerOrgId: 5
           organizationName: organizationName
+          resellerAccountNumber: 1
           accountName: accountName
           ucmId: ucmId
-          accountReferenceId: accountReferenceId
+          resellerUcmId: resellerUcmId
           globalOrganizationName: globalOrganizationName
           globalOrgId: globalOrgId
-          accountNumber: 0
-          orgId: 6
-          resellerAccountNumber: 1
-          resellerUcmId: resellerUcmId
           resellerAccountName: resellerAccountName
+          accountNumber: 0
           globalCustId: globalCustId
-        gateway:
-          package:
-            code: LAB
-          location: null
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          orgId: 6
     ServiceProfileTypeEnum:
       type: string
       description: Service profile type
@@ -14681,7 +14918,7 @@ components:
             firstName: firstName
             lastName: lastName
             email: email
-          signatory: ECHOSIGN
+          signatory: DELEGATE
         purchaseOrder:
           number: number
           amount: amount
@@ -14755,6 +14992,10 @@ components:
         patchPanel:
           type: string
           description: Port patch panel
+        patchPanelName:
+          type: string
+          description: Port patch panel
+          deprecated: true
         patchPanelPortA:
           type: string
           description: Port patch panel port A
@@ -14770,6 +15011,7 @@ components:
       description: Customer physical Port
       example:
         patchPanel: patchPanel
+        patchPanelName: patchPanelName
         connectorType: connectorType
         cabinetUniqueSpaceId: cabinetUniqueSpaceId
         patchPanelPortB: patchPanelPortB
@@ -14784,7 +15026,7 @@ components:
           description: Access point redundancy
         group:
           type: string
-          description: Port redundancy group
+          description: Port UUID of respective primary port
         priority:
           $ref: '#/components/schemas/PortPriority'
       description: Port redundancy configuration
@@ -14810,6 +15052,27 @@ components:
       example:
         tagProtocolId: tagProtocolId
         type: "NULL"
+    PortLag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: id
+        enabled:
+          type: boolean
+          description: enabled
+        name:
+          type: string
+          description: name
+        memberStatus:
+          type: string
+          description: member status
+      description: Port Lag
+      example:
+        name: name
+        memberStatus: memberStatus
+        id: id
+        enabled: true
     PortSettings:
       type: object
       properties:
@@ -14830,6 +15093,11 @@ components:
           type: boolean
         sharedPortProduct:
           type: string
+          enum:
+          - NETWORK_EDGE
+          - VIRTUAL_GATEWAY
+          - SMARTKEY
+          - EDGE_METAL
         packageType:
           type: string
           description: Type of Port Package
@@ -14837,7 +15105,6 @@ components:
           - STANDARD
           - UNTAGGED
           - UNLIMITED
-          - NETWORK_EDGE
           - FREE
       description: Port configuration settings
       example:
@@ -14849,7 +15116,7 @@ components:
         placeVcOrderPermission: true
         sharedPortType: true
         packageType: STANDARD
-        sharedPortProduct: sharedPortProduct
+        sharedPortProduct: NETWORK_EDGE
     PortNotification:
       required:
       - registeredUsers
@@ -15026,7 +15293,7 @@ components:
           bandwidth: 100
           href: http://example.com/aeiou
           type: EVPL_VC
-          uuid: cd67f685-41b0-1b07-6de0-0320a5c00abe
+          uuid: cd67f685-41b0-1b07-6de0-320a5c00abe
         state: RESERVED
         vlanTagMax: 200
         serviceToken:
@@ -15035,6 +15302,19 @@ components:
           type: TOKEN
           uuid: cd67f685-41b0-1b07-6de0-0320a5c00abe
         vlanCTagMax: 200
+    PortSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    PortSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /device/name
+      enum:
+      - /device/name
     SimplifiedLocationWithoutIBX:
       required:
       - metroCode
@@ -15052,31 +15332,33 @@ components:
         metroCode:
           type: string
           example: AM
-    FabricGatewayPackageType:
+    CloudRouterPackageType:
       required:
       - code
       type: object
       properties:
         href:
           type: string
-          description: Fabric Gateway URI
+          description: Fabric Cloud Router URI
           format: uri
-          example: https://api.equinix.com/fabric/v4/gatewayPackages/LAB
+          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
         type:
           type: string
-          description: Gateway package code
-          example: GATEWAY_PACKAGE
+          description: Cloud Router package type
+          example: ROUTER_PACKAGE
           enum:
-          - GATEWAY_PACKAGE
+          - ROUTER_PACKAGE
         code:
           type: string
-          description: Gateway package code
+          description: Cloud Router package code
           example: LAB
           enum:
           - LAB
+          - BASIC
           - PRO
-      description: Fabric Gateway Package Type
-    FabricGatewayAccessPointState:
+          - PREMIUM
+      description: Fabric Cloud Router Package Type
+    CloudRouterAccessPointState:
       type: string
       description: Access point lifecycle state
       enum:
@@ -15085,7 +15367,9 @@ components:
       - DEPROVISIONING
       - DEPROVISIONED
       - LOCKED
-    GatewayChange:
+      - NOT_PROVISIONED
+      - NOT_DEPROVISIONED
+    CloudRouterChange:
       required:
       - type
       - updatedDateTime
@@ -15098,8 +15382,8 @@ components:
           type: string
           description: Type of change
           enum:
-          - GATEWAY_UPDATE
-          - GATEWAY_PACKAGE_UPDATE
+          - ROUTER_UPDATE
+          - ROUTER_PACKAGE_UPDATE
         status:
           type: string
           description: Current outcome of the change flow
@@ -15121,8 +15405,8 @@ components:
           type: string
           description: Additional information
         data:
-          $ref: '#/components/schemas/FabricGatewayChangeOperation'
-      description: Current state of latest gateway change
+          $ref: '#/components/schemas/CloudRouterChangeOperation'
+      description: Current state of latest CloudRouter change
       example:
         data:
           op: replace
@@ -15130,11 +15414,11 @@ components:
           value: {}
         createdDateTime: 2020-11-06T07:00:00Z
         information: information
-        type: GATEWAY_UPDATE
+        type: ROUTER_UPDATE
         uuid: uuid
         status: COMPLETED
         updatedDateTime: 2020-11-06T07:00:00Z
-    FabricGatewayChangeOperation:
+    CloudRouterChangeOperation:
       required:
       - op
       - path
@@ -15154,14 +15438,14 @@ components:
         value:
           type: object
           description: new value for updated parameter
-      description: Fabric Gateway change operation data
+      description: Fabric Cloud Router change operation data
       example:
         op: replace
         path: path
         value: {}
     GatewayActionType:
       type: string
-      description: Gateway action type
+      description: Cloud Router action type
       enum:
       - BGP_SESSION_STATUS_UPDATE
       - ROUTE_TABLE_ENTRY_UPDATE
@@ -15232,11 +15516,13 @@ components:
         age: PT5M30S
     code:
       type: string
-      description: Gateway package code
+      description: Cloud Router package code
       example: LAB
       enum:
       - LAB
+      - BASIC
       - PRO
+      - PREMIUM
     PackageChangeLog:
       type: object
       properties:
@@ -15248,7 +15534,7 @@ components:
           type: string
           format: date-time
           example: 2020-11-06T07:00:00Z
-      description: Gateway package change log
+      description: Cloud Router package change log
       example:
         createdDateTime: 2020-11-06T07:00:00Z
         updatedDateTime: 2020-11-06T07:00:00Z
@@ -15275,6 +15561,7 @@ components:
       enum:
       - EVPLAN
       - EPLAN
+      - IPWAN
     NetworkScope:
       type: string
       description: Network scope
@@ -15416,8 +15703,8 @@ components:
           $ref: '#/components/schemas/SimplifiedPort'
         profile:
           $ref: '#/components/schemas/SimplifiedServiceProfile'
-        gateway:
-          $ref: '#/components/schemas/FabricGateway'
+        router:
+          $ref: '#/components/schemas/CloudRouter'
         linkProtocol:
           $ref: '#/components/schemas/SimplifiedLinkProtocol'
         virtualDevice:
@@ -15572,6 +15859,27 @@ components:
           operation:
             equinixStatus: PROVISIONING
           account: null
+        router:
+          bgpIpv4RoutesCount: 0
+          equinixAsn: 30000
+          change:
+            data:
+              op: replace
+              path: path
+              value: {}
+            createdDateTime: 2020-11-06T07:00:00Z
+            information: information
+            type: ROUTER_UPDATE
+            uuid: uuid
+            status: COMPLETED
+            updatedDateTime: 2020-11-06T07:00:00Z
+          name: test-fg-1
+          changeLog: null
+          href: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          state: PROVISIONED
+          bgpIpv6RoutesCount: 0
+          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          connectionsCount: 0
         port:
           serviceType: EPL
           encapsulation:
@@ -15611,10 +15919,11 @@ components:
             placeVcOrderPermission: true
             sharedPortType: true
             packageType: STANDARD
-            sharedPortProduct: sharedPortProduct
+            sharedPortProduct: NETWORK_EDGE
           availableBandwidth: 0
           demarcationPoint:
             patchPanel: patchPanel
+            patchPanelName: patchPanelName
             connectorType: connectorType
             cabinetUniqueSpaceId: cabinetUniqueSpaceId
             patchPanelPortB: patchPanelPortB
@@ -15659,7 +15968,7 @@ components:
                   firstName: firstName
                   lastName: lastName
                   email: email
-                signatory: ECHOSIGN
+                signatory: DELEGATE
               purchaseOrder:
                 number: number
                 amount: amount
@@ -15696,7 +16005,7 @@ components:
                   firstName: firstName
                   lastName: lastName
                   email: email
-                signatory: ECHOSIGN
+                signatory: DELEGATE
               purchaseOrder:
                 number: number
                 amount: amount
@@ -15725,27 +16034,6 @@ components:
           region: "AMER, APAC, EMEA"
           ibx: AM1
         account: null
-        gateway:
-          bgpIpv4RoutesCount: 0
-          equinixAsn: 30000
-          change:
-            data:
-              op: replace
-              path: path
-              value: {}
-            createdDateTime: 2020-11-06T07:00:00Z
-            information: information
-            type: GATEWAY_UPDATE
-            uuid: uuid
-            status: COMPLETED
-            updatedDateTime: 2020-11-06T07:00:00Z
-          name: test-fg-1
-          changeLog: null
-          href: https://api.equinix.com/fabric/v4/gateways/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-          state: PROVISIONED
-          bgpIpv6RoutesCount: 0
-          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-          connectionsCount: 0
         peeringType: PRIVATE
         linkProtocol:
           vlanTag: 4078
@@ -15864,7 +16152,7 @@ components:
       - VIRTUAL_CONNECTION_PRODUCT
       - IP_BLOCK_PRODUCT
       - VIRTUAL_PORT_PRODUCT
-      - FABRIC_GATEWAY_PRODUCT
+      - CLOUD_ROUTER_PRODUCT
     PriceCharge:
       type: object
       properties:
@@ -15954,13 +16242,13 @@ components:
       properties:
         uuid:
           type: string
-          description: Unique identifier assigned to the Fabric Gateway
+          description: Unique identifier assigned to the Cloud Router
           format: uuid
         location:
           $ref: '#/components/schemas/PriceLocation'
         package:
           $ref: '#/components/schemas/FabricGatewayPackages'
-      description: Fabric Gateway Product configuration
+      description: Cloud Router  Product configuration
       example:
         package:
           code: LAB
@@ -16119,8 +16407,8 @@ components:
           readOnly: true
         uuid:
           type: string
-          format: uuid
-          example: cd67f685-41b0-1b07-6de0-0320a5c00abe
+          format: string
+          example: cd67f685-41b0-1b07-6de0-320a5c00abe
         type:
           type: string
           example: EVPL_VC
@@ -16133,7 +16421,7 @@ components:
         bandwidth: 100
         href: http://example.com/aeiou
         type: EVPL_VC
-        uuid: cd67f685-41b0-1b07-6de0-0320a5c00abe
+        uuid: cd67f685-41b0-1b07-6de0-320a5c00abe
     LinkProtocolServiceToken:
       type: object
       properties:
@@ -16221,7 +16509,7 @@ components:
       - IGW
       - COLO
       - SUBNET
-      - GW
+      - CLOUD_ROUTER
       - NETWORK
     SimplifiedPort:
       type: object
@@ -16359,10 +16647,11 @@ components:
           placeVcOrderPermission: true
           sharedPortType: true
           packageType: STANDARD
-          sharedPortProduct: sharedPortProduct
+          sharedPortProduct: NETWORK_EDGE
         availableBandwidth: 0
         demarcationPoint:
           patchPanel: patchPanel
+          patchPanelName: patchPanelName
           connectorType: connectorType
           cabinetUniqueSpaceId: cabinetUniqueSpaceId
           patchPanelPortB: patchPanelPortB
@@ -16407,7 +16696,7 @@ components:
                 firstName: firstName
                 lastName: lastName
                 email: email
-              signatory: ECHOSIGN
+              signatory: DELEGATE
             purchaseOrder:
               number: number
               amount: amount
@@ -16444,7 +16733,7 @@ components:
                 firstName: firstName
                 lastName: lastName
                 email: email
-              signatory: ECHOSIGN
+              signatory: DELEGATE
             purchaseOrder:
               number: number
               amount: amount
@@ -16638,6 +16927,7 @@ components:
       - ACCESS_EPL_VC
       - EVPLAN_VC
       - EPLAN_VC
+      - IPWAN_VC
     VirtualConnectionPriceASide:
       type: object
       properties:
@@ -16686,7 +16976,7 @@ components:
       properties:
         code:
           $ref: '#/components/schemas/FabricGatewayCode'
-      description: Virtual port gateway package
+      description: Cloud Router  package
       example:
         code: LAB
     VirtualPortType:
@@ -16793,7 +17083,7 @@ components:
       - VD
       - SP
       - COLO
-      - GW
+      - CLOUD_ROUTER
       - CHAINGROUP
       - NETWORK
     VirtualConnectionBridgePackageCode:
@@ -16804,7 +17094,7 @@ components:
       - GLOBAL
     FabricGatewayCode:
       type: string
-      description: Virtual port gateway code
+      description: Cloud Router code
       enum:
       - LAB
       - BASIC
@@ -17037,7 +17327,6 @@ components:
           type: string
           description: Port signature Type
           enum:
-          - ECHOSIGN
           - DELEGATE
           - SELF
           - ACCOUNT_SUPPORT
@@ -17049,7 +17338,7 @@ components:
           firstName: firstName
           lastName: lastName
           email: email
-        signatory: ECHOSIGN
+        signatory: DELEGATE
     RouteTableEntry_connection:
       type: object
       properties:
@@ -17220,6 +17509,76 @@ components:
         correlationId: test
         additionalInfo:
         - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142514
+        errorMessage: Redundancy group is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142515
+        errorMessage: Redundancy priority is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142516
+        errorMessage: Invalid redundancy group
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142517
+        errorMessage: Invalid redundancy priority
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142303
+        errorMessage: Only Primary connection allowed for this CSP
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142320
+        errorMessage: "For redundant connection, Service Profile should be the same"
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142021
+        errorMessage: "For redundant connection, Fabric Gateway should be the same"
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/gateway/uuid
+      - errorCode: EQ-3142012
+        errorMessage: Fabric Gateway is not in PROVISIONED state
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/gateway/uuid
+      - errorCode: EQ-3142301
+        errorMessage: Given profile does not exist
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142302
+        errorMessage: Service provider does not exist in required zSide metro
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/location/metroCode
+      - errorCode: EQ-3142013
+        errorMessage: Invalid metro for gateway connection
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/gateway/uuid
+      - errorCode: EQ-3142304
+        errorMessage: Private connections are not allowed on public profiles
+        correlationId: test
+        additionalInfo:
+        - property: visibility
+      - errorCode: EQ-3142306
+        errorMessage: Requested bandwidth is not supported by service profile
+        correlationId: test
+        additionalInfo:
+        - property: /bandwidth
+      - errorCode: EQ-3142308
+        errorMessage: Authentication key is required
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/authenticationKey
     "401":
       value:
       - errorCode: EQ-3000039
@@ -18026,15 +18385,15 @@ components:
           emails:
           - test@equinix.com
           - test1@equinix.com
-    Gw2Colo:
+    Fcr2Colo:
       value:
         type: IP_VC
-        name: My-GW-Connection
+        name: My-FCR-Connection
         bandwidth: 1000
         aSide:
           accessPoint:
-            type: GW
-            gateway:
+            type: CLOUD_ROUTER
+            router:
               uuid: 66a21614-1c4a-11ec-9621-0242ac130002
         zSide:
           accessPoint:
@@ -18053,15 +18412,15 @@ components:
           emails:
           - test@equinix.com
           - test1@equinix.com
-    Gw2Sp-Google:
+    Fcr2Sp-Google:
       value:
         type: IP_VC
         name: My-GW-Connection
         bandwidth: 1000
         aSide:
           accessPoint:
-            type: GW
-            gateway:
+            type: CLOUD_ROUTER
+            router:
               uuid: 66a21614-1c4a-11ec-9621-0242ac130002
         zSide:
           accessPoint:
@@ -18082,15 +18441,15 @@ components:
           emails:
           - test@equinix.com
           - test1@equinix.com
-    Gw2Sp-Azure:
+    Fcr2Sp-Azure:
       value:
         type: IP_VC
         name: My-GW-Connection
         bandwidth: 1000
         aSide:
           accessPoint:
-            type: GW
-            gateway:
+            type: CLOUD_ROUTER
+            router:
               uuid: 66a21614-1c4a-11ec-9621-0242ac130002
         zSide:
           accessPoint:
@@ -18111,14 +18470,44 @@ components:
           emails:
           - test@equinix.com
           - test1@equinix.com
-    Gw2Sp-Generic:
+    Fcr2Sp-Generic:
       value:
         type: IP_VC
         name: My-GW-Generic
         bandwidth: 1000
         aSide:
           accessPoint:
-            type: GW
+            type: CLOUD_ROUTER
+            router:
+              uuid: 66a21614-1c4a-11ec-9621-0242ac130002
+        zSide:
+          accessPoint:
+            type: SP
+            profile:
+              type: L2_PROFILE
+              uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
+            location:
+              metroCode: SV
+        order:
+          purchaseOrderNumber: 1-129105284100
+        project:
+          projectId: "567"
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+          - test1@equinix.com
+    Fcr2Sp-Generic-Redundant-Secondary:
+      value:
+        type: IP_VC
+        name: FG_to_RedSP_Secondary
+        bandwidth: 50
+        redundancy:
+          group: a00cef6f-8e35-4794-9ff9-665e084e4e6d
+          priority: SECONDARY
+        aSide:
+          accessPoint:
+            type: CLOUD_ROUTER
             gateway:
               uuid: 66a21614-1c4a-11ec-9621-0242ac130002
         zSide:
@@ -18138,17 +18527,47 @@ components:
           emails:
           - test@equinix.com
           - test1@equinix.com
-    Gw2Sp-Aws:
+    Fcr2Sp-Generic-Redundant-Primary:
       value:
         type: IP_VC
-        name: My-GW-AWSConnection
+        name: FG_to_RedSP_Primary-Re-add
+        bandwidth: 50
+        redundancy:
+          group: a00cef6f-8e35-4794-9ff9-665e084e4e6d
+          priority: PRIMARY
+        aSide:
+          accessPoint:
+            type: CLOUD_ROUTER
+            gateway:
+              uuid: 66a21614-1c4a-11ec-9621-0242ac130002
+        zSide:
+          accessPoint:
+            type: SP
+            profile:
+              type: L2_PROFILE
+              uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
+            location:
+              metroCode: SV
+        order:
+          purchaseOrderNumber: 1-129105284100
+        project:
+          projectId: "567"
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+          - test1@equinix.com
+    Fcr2Sp-Aws:
+      value:
+        type: IP_VC
+        name: My-FCR-AWSConnection
         bandwidth: 100
         redundancy:
           priority: PRIMARY
         aSide:
           accessPoint:
-            type: GW
-            gateway:
+            type: CLOUD_ROUTER
+            router:
               uuid: 66a21614-1c4a-11ec-9621-0242ac130002
         zSide:
           accessPoint:
@@ -18167,7 +18586,35 @@ components:
           emails:
           - test@equinix.com
           - test1@equinix.com
-    Gw2Vd:
+    Fcr2Sp-Oracle:
+      value:
+        type: IP_VC
+        name: My-GW-OracleConnection
+        bandwidth: 1000
+        redundancy:
+          priority: PRIMARY
+        aSide:
+          accessPoint:
+            type: CLOUD_ROUTER
+            gateway:
+              uuid: 66a21614-1c4a-11ec-9621-0242ac130002
+        zSide:
+          accessPoint:
+            type: SP
+            profile:
+              type: L2_PROFILE
+              uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
+            location:
+              metroCode: DC
+            sellerRegion: us-ashburn-1
+            authenticationKey: xx-xx-xx
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+        project:
+          projectId: "567"
+    Fcr2Vd:
       value:
         type: IP_VC
         name: My-GW-VDConnection
@@ -18176,8 +18623,8 @@ components:
           priority: PRIMARY
         aSide:
           accessPoint:
-            type: GW
-            gateway:
+            type: CLOUD_ROUTER
+            router:
               uuid: 66a21614-1c4a-11ec-9621-0242ac130002
         zSide:
           accessPoint:
@@ -18190,6 +18637,30 @@ components:
               id: 45645
         project:
           projectId: "567"
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+          - test1@equinix.com
+    Fcr2IpWan:
+      value:
+        type: IPWAN_VC
+        name: MY-IPWAN-CONNECTION-1
+        bandwidth: 1000
+        aSide:
+          accessPoint:
+            type: CLOUD_ROUTER
+            router:
+              uuid: 66a21614-1c4a-11ec-9621-0242ac130002
+        zSide:
+          accessPoint:
+            type: NETWORK
+            network:
+              uuid: 25f8884e-85e3-4eaa-8ea9-a7ad2ca5b3c2
+        order:
+          purchaseOrderNumber: 1-129105284100
+        project:
+          projectId: 123
         notifications:
         - type: ALL
           emails:
@@ -18595,7 +19066,7 @@ components:
               uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
             linkProtocol:
               type: UNTAGGED
-    Gw2Sp-Response:
+    Fcr2Sp-Response:
       value:
         href: https://api.equinix.com/fabric/v4/connections/0ed42ea7-2df8-470d-ad59-e432d768b4f1
         type: IP_VC
@@ -18609,9 +19080,9 @@ components:
           billingTier: Up to 50 MB
         aSide:
           accessPoint:
-            type: GW
-            gateway:
-              href: https://api.equinix.com/fabric/v4/gateways/56d267f3-a566-47a8-8cf9-40e6cc925bf0
+            type: CLOUD_ROUTER
+            router:
+              href: https://api.equinix.com/fabric/v4/routers/56d267f3-a566-47a8-8cf9-40e6cc925bf0
               uuid: 56d267f3-a566-47a8-8cf9-40e6cc925bf0
               name: My-FG-1
         zSide:
@@ -18639,7 +19110,7 @@ components:
           createdByFullName: test
           createdByEmail: test@equinix.com
           createdDateTime: 2022-05-12T17:53:45.401Z
-    Gw2Colo-ResponseExample:
+    Fcr2Colo-ResponseExample:
       value:
         href: https://api.equinix.com/fabric/v4/connections/0ed42ea7-2df8-470d-ad59-e432d768b4f1
         type: IP_VC
@@ -18653,9 +19124,9 @@ components:
           billingTier: Up to 50 MB
         aSide:
           accessPoint:
-            type: GW
-            gateway:
-              href: https://api.equinix.com/fabric/v4/gateways/56d267f3-a566-47a8-8cf9-40e6cc925bf0
+            type: CLOUD_ROUTER
+            router:
+              href: https://api.equinix.com/fabric/v4/routers/56d267f3-a566-47a8-8cf9-40e6cc925bf0
               uuid: 56d267f3-a566-47a8-8cf9-40e6cc925bf0
         zSide:
           accessPoint:
@@ -18669,6 +19140,50 @@ components:
         operation:
           equinixStatus: PROVISIONING
           providerStatus: PROVISIONING
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+          - test1@equinix.com
+        changeLog:
+          createdBy: test
+          createdByFullName: test
+          createdByEmail: test@equinix.com
+          createdDateTime: 2022-05-12T17:53:45.401Z
+    Fcr2IpWan-response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/0ed42ea7-2df8-470d-ad59-e432d768b4f1
+        type: IPWAN_VC
+        uuid: 0ed42ea7-2df8-470d-ad59-e432d768b4f1
+        name: MY-IPWAN-CONNECTION-1
+        bandwidth: 50
+        redundancy:
+          group: 4f786b3f-27d4-48e0-8571-423d085826c1
+          priority: PRIMARY
+        order:
+          billingTier: Up to 50 MB
+        aSide:
+          accessPoint:
+            type: CLOUD_ROUTER
+            router:
+              href: https://api.equinix.com/fabric/v4/routers/66a21614-1c4a-11ec-9621-0242ac130002
+              uuid: 66a21614-1c4a-11ec-9621-0242ac130002
+              name: My-FG
+        zSide:
+          accessPoint:
+            network:
+              href: https://api.equinix.com/fabric/v4/networks/25f8884e-85e3-4eaa-8ea9-a7ad2ca5b3c2
+              uuid: 25f8884e-85e3-4eaa-8ea9-a7ad2ca5b3c2
+              name: My-IPWAN
+              platformUuid: be2c3921-602a-444e-86ef-92cf749c7647
+              state: ACTIVE
+              type: IPWAN
+              scope: REGIONAL
+              location:
+                region: AMER
+        operation:
+          equinixStatus: PROVISIONING
+          providerStatus: NOT_AVAILABLE
         notifications:
         - type: ALL
           emails:
@@ -20060,18 +20575,6 @@ components:
         path: /ipv6
         value:
           equinixIfaceIp: 1202:ABCD::/64
-    ConnectionResendInvitationRequest:
-      value:
-      - op: replace
-        path: /zSide/invitation/message
-        value: Resending Hello world!!
-    ConnectionForwardInvitationRequest:
-      value:
-      - op: replace
-        path: /zSide/invitation
-        value:
-          email: test2222222@equinix.com
-          message: Hello world!!
     ConnectionMigrationAsideRequest:
       value:
       - op: replace
@@ -20086,6 +20589,11 @@ components:
           emails:
           - testEmail1@equinix.com
           - testEmail2@equinix.com
+    ConnectionMigrationAsideVirtualDeviceRequest:
+      value:
+      - op: replace
+        path: /aSide/accessPoint/virtualDevice/uuid
+        value: 5e7fd31d-f1e8-46fe-b6ad-6f5f2306cfd8
     ConnectionPatchResponse:
       value:
         href: https://api.equinix.com/fabric/v4/connections/3a58dd05-f46d-4b1d-a154-2e85c396ea62
@@ -20274,14 +20782,14 @@ components:
         correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
         additionalInfo:
         - reason: Please contact support@equinix.com for more info
-    Gw2ColoCreateDirect:
+    Fcr2ColoCreateDirect:
       value:
         type: DIRECT
         directIpv4:
           equinixIfaceIp: 192.168.100.1/30
         directIpv6:
           equinixIfaceIp: 2001:7a9::34f4:0:f3dd:1/126
-    Gw2ColoCreateBGP:
+    Fcr2ColoCreateBGP:
       value:
         type: BGP
         bgpIpv4:
@@ -20294,12 +20802,12 @@ components:
         bfd:
           enabled: true
           interval: 100
-    Gw2GcpCreateDirect:
+    Fcr2GcpCreateDirect:
       value:
         type: DIRECT
         directIpv4:
           equinixIfaceIp: 169.254.100.1/30
-    Gw2GcpCreateBGP:
+    Fcr2GcpCreateBGP:
       value:
         type: BGP
         bgpIpv4:
@@ -20896,7 +21404,7 @@ components:
       value:
         filter:
           and:
-          - property: /aSide/accessPoint/gateway/uuid
+          - property: /aSide/accessPoint/router/uuid
             operator: =
             values:
             - 742e5b08-385a-4f50-94b8-08acdf91b7b0
@@ -21615,7 +22123,7 @@ components:
           - property: /connection/aSide/accessPoint/type
             operator: =
             values:
-            - GW
+            - CLOUD_ROUTER
           - property: /connection/aSide/accessPoint/location/metroCode
             operator: =
             values:
@@ -21651,7 +22159,7 @@ components:
           - property: /connection/aSide/accessPoint/type
             operator: =
             values:
-            - GW
+            - CLOUD_ROUTER
           - property: /connection/aSide/accessPoint/location/metroCode
             operator: =
             values:
@@ -21810,6 +22318,42 @@ components:
               operator: =
               values:
               - efeed227-765e-4f74-b14c-0c8a739be23e
+    VirtualConnectionProductEvpLanVcTypeFromColoToNetwork:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: =
+            values:
+            - VIRTUAL_CONNECTION_PRODUCT
+          - property: /connection/type
+            operator: =
+            values:
+            - EVPLAN_VC
+          - property: /connection/aSide/accessPoint/type
+            operator: =
+            values:
+            - COLO
+          - property: /connection/aSide/accessPoint/location/metroCode
+            operator: =
+            values:
+            - DA
+          - property: /connection/aSide/accessPoint/port/settings/buyout
+            operator: =
+            values:
+            - "true"
+          - property: /connection/zSide/accessPoint/type
+            operator: =
+            values:
+            - NETWORK
+          - property: /connection/zSide/accessPoint/network/scope
+            operator: =
+            values:
+            - REGIONAL
+          - property: /connection/bandwidth
+            operator: IN
+            values:
+            - "10"
     FabricGatewayProduct:
       value:
         filter:
@@ -21817,12 +22361,12 @@ components:
           - property: /type
             operator: =
             values:
-            - FABRIC_GATEWAY_PRODUCT
-          - property: /gateway/location/metroCode
+            - CLOUD_ROUTER_PRODUCT
+          - property: /router/location/metroCode
             operator: =
             values:
             - CH
-          - property: /gateway/package/code
+          - property: /router/package/code
             operator: IN
             values:
             - LAB
@@ -21952,17 +22496,17 @@ components:
           limit: 1
           total: 1
         data:
-        - type: FABRIC_GATEWAY_PRODUCT
+        - type: CLOUD_ROUTER_PRODUCT
           code: ECX00014.PROD
-          name: Equinix Fabric Gateway Product
-          description: Equinix Fabric Gateway
+          name: Equinix Cloud Router Product
+          description: Equinix Cloud Router
           account:
             accountNumber: 200001
           charges:
           - type: MONTHLY_RECURRING
             price: 5000
           currency: USD
-          gateway:
+          router:
             package:
               code: BASIC
             location:
@@ -23417,6 +23961,7 @@ components:
           name: Amsterdam
           region: EMEA
           equinixAsn: 60000
+          localVCBandwidthMax: 10000
           geoCoordinates:
             latitude: 52.30049
             longitude: 4.942603
@@ -23424,33 +23969,43 @@ components:
           - href: https://api.equinix.com/v4/fabric/metros/MX
             code: MX
             avgLatency: 132
+            remoteVCBandwidthMax: 10000
           - href: https://api.equinix.com/v4/fabric/metros/AM
             code: HH
             avgLatency: 8.62
+            remoteVCBandwidthMax: 10000
           - href: https://api.equinix.com/v4/fabric/metros/SL
             code: SL
             avgLatency: 229
+            remoteVCBandwidthMax: 10000
           - href: https://api.equinix.com/v4/fabric/metros/SO
             code: SO
             avgLatency: 36.3
+            remoteVCBandwidthMax: 50000
           - href: https://api.equinix.com/v4/fabric/metros/IL
             code: IL
             avgLatency: 44.8
+            remoteVCBandwidthMax: 50000
           - href: https://api.equinix.com/v4/fabric/metros/LS
             code: LS
             avgLatency: 36.6
+            remoteVCBandwidthMax: 50000
           - href: https://api.equinix.com/v4/fabric/metros/BA
             code: BA
             avgLatency: 32.6
+            remoteVCBandwidthMax: 50000
           - href: https://api.equinix.com/v4/fabric/metros/BL
             code: BL
             avgLatency: 3.28
+            remoteVCBandwidthMax: 50000
           - href: https://api.equinix.com/v4/fabric/metros/GV
             code: GV
             avgLatency: 15.3
+            remoteVCBandwidthMax: 50000
           - href: https://api.equinix.com/v4/fabric/metros/LD
             code: LD
             avgLatency: 5.85
+            remoteVCBandwidthMax: 50000
     "400_metros":
       value:
       - errorCode: EQ-3036013
@@ -23481,6 +24036,7 @@ components:
         region: EMEA
         name: Amsterdam
         equinixAsn: 60000
+        localVCBandwidthMax: 50000
         geoCoordinates:
           latitude: 52.30049
           longitude: 4.942603
@@ -23488,33 +24044,43 @@ components:
         - href: https://api.equinix.com/v4/fabric/metros/MX
           code: MX
           avgLatency: 132
+          remoteVCBandwidthMax: 50000
         - href: https://api.equinix.com/v4/fabric/metros/HH
           code: HH
           avgLatency: 8.62
+          remoteVCBandwidthMax: 50000
         - href: https://api.equinix.com/v4/fabric/metros/SL
           code: SL
           avgLatency: 229
+          remoteVCBandwidthMax: 50000
         - href: https://api.equinix.com/v4/fabric/metros/SO
           code: SO
           avgLatency: 36.3
+          remoteVCBandwidthMax: 10000
         - href: https://api.equinix.com/v4/fabric/metros/IL
           code: IL
           avgLatency: 44.8
+          remoteVCBandwidthMax: 10000
         - href: https://api.equinix.com/v4/fabric/metros/LS
           code: LS
           avgLatency: 36.6
+          remoteVCBandwidthMax: 10000
         - href: https://api.equinix.com/v4/fabric/metros/AM
           code: BA
           avgLatency: 32.6
+          remoteVCBandwidthMax: 10000
         - href: https://api.equinix.com/v4/fabric/metros/BL
           code: BL
           avgLatency: 3.28
+          remoteVCBandwidthMax: 10000
         - href: https://api.equinix.com/v4/fabric/metros/GV
           code: GV
           avgLatency: 15.3
+          remoteVCBandwidthMax: 10000
         - href: https://api.equinix.com/v4/fabric/metros/LD
           code: LD
           avgLatency: 5.85
+          remoteVCBandwidthMax: 10000
     "400_metroCode":
       value:
       - errorCode: EQ-3036013
@@ -23539,6 +24105,9 @@ components:
           bandwidth: 10000
           usedBandwidth: 0
           availableBandwidth: 20000
+          redundancy:
+            group: "1"
+            priority: SECONDARY
           location:
             metroHref: https://api.equinix.com/fabric/v4/metros/AT
             ibx: AT1
@@ -23554,6 +24123,8 @@ components:
             type: DOT1Q
             tagProtocolId: 33024
           lagEnabled: true
+          lag:
+            enabled: true
           settings:
             buyout: false
             placeVcOrderPermission: true
@@ -23582,6 +24153,7 @@ components:
             demarcationPoint:
               ibx: AT1
               patchPanel: PP:8118:1586
+              patchPanelName: PP:8118:1586
               patchPanelPortA: "92"
               patchPanelPortB: "24"
             operation:
@@ -23598,22 +24170,25 @@ components:
             organizationName: Cust_Org_100179
           changeLog:
             createdDateTime: 2020-06-14T17:21:25.586Z
+          project:
+            projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
     COLOSinglePortNonLag:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: COLO
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
         lagEnabled: false
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         notifications:
@@ -23634,8 +24209,7 @@ components:
               lastName: Doe
               email: john.doe@company.com
         physicalPorts:
-        - type: XF_PHYSICAL_PORT
-          demarcationPoint:
+        - demarcationPoint:
             ibx: GV1
             cabinetUniqueSpaceId: Demarc
             cageUniqueSpaceId: GV1:01:002174
@@ -23645,18 +24219,19 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: COLO
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
         lagEnabled: true
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         notifications:
@@ -23680,8 +24255,7 @@ components:
         - key: lagType
           value: Single
         physicalPorts:
-        - type: XF_PHYSICAL_PORT
-          demarcationPoint:
+        - demarcationPoint:
             ibx: GV1
             cabinetUniqueSpaceId: Demarc
             cageUniqueSpaceId: GV1:01:002174
@@ -23691,18 +24265,19 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: COLO
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
         lagEnabled: true
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         notifications:
@@ -23728,15 +24303,13 @@ components:
         - key: quoteReferenceId
           value: 396e93c2-3b3a-4d47-a9d9-1ea68627374b
         physicalPorts:
-        - type: XF_PHYSICAL_PORT
-          demarcationPoint:
+        - demarcationPoint:
             ibx: GV1
             cabinetUniqueSpaceId: Demarc
             cageUniqueSpaceId: GV1:01:002174
             patchPanel: CP:Demarc:1259684
             connectorType: SC
-        - type: XF_PHYSICAL_PORT
-          demarcationPoint:
+        - demarcationPoint:
             ibx: GV1
             cabinetUniqueSpaceId: Demarc
             cageUniqueSpaceId: GV1:01:002174
@@ -23746,10 +24319,11 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 10000
-        physicalPortsType: 1G_LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: COLO
         location:
-          ibx: SV1
+          metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
           sharedPortType: false
@@ -23799,8 +24373,7 @@ components:
           registeredUsers:
           - jaguarsuser-port-order
         physicalPorts:
-        - type: XF_PHYSICAL_PORT
-          demarcationPoint:
+        - demarcationPoint:
             ibx: AM1
             cabinet: AM1:02:032575:0105
             cage: AM1:02:032575
@@ -23812,12 +24385,12 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: REMOTE
         physicalPortsCount: 1
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
           sharedPortType: false
@@ -23825,6 +24398,8 @@ components:
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         notifications:
@@ -23855,20 +24430,21 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: BMMR
         bmmrType: SELF
         physicalPortsCount: 1
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
         lagEnabled: true
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         notifications:
@@ -23901,18 +24477,19 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: BMMR
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
         lagEnabled: false
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         order:
@@ -23939,15 +24516,15 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 10000
-        physicalPortsType: 1G_LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: BMMR
         bmmrType: SELF|EQUINIX
         location:
-          ibx: SV1
+          metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
-          sharedPortProduct: null
+          sharedPortProduct: NETWORK_EDGE
         redundancy:
           priority: SECONDARY
           group: 1f6bdb37-f131-5925-c039-fe1785fad165
@@ -23999,20 +24576,21 @@ components:
       value:
         type: XF_PORT
         physicalPortsSpeed: 1000
-        physicalPortsType: 1G LX
+        physicalPortsType: 1000BASE_LX
         connectivitySourceType: BMMR
         bmmrType: SELF
         physicalPortsCount: 1
         location:
-          ibx: GV1
           metroCode: GV
+        demarcationPointIbx: GV1
         settings:
           packageType: STANDARD
-          sharedPortType: false
         lagEnabled: true
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
         account:
           accountNumber: "270848"
         notifications:
@@ -24042,53 +24620,28 @@ components:
         href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad166
         type: XF_PORT
         uuid: 0f6bdb36-e130-4924-b038-ee1785fad166
-        name: L2-DEV-USER01-CX-10G-PRIMARY
-        description: Test LAG port in Amsterdam
-        state: PROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad166/changes/f0f5e7bf-2968-485d-b9b0-a356e3a8d58f
-          type: PORT_CREATION
-          uuid: f0f5e7bf-2968-485d-b9b0-a356e3a8d58f
-        bandwidth: 20000
-        usedBandwidth: 0
-        availableBandwidth: 20000
+        state: PENDING
         physicalPortsType: 10GBASE_L
         physicalPortsSpeed: 10000
         physicalPortsCount: 1
-        cvpId: 108608
-        connectionsCount: 0
         location:
-          region: EMEA
-          metroHref: https://api.equinix.com/fabric/v4/metros/AM
           metroCode: AM
-          metroName: Amsterdam
-          ibx: AM2
-        device:
-          name: dev-int-vsim-2.lab
-          redundancy:
-            group: 1
-            priority: PRIMARY
-        lagEnabled: true
+        demarcationPointIbx: AM1
+        redundancy:
+          group: 1
+          priority: PRIMARY
+        lagEnabled: false
         encapsulation:
           type: DOT1Q
           tagProtocolId: 33024
         settings:
-          buyout: false
-          placeVcOrderPermission: true
-          viewPortPermission: true
-        operation:
-          operationalStatus: UNAVAILABLE
-          opStatusChangedAt: null
-          maintenanceMode: null
+          sharedPortType: "false,"
+          packageType: STANDARD
         project:
-          href: https://api.equinix.com/resourceManager/v1/projects/567
           projectId: 567
         account:
-          href: https://api.equinix.com/accountService/v1/accounts/1000
           accountNumber: 1000
         order:
-          href: https://api.equinix.com/fabric/v4/orders/cd67f685-41b0-1b07-6de0-320a5c00abee
-          uuid: cd67f685-41b0-1b07-6de0-320a5c00abee
           orderNumber: 1-207799950758
           signature:
             signatory: DELEGATE
@@ -24107,11 +24660,6 @@ components:
         - type: ESCALATION
           registeredUsers:
           - jaguarsuser-port-order
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21T10:30:00Z
     port-400:
       value:
       - errorCode: EQ-3143101
@@ -24247,6 +24795,9 @@ components:
           name: L2-DEV-USER01-CX-10G-PRIMARY
           description: Test Redundant port in Amsterdam
           physicalPortsSpeed: 10000
+          location:
+            metroCode: AM
+          demarcationPointIbx: AM1
           lagEnabled: false
           encapsulation:
             type: DOT1Q
@@ -24271,8 +24822,7 @@ components:
           redundancy:
             priority: PRIMARY
           physicalPorts:
-          - type: XF_PHYSICAL_PORT
-            demarcationPoint:
+          - demarcationPoint:
               ibx: AM1
               cabinet: AM1:02:032575:0105
               cage: AM1:02:032575
@@ -24284,6 +24834,9 @@ components:
           name: L2-DEV-USER01-CX-10G-SECONDARY
           description: Test Redundant port in Amsterdam
           physicalPortsSpeed: 10000
+          location:
+            metroCode: AM
+          demarcationPointIbx: AM1
           lagEnabled: false
           encapsulation:
             type: DOT1Q
@@ -24308,8 +24861,7 @@ components:
           redundancy:
             priority: SECONDARY
           physicalPorts:
-          - type: XF_PHYSICAL_PORT
-            demarcationPoint:
+          - demarcationPoint:
               ibx: AM1
               cabinet: AM1:02:032575:0105
               cage: AM1:02:032575
@@ -24320,59 +24872,32 @@ components:
     COLOBulkPortResponse:
       value:
         data:
-        - href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad999
-          type: XF_PORT
-          uuid: 0f6bdb36-e130-4924-b038-ee1785fad999
-          name: L2-DEV-USER01-CX-10G-PRIMARY
-          description: Test Redundant port in Amsterdam
-          state: PENDING
+        - href: http://qa3api.corp.equinix.com/fabric/v4/ports/a6f77b33-96c6-4eeb-8d79-76374d950603
+          uuid: a6f77b33-96c6-4eeb-8d79-76374d950603
+          physicalPortsSpeed: 1000
+          physicalPortsType: 1000BASE_LX
+          physicalPortsCount: 1
           connectivitySourceType: COLO
-          change:
-            href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad999/changes/f0f5e7bf-2968-485d-b9b0-a356e3a8d999
-            type: PORT_CREATION
-            uuid: f0f5e7bf-2968-485d-b9b0-a356e3a8d999
-          usedBandwidth: 0
-          availableBandwidth: 20000
-          physicalPortsType: 10GBASE_L
-          physicalPortsSpeed: 10000
-          cvpId: 108608
-          connectionsCount: 0
-          location:
-            region: EMEA
-            metroHref: https://api.equinix.com/fabric/v4/metros/AM
-            metroCode: AM
-            metroName: Amsterdam
-            ibx: AM2
-          device:
-            name: dev-int-vsim-2.lab
-            redundancy:
-              group: 1
-              priority: PRIMARY
-          lagEnabled: false
-          encapsulation:
-            type: DOT1Q
-            tagProtocolId: 33024
-          settings:
-            buyout: false
-            placeVcOrderPermission: true
-            viewPortPermission: true
-            packageType: STANDARD
-            sharedPortType: false
-            sharedPortProduct: null
-          operation:
-            operationalStatus: UNAVAILABLE
-            opStatusChangedAt: null
-            maintenanceMode: null
-          project:
-            href: https://api.equinix.com/resourceManager/v1/projects/567
-            projectId: 567
-          account:
-            href: https://api.equinix.com/accountService/v1/accounts/1000
-            accountNumber: 1000
+          state: PENDING
           order:
-            href: https://api.equinix.com/fabric/v4/orders/cd67f685-41b0-1b07-6de0-320a5c00a999
-            uuid: cd67f685-41b0-1b07-6de0-320a5c00a999
-            orderNumber: 1-207799950758
+            orderNumber: 1-210210611704
+          account:
+            accountNumber: 270848
+          changelog:
+            createdBy: "907831"
+            createdDateTime: 2023-06-02T22:25:52.206Z
+          location:
+            metroCode: GV
+          demarcationPointIbx: GV1
+          redundancy:
+            group: 22f8e668-4754-4564-825d-d1c7889c885a
+            priority: PRIMARY
+          lagEnabled: false
+          settings:
+            sharedPortType: false
+            packageType: STANDARD
+          project:
+            projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
           notifications:
           - type: TECHNICAL
             registeredUsers:
@@ -24380,76 +24905,37 @@ components:
           - type: NOTIFICATION
             registeredUsers:
             - jaguarsuser-port-order
-          - type: PEERING
-            registeredUsers:
-            - jaguarsuser-port-order
-          - type: ESCALATION
-            registeredUsers:
-            - jaguarsuser-port-order
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21T10:30:00Z
           additionalInfo:
-          - key: internalReferenceId
-            value: 635368
           - key: quoteReferenceId
-            value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
-          - key: orderUuid
-            value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
-        - href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad999
-          type: XF_PORT
-          uuid: 0f6bdb36-e130-4924-b038-ee1785fad999
-          name: L2-DEV-USER01-CX-10G-SECONDARY
-          description: Test Redundant port in Amsterdam
-          state: PENDING
+            value: dd70d3dd-29f6-4a30-8820-03dc1c80a682
+          - key: InterfaceReferenceId
+            value: "32729"
+        - href: http://qa3api.corp.equinix.com/fabric/v4/ports/22f8e668-4754-4564-825d-d1c7889c885a
+          uuid: 22f8e668-4754-4564-825d-d1c7889c885a
+          physicalPortsSpeed: 1000
+          physicalPortsType: 1000BASE_LX
+          physicalPortsCount: 1
           connectivitySourceType: COLO
-          change:
-            href: https://api.equinix.com/fabric/v4/ports/0f6bdb36-e130-4924-b038-ee1785fad999/changes/f0f5e7bf-2968-485d-b9b0-a356e3a8d999
-            type: PORT_CREATION
-            uuid: f0f5e7bf-2968-485d-b9b0-a356e3a8d999
-          usedBandwidth: 0
-          availableBandwidth: 20000
-          physicalPortsType: 10GBASE_L
-          physicalPortsSpeed: 10000
-          cvpId: 108608
-          connectionsCount: 0
-          location:
-            region: EMEA
-            metroHref: https://api.equinix.com/fabric/v4/metros/AM
-            metroCode: AM
-            metroName: Amsterdam
-            ibx: AM2
-          device:
-            name: dev-int-vsim-2.lab
-            redundancy:
-              group: 1
-              priority: SECONDARY
-          lagEnabled: false
-          encapsulation:
-            type: DOT1Q
-            tagProtocolId: 33024
-          settings:
-            buyout: false
-            placeVcOrderPermission: true
-            viewPortPermission: true
-            packageType: STANDARD
-            sharedPortType: false
-          operation:
-            operationalStatus: UNAVAILABLE
-            opStatusChangedAt: null
-            maintenanceMode: null
-          project:
-            href: https://api.equinix.com/resourceManager/v1/projects/567
-            projectId: 567
-          account:
-            href: https://api.equinix.com/accountService/v1/accounts/1000
-            accountNumber: 1000
+          state: PENDING
           order:
-            href: https://api.equinix.com/fabric/v4/orders/cd67f685-41b0-1b07-6de0-320a5c00a999
-            uuid: cd67f685-41b0-1b07-6de0-320a5c00a999
-            orderNumber: 1-207799950758
+            orderNumber: 1-210210611704
+          account:
+            accountNumber: 270848
+          changelog:
+            createdBy: "907831"
+            createdDateTime: 2023-06-02T22:25:52.206Z
+          location:
+            metroCode: GV
+          demarcationPointIbx: GV1
+          redundancy:
+            group: a6f77b33-96c6-4eeb-8d79-76374d950603
+            priority: SECONDARY
+          lagEnabled: false
+          project:
+            projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+          settings:
+            sharedPortType: false
+            packageType: STANDARD
           notifications:
           - type: TECHNICAL
             registeredUsers:
@@ -24457,24 +24943,11 @@ components:
           - type: NOTIFICATION
             registeredUsers:
             - jaguarsuser-port-order
-          - type: PEERING
-            registeredUsers:
-            - jaguarsuser-port-order
-          - type: ESCALATION
-            registeredUsers:
-            - jaguarsuser-port-order
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21T10:30:00Z
           additionalInfo:
-          - key: internalReferenceId
-            value: 635368
           - key: quoteReferenceId
-            value: 16aabad4-1caa-4aae-be35-3ff1dc1814d4
-          - key: orderUuid
-            value: c64de7e5-7fe7-41e6-b984-80d5aa159a0d
+            value: dd70d3dd-29f6-4a30-8820-03dc1c80a682
+          - key: InterfaceReferenceId
+            value: "32729"
     COLOAddToLag:
       value:
         data:
@@ -24514,7 +24987,7 @@ components:
           - key: connectivitySourceType
             value: COLO
           - key: physicalPortsType
-            value: 10G SMF
+            value: 10GBASE_LR
           - key: packageType
             value: STANDARD
           - key: notification
@@ -24555,7 +25028,7 @@ components:
           - key: connectivitySourceType
             value: COLO
           - key: physicalPortsType
-            value: 10G SMF
+            value: 10GBASE_LR
           - key: packageType
             value: STANDARD
           - key: notification
@@ -24576,7 +25049,7 @@ components:
           - key: connectivitySourceType
             value: REMOTE
           - key: physicalPortsType
-            value: 10G SMF
+            value: 10GBASE_LR
           - key: packageType
             value: STANDARD
           - key: notification
@@ -24613,7 +25086,7 @@ components:
           - key: connectivitySourceType
             value: REMOTE
           - key: physicalPortsType
-            value: 10G SMF
+            value: 10GBASE_LR
           - key: packageType
             value: STANDARD
           - key: notification
@@ -24653,7 +25126,7 @@ components:
           - key: bmmrType
             value: SELF
           - key: physicalPortsType
-            value: 10G SMF
+            value: 10GBASE_LR
           - key: packageType
             value: STANDARD
           - key: notification
@@ -24690,13 +25163,60 @@ components:
           - key: bmmrType
             value: SELF
           - key: physicalPortsType
-            value: 10G SMF
+            value: 10GBASE_LR
           - key: packageType
             value: STANDARD
           - key: notification
             value: jaguarsuser-port-order
         - loas:
           - uuid: 64de7e5-7fe7-41e6-b984-80d5aa159a0e
+    COLOAddToLagResponse:
+      value:
+        data:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            patchPanelPortA: "39"
+            patchPanelPortB: "40"
+            connectorType: SC
+            ibx: GV1
+          additionalInfo:
+          - key: lagType
+            value: Existing
+          - key: connectivitySourceType
+            value: COLO
+          - key: physicalPortsType
+            value: 10GBASE_LR
+          - key: packageType
+            value: STANDARD
+          - key: notification
+            value: userName
+          order:
+            orderNumber: 1-210210611904
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            patchPanelPortA: "41"
+            patchPanelPortB: "42"
+            connectorType: SC
+            ibx: GV1
+          additionalInfo:
+          - key: lagType
+            value: Existing
+          - key: connectivitySourceType
+            value: COLO
+          - key: physicalPortsType
+            value: 10GBASE_LR
+          - key: packageType
+            value: STANDARD
+          - key: notification
+            value: userName
+          order:
+            orderNumber: 1-210210611904
     portByUUID:
       value:
         href: https://api.equinix.com/fabric/v4/ports/e91484bb-4f65-4ab3-8f77-500dec2f855d
@@ -24708,6 +25228,9 @@ components:
         bandwidth: 10000
         usedBandwidth: 0
         availableBandwidth: 20000
+        redundancy:
+          group: "1"
+          priority: Secondary
         location:
           metroHref: https://api.equinix.com/fabric/v4/metros/AT
           ibx: AT1
@@ -24723,6 +25246,8 @@ components:
           type: DOT1Q
           tagProtocolId: 33024
         lagEnabled: true
+        lag:
+          enabled: true
         settings:
           buyout: false
           placeVcOrderPermission: true
@@ -24740,6 +25265,7 @@ components:
           demarcationPoint:
             ibx: AT1
             patchPanel: PP:8118:1586
+            patchPanelName: PP:8118:1586
             patchPanelPortA: "92"
             patchPanelPortB: "24"
           operation:
@@ -24766,7 +25292,9 @@ components:
           orgId: "100179"
           organizationName: Cust_Org_100179
         changeLog:
-          createdDateTime: 2018-06-14T17:21:25.586Z
+          createdDateTime: 2018-06-14T17:21:25.587Z
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
     LinkProtocolGetQinqResponseExample:
       value:
         pagination:
@@ -24965,10 +25493,25 @@ components:
       - errorCode: EQ-3035002
         errorMessage: Access Forbidden
         correlationId: UnAuthorized User- Cannot perform action
+    PortSearchProjectidOPtional-CRH:
+      value:
+        filter:
+          and:
+          - property: /project/projectId
+            operator: =
+            values:
+            - 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        pagination:
+          limit: 25
+          offset: 0
+          total: 0
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
     CreateLabPackage:
       value:
-        type: XF_GATEWAY
-        name: My-Fabric-Gateway
+        type: XF_ROUTER
+        name: My-Cloud-Router
         location:
           metroCode: SV
         package:
@@ -24983,8 +25526,8 @@ components:
           projectId: "995072000433550"
     CreateProPackage:
       value:
-        type: XF_GATEWAY
-        name: My-Fabric-Gateway
+        type: XF_ROUTER
+        name: My-Cloud-Router
         location:
           metroCode: SV
         package:
@@ -24997,13 +25540,13 @@ components:
           accountNumber: 272010
         project:
           projectId: "995072000433550"
-    GatewayPostResponseExample:
+    CloudRouterPostResponseExample:
       value:
-        href: https://api.equinix.com/fabric/v4/gateways/201b7346-a9eb-42fe-ae7a-08148c71928d
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
         uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
         state: PROVISIONED
-        type: XF_GATEWAY
-        name: My-Fabric-Gateway
+        type: XF_ROUTER
+        name: My-Cloud-Router
         location:
           metroCode: HH
         equinixAsn: 30000
@@ -25033,13 +25576,13 @@ components:
         errorMessage: Package not found
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: package must be of type LAB or PRO
-    GatewayResponseExample:
+    CloudRouterResponseExample:
       value:
-        href: https://api.equinix.com/fabric/v4/gateways/201b7346-a9eb-42fe-ae7a-08148c71928d
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
         uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
         state: PROVISIONED
-        type: XF_GATEWAY
-        name: My-Fabric-Gateway
+        type: XF_ROUTER
+        name: My-Cloud-Router
         location:
           metroCode: HH
         equinixAsn: 30000
@@ -25074,9 +25617,9 @@ components:
     "400_invalid_state":
       value:
       - errorCode: EQ-3040030
-        errorMessage: Cannot delete Fabric Gateway in transient state
+        errorMessage: Cannot delete Fabric Cloud Router in transient state
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Cannot delete Fabric Gateway in transient state.
+        details: Cannot delete Fabric Cloud Router in transient state.
     UpdatePackage:
       value:
       - op: replace
@@ -25086,7 +25629,7 @@ components:
       value:
       - op: replace
         path: /name
-        value: Gateway-name-2
+        value: Router-name-2
     UpdateNotifications:
       value:
       - op: replace
@@ -25096,13 +25639,13 @@ components:
           emails:
           - testEmail1@equinix.com
           - testEmail2@equinix.com
-    GatewayPatchResponseExample:
+    CloudRouterPatchResponseExample:
       value:
-        href: https://api.equinix.com/fabric/v4/gateways/201b7346-a9eb-42fe-ae7a-08148c71928d
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
         uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
         state: PROVISIONED
-        type: XF_GATEWAY
-        name: My-Fabric-Gateway
+        type: XF_ROUTER
+        name: My-Cloud-Router
         location:
           metroCode: HH
         equinixAsn: 30000
@@ -25123,7 +25666,7 @@ components:
         connectionsCount: 0
         change:
           uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-          type: GATEWAY_UPDATE
+          type: ROUTER_UPDATE
           status: REQUESTED
           createdDateTime: 2022-04-19T04:20:55.471Z
           updatedDateTime: 2022-04-19T04:20:55.471Z
@@ -25264,11 +25807,11 @@ components:
           next: /search?offset=40&limit=20
           previous: /search?offset=0&limit=20
         data:
-        - href: https://api.equinix.com/fabric/v4/gateways/201b7346-a9eb-42fe-ae7a-08148c71928d
+        - href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
           uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
           state: PROVISIONED
-          type: XF_GATEWAY
-          name: My-Fabric-Gateway
+          type: XF_ROUTER
+          name: My-Cloud-Router
           location:
             metroCode: HH
           equinixAsn: 30000
@@ -25300,15 +25843,15 @@ components:
             deletedByFullName: abc
             deletedByEmail: abc@xyz.com
             deletedDateTime: 2021-09-24T06:59:46Z
-    ListFGPackagesResponse:
+    ListFCRPackagesResponse:
       value:
         pagination:
           offset: 0
           limit: 20
           total: 1
         data:
-        - href: https://api.equinix.com/fabric/v4/gatewayPackages/LAB
-          type: GATEWAY_PACKAGE
+        - href: https://api.equinix.com/fabric/v4/routerPackages/LAB
+          type: ROUTER_PACKAGE
           code: LAB
           description: string
           totalIPv4RoutesMax: 50
@@ -25320,9 +25863,9 @@ components:
           haSupported: true
           routeFilterSupported: true
           natType: STATIC_NAT
-          maxConnLimit: 10
-          maxGwLimit: 3
-          maxBwLimit: 50
+          vcCountMax: 10
+          crCountMax: 3
+          vcBandwidthMax: 50
           changeLog:
             createdDateTime: 2022-02-10T00:14:47Z
             updatedDateTime: 2022-02-10T00:14:47Z
@@ -25349,7 +25892,7 @@ components:
         - route: /stats
           status: UP
           changedDateTime: 2022-10-03T18:37:56.951+00:00
-        - route: /gateways
+        - route: /routers
           status: UP
           changedDateTime: 2022-10-03T18:37:57.271+00:00
         - route: /serviceProfiles
@@ -25669,7 +26212,7 @@ components:
             priority: SECONDARY
           aside:
             accessPoint:
-              type: GW
+              type: CLOUD_ROUTER
           zSide:
             accessPoint:
               type: COLO
@@ -25687,7 +26230,7 @@ components:
             priority: SECONDARY
           aside:
             accessPoint:
-              type: GW
+              type: CLOUD_ROUTER
           zSide:
             accessPoint:
               type: COLO
@@ -25721,9 +26264,7 @@ components:
         - key: message
           value: Authorization key provided is valid
         data:
-        - bandwidth: 500
-          redundancy:
-            priority: PRIMARY
+        - bandwidth: 1000
     Response-Dot1q-Vlan:
       value:
         additionalInfo:
@@ -25828,9 +26369,9 @@ components:
             href: https://api.equinix.com/fabric/v4/connections/ecd30480-07a1-469e-ad38-65fadf0f7221
             type: IP_VC
             uuid: ecd30480-07a1-469e-ad38-65fadf0f7221
-          gateway:
-            href: https://api.equinix.com/fabric/v4/gateways/e2e99d48-66b8-4b80-84eb-daea190e9186
-            type: XF_GATEWAY
+          router:
+            href: https://api.equinix.com/fabric/v4/routers/e2e99d48-66b8-4b80-84eb-daea190e9186
+            type: XF_ROUTER
             uuid: e2e99d48-66b8-4b80-84eb-daea190e9186
         - createdDateTime: 2023-04-01T10:29:00Z
           href: https://api.equinix.com/fabric/v4/events/422504a4-286d-44e7-b386-8e385d2e99e2
@@ -25847,9 +26388,9 @@ components:
             href: https://api.equinix.com/fabric/v4/connections/ecd30480-07a1-469e-ad38-65fadf0f7221
             type: IP_VC
             uuid: ecd30480-07a1-469e-ad38-65fadf0f7221
-          gateway:
-            href: https://api.equinix.com/fabric/v4/gateways/e2e99d48-66b8-4b80-84eb-daea190e9186
-            type: XF_GATEWAY
+          router:
+            href: https://api.equinix.com/fabric/v4/routers/e2e99d48-66b8-4b80-84eb-daea190e9186
+            type: XF_ROUTER
             uuid: e2e99d48-66b8-4b80-84eb-daea190e9186
         - createdDateTime: 2023-04-01T10:28:00Z
           href: https://api.equinix.com/fabric/v4/events/422504a4-286d-44e7-b386-8e385d2e99e3
@@ -25866,9 +26407,9 @@ components:
             href: https://api.equinix.com/fabric/v4/connections/ecd30480-07a1-469e-ad38-65fadf0f7221
             type: IP_VC
             uuid: ecd30480-07a1-469e-ad38-65fadf0f7221
-          gateway:
-            href: https://api.equinix.com/fabric/v4/gateways/e2e99d48-66b8-4b80-84eb-daea190e9186
-            type: XF_GATEWAY
+          router:
+            href: https://api.equinix.com/fabric/v4/routers/e2e99d48-66b8-4b80-84eb-daea190e9186
+            type: XF_ROUTER
             uuid: e2e99d48-66b8-4b80-84eb-daea190e9186
         - createdDateTime: 2023-04-01T10:27:00Z
           href: https://api.equinix.com/fabric/v4/events/422504a4-286d-44e7-b386-8e385d2e99e4
@@ -25885,9 +26426,9 @@ components:
             href: https://api.equinix.com/fabric/v4/connections/ecd30480-07a1-469e-ad38-65fadf0f7221
             type: IP_VC
             uuid: ecd30480-07a1-469e-ad38-65fadf0f7221
-          gateway:
-            href: https://api.equinix.com/fabric/v4/gateways/e2e99d48-66b8-4b80-84eb-daea190e9186
-            type: XF_GATEWAY
+          router:
+            href: https://api.equinix.com/fabric/v4/routers/e2e99d48-66b8-4b80-84eb-daea190e9186
+            type: XF_ROUTER
             uuid: e2e99d48-66b8-4b80-84eb-daea190e9186
     CreateGlobalNetwork:
       value:

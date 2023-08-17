@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Location** | [***SimplifiedLocation**](SimplifiedLocation.md) |  | [optional] [default to null]
 **Port** | [***SimplifiedPort**](SimplifiedPort.md) |  | [optional] [default to null]
 **Profile** | [***SimplifiedServiceProfile**](SimplifiedServiceProfile.md) |  | [optional] [default to null]
-**Gateway** | [***FabricGateway**](FabricGateway.md) |  | [optional] [default to null]
+**Router** | [***CloudRouter**](CloudRouter.md) |  | [optional] [default to null]
 **LinkProtocol** | [***SimplifiedLinkProtocol**](SimplifiedLinkProtocol.md) |  | [optional] [default to null]
 **VirtualDevice** | [***VirtualDevice**](VirtualDevice.md) |  | [optional] [default to null]
 **Interface_** | [***ModelInterface**](Interface.md) |  | [optional] [default to null]
