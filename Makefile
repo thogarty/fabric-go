@@ -74,6 +74,10 @@ gen-swagger:
 		-o ./${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i ./${SPEC_PATCHED_FILE}
 
+# Requires downloading the specific version of the swagger-codegen-cli.jar from the artifact website
+# and putting it in the root of the repository. It will be .gitignore'd but it needs to be present.
+# Command below matches the Docker image Swagger Codegen CLI version above 3.0.34
+# curl -o swagger-codegen-cli.jar https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.34/swagger-codegen-cli-3.0.34.jar
 gen-swagger-apple-chip-cpu:
 	java -jar swagger-codegen-cli.jar generate -l go \
 		--additional-properties packageName=${PACKAGE_MAJOR} \
@@ -84,7 +88,7 @@ gen-swagger-apple-chip-cpu:
 		-o ./${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i ./${SPEC_PATCHED_FILE}
 
-gen: gen-swagger-apple-chip-cpu
+gen: gen-swagger
 
 mod:
 	rm -f go.mod go.sum
