@@ -23,6 +23,8 @@ DOCKER=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local
 DOCKER_SWAGGER=${DOCKER} ${SWAGGER_CODEGEN_IMAGE}
 DOCKER_OPENAPI=${DOCKER} ${OPENAPI_CODEGEN_IMAGE}
 
+IMAGE=${SWAGGER_CODEGEN_IMAGE}
+
 GOLANGCI_LINT=golangci-lint
 
 
@@ -31,7 +33,13 @@ GOLANGCI_LINT=golangci-lint
 # Open API
 # Swagger Codegen Docker
 # Swagger Code Gen Java Jar for OSX Machines with Apple Silicon CPU M1/M2
-all: fetch patch clean gen mod fmt patch-post docs move-other test stage
+all: pull fetch patch clean gen mod fmt patch-post docs move-other test stage
+
+
+# Update the IMAGE variable above to either ${OPENAPI_CODEGEN_IMAGE} or ${SWAGGER_CODEGEN_IMAGE}
+# depending on the job that you will be using to generate the Fabric Go SDK
+pull:
+	${CRI} pull ${IMAGE}
 
 fetch:
 	curl \
