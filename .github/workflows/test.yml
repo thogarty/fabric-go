@@ -20,4 +20,5 @@ jobs:
       run: |
         make clean gen mod fmt patch-post docs move-other test
         # Expect all changes to be accounted for
+        git diff
         ! git status --porcelain | grep .
