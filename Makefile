@@ -79,8 +79,8 @@ gen-swagger:
 		--api-package models \
 		--git-user-id ${GIT_ORG} \
 		--git-repo-id ${GIT_REPO} \
-		-o ./${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
-		-i ./${SPEC_PATCHED_FILE}
+		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
+		-i /local/${SPEC_PATCHED_FILE}
 
 # Requires downloading the specific version of the swagger-codegen-cli.jar from the artifact website
 # and putting it in the root of the repository. It will be .gitignore'd but it needs to be present.
@@ -93,8 +93,8 @@ gen-swagger-apple-chip-cpu:
 		--api-package models \
 		--git-user-id ${GIT_ORG} \
 		--git-repo-id ${GIT_REPO} \
-		-o ./${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
-		-i ./${SPEC_PATCHED_FILE}
+		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
+		-i /local/${SPEC_PATCHED_FILE}
 
 gen: gen-swagger
 
