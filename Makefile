@@ -93,8 +93,8 @@ gen-swagger-apple-chip-cpu:
 		--api-package models \
 		--git-user-id ${GIT_ORG} \
 		--git-repo-id ${GIT_REPO} \
-		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
-		-i /local/${SPEC_PATCHED_FILE}
+		-o ./${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
+		-i ./${SPEC_PATCHED_FILE}
 
 gen: gen-swagger
 
@@ -132,27 +132,6 @@ test:
 
 stage:
 	test -d .git && git add --intent-to-add README.md docs ${PACKAGE_PREFIX} go.mod go.sum
-
-# https://github.com/OpenAPITools/openapi-generator/issues/741#issuecomment-569791780
-remove-dupe-requests: ## Removes duplicate Request structs from the generated code
-	@for struct in $$(grep -h 'type .\{1,\} struct' $(PACKAGE_MAJOR)/*.go | grep Request  | sort | uniq -c | grep -v '^      1' | awk '{print $$3}'); do \
-	  for f in $$(/bin/ls $(PACKAGE_MAJOR)/*.go); do \
-	    if grep -qF "type $${struct} struct" "$${f}"; then \
-	      if eval "test -z \$${$${struct}}"; then \
-	        echo "skipping first appearance of $${struct} in file $${f}"; \
-	        eval "export $${struct}=1"; \
-	      else \
-	        echo "removing dupe $${struct} from file $${f}"; \
-	        tr '\n' '\r' <"$${f}" | sed 's~// '"$${struct}"'.\{1,\}type '"$${struct}"' struct {[^}]\{1,\}}~~' | tr '\r' '\n' >"$${f}.tmp"; \
-	        mv -f "$${f}.tmp" "$${f}"; \
-	      fi; \
-	    fi \
-	  done \
-	done
-
-fix-tags:
-	- jq '. | select(((.paths[][].tags| type=="array"), length) > 1).paths[][].tags |= [.[0]]' ${SPEC_FETCHED_FILE} | diff -d -U6 ${SPEC_FETCHED_FILE} - >  patches/01-tag-from-last-in-path.patch
-
 
 lint:
 	@$(GOLANGCI_LINT) run -v --no-config --fast=false --fix --disable-all --enable goimports $(PACKAGE_PREFIX)
