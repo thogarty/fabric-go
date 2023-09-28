@@ -1,17 +1,18 @@
-.PHONY: all gen patch fetch
+.PHONY: all generate patch fetch
 
 CURRENT_UID := $(shell id -u)
 CURRENT_GID := $(shell id -g)
 
-# https://github.com/OpenAPITools/openapi-generator-cli
 SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.9/swagger.yaml"
-
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
+
+# https://github.com/OpenAPITools/openapi-generator-cli
 OPENAPI_CODEGEN_TAG=v6.4.0
 OPENAPI_CODEGEN_IMAGE=openapitools/openapi-generator-cli:${OPENAPI_CODEGEN_TAG} # to use, change gen: to gen-openapitools
+
+# https://github.com/swagger-api/swagger-codegen
 SWAGGER_CODEGEN_IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
-VALIDATE_IMAGE=openapitools/openapi-generator-cli
 
 GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
@@ -33,8 +34,10 @@ GOLANGCI_LINT=golangci-lint
 # Open API
 # Swagger Codegen Docker
 # Swagger Code Gen Java Jar for OSX Machines with Apple Silicon CPU M1/M2
-all: pull fetch patch clean gen mod fmt patch-post docs move-other test stage
+all: pull fetch patch generate stage
 
+# Used for github workflows because the spec file is already present in the repo
+generate: clean gen mod fmt patch-post docs move-other test
 
 # Update the IMAGE variable above to either ${OPENAPI_CODEGEN_IMAGE} or ${SWAGGER_CODEGEN_IMAGE}
 # depending on the job that you will be using to generate the Fabric Go SDK

@@ -18,7 +18,7 @@ jobs:
       run: make patch
     - name: Generate
       run: |
-        make clean gen mod fmt patch-post docs move-other test
+        make generate
         # Expect all changes to be accounted for
         git diff
         ! git status --porcelain | grep .
