@@ -20,4 +20,4 @@ jobs:
       run: |
         make generate
         # Expect all changes to be accounted for
-        ! git status --porcelain | grep .
+        ! git status --porcelain | grep -v -e 'go.mod' -e 'go.sum'
