@@ -20,5 +20,4 @@ jobs:
       run: |
         make generate
         # Expect all changes to be accounted for
-        git diff
         ! git status --porcelain | grep .
