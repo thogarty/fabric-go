@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **LocalVCBandwidthMax** | **int64** | This field holds Max Connection speed with in the metro | [optional] [default to null]
 **GeoCoordinates** | [***GeoCoordinates**](GeoCoordinates.md) |  | [optional] [default to null]
 **ConnectedMetros** | [**[]ConnectedMetro**](ConnectedMetro.md) |  | [optional] [default to null]
+**GeoScopes** | [**[]GeoScopeType**](GeoScopeType.md) | List of supported geographic boundaries of a Fabric Metro. | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

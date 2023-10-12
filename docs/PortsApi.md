@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**GetPortByUuid**](PortsApi.md#GetPortByUuid) | **Get** /fabric/v4/ports/{portId} | Get Port by uuid
 [**GetPorts**](PortsApi.md#GetPorts) | **Get** /fabric/v4/ports | Get All Ports
 [**GetVlans**](PortsApi.md#GetVlans) | **Get** /fabric/v4/ports/{portUuid}/linkProtocols | Get Vlans
+[**SearchPorts**](PortsApi.md#SearchPorts) | **Post** /fabric/v4/ports/search | Search ports
 
 # **AddToLag**
 > AllPhysicalPortsResponse AddToLag(ctx, body, portId)
@@ -182,6 +183,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **SearchPorts**
+> AllPortsResponse SearchPorts(ctx, body)
+Search ports
+
+The API provides capability to get list of user's virtual ports using search criteria, including optional filtering, pagination and sorting
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**PortV4SearchRequest**](PortV4SearchRequest.md)|  | 
+
+### Return type
+
+[**AllPortsResponse**](AllPortsResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

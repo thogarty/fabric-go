@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SearchServiceProfiles**
-> ServiceProfiles SearchServiceProfiles(ctx, body)
+> ServiceProfiles SearchServiceProfiles(ctx, body, optional)
 Profile Search
 
 Search service profiles by search criteria
@@ -182,6 +182,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**ServiceProfileSearchRequest**](ServiceProfileSearchRequest.md)|  | 
+ **optional** | ***ServiceProfilesApiSearchServiceProfilesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ServiceProfilesApiSearchServiceProfilesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **viewPoint** | **optional.**| flips view between buyer and seller representation | [default to aSide]
 
 ### Return type
 

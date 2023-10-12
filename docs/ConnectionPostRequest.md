@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Order** | [***Order**](Order.md) |  | [optional] [default to null]
 **Notifications** | [**[]SimplifiedNotification**](SimplifiedNotification.md) | Preferences for notifications on connection configuration or status changes | [optional] [default to null]
 **Bandwidth** | **int32** | Connection bandwidth in Mbps | [optional] [default to null]
+**GeoScope** | [***GeoScopeType**](GeoScopeType.md) |  | [optional] [default to null]
 **Redundancy** | [***ConnectionRedundancy**](ConnectionRedundancy.md) |  | [optional] [default to null]
 **ASide** | [***ConnectionSide**](ConnectionSide.md) |  | [optional] [default to null]
 **ZSide** | [***ConnectionSide**](ConnectionSide.md) |  | [optional] [default to null]
