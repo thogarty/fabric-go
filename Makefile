@@ -1,3 +1,8 @@
+# Apple Silicon M1/M2 CPUs require enablement of the
+# `Use Rosetta for x86/amd64 emulation on Apple Silicon`
+# in the `Features in Development` settings category on your Docker Desktop
+# in order to use this Makefile to code generate the Go SDK.
+
 .PHONY: all generate patch fetch
 
 CURRENT_UID := $(shell id -u)
@@ -33,7 +38,6 @@ GOLANGCI_LINT=golangci-lint
 # Options will switch between:
 # Open API
 # Swagger Codegen Docker
-# Swagger Code Gen Java Jar for OSX Machines with Apple Silicon CPU M1/M2
 all: pull fetch patch generate stage
 
 # Used for github workflows because the spec file is already present in the repo
@@ -62,6 +66,8 @@ patch:
 clean: clean-docs
 	rm -rf ${PACKAGE_PREFIX}
 
+gen: gen-swagger
+
 gen-openapitools:
 	${DOCKER_OPENAPI} generate -g go \
 		--package-name ${PACKAGE_MAJOR} \
@@ -84,22 +90,6 @@ gen-swagger:
 		--git-repo-id ${GIT_REPO} \
 		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i /local/${SPEC_PATCHED_FILE}
-
-# Requires downloading the specific version of the swagger-codegen-cli.jar from the artifact website
-# and putting it in the root of the repository. It will be .gitignore'd but it needs to be present.
-# Command below matches the Docker image Swagger Codegen CLI version above 3.0.34
-# curl -o swagger-codegen-cli.jar https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.34/swagger-codegen-cli-3.0.34.jar
-gen-swagger-apple-chip-cpu:
-	java -jar swagger-codegen-cli.jar generate -l go \
-		--additional-properties packageName=${PACKAGE_MAJOR} \
-		--model-package types \
-		--api-package models \
-		--git-user-id ${GIT_ORG} \
-		--git-repo-id ${GIT_REPO} \
-		-o ./${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
-		-i ./${SPEC_PATCHED_FILE}
-
-gen: gen-swagger
 
 mod:
 	rm -f go.mod go.sum
