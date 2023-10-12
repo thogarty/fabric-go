@@ -1,32 +1,50 @@
-.PHONY: all gen patch fetch
+# Apple Silicon M1/M2 CPUs require enablement of the
+# `Use Rosetta for x86/amd64 emulation on Apple Silicon`
+# in the `Features in Development` settings category on your Docker Desktop
+# in order to use this Makefile to code generate the Go SDK.
+
+.PHONY: all generate patch fetch
 
 CURRENT_UID := $(shell id -u)
 CURRENT_GID := $(shell id -g)
 
-# https://github.com/OpenAPITools/openapi-generator-cli
-# SPEC_URL:="https://developer.equinix.com/sites/default/files/fabric-v4-catalog-fabric_v4_3.yaml"
 SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.9/swagger.yaml"
-
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
-IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
-# IMAGE=openapitools/openapi-generator-cli # to use, change gen: to gen-openapitools
-VALIDATE_IMAGE=openapitools/openapi-generator-cli
+
+# https://github.com/OpenAPITools/openapi-generator-cli
+OPENAPI_CODEGEN_TAG=v6.4.0
+OPENAPI_CODEGEN_IMAGE=openapitools/openapi-generator-cli:${OPENAPI_CODEGEN_TAG} # to use, change gen: to gen-openapitools
+
+# https://github.com/swagger-api/swagger-codegen
+SWAGGER_CODEGEN_IMAGE=swaggerapi/swagger-codegen-cli-v3:3.0.34
 
 GIT_ORG=equinix-labs
 GIT_REPO=fabric-go
 PACKAGE_PREFIX=fabric
 PACKAGE_MAJOR=v4
-CRI=docker # nerdctl
+CRI=docker
 
-SWAGGER=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${IMAGE}
-VALIDATE=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local ${VALIDATE_IMAGE}
+DOCKER=${CRI} run --rm -u ${CURRENT_UID}:${CURRENT_GID} -v $(CURDIR):/local
+DOCKER_SWAGGER=${DOCKER} ${SWAGGER_CODEGEN_IMAGE}
+DOCKER_OPENAPI=${DOCKER} ${OPENAPI_CODEGEN_IMAGE}
+
+IMAGE=${SWAGGER_CODEGEN_IMAGE}
 
 GOLANGCI_LINT=golangci-lint
 
-#all: pull fetch patch clean gen mod docs move-other patch-post fmt test stage
-all: pull fetch patch clean gen mod fmt patch-post docs move-other test stage
 
+# Update the dependency on the gen job to switch between code generator methods.
+# Options will switch between:
+# Open API
+# Swagger Codegen Docker
+all: pull fetch patch generate stage
+
+# Used for github workflows because the spec file is already present in the repo
+generate: clean gen mod fmt patch-post docs move-other test
+
+# Update the IMAGE variable above to either ${OPENAPI_CODEGEN_IMAGE} or ${SWAGGER_CODEGEN_IMAGE}
+# depending on the job that you will be using to generate the Fabric Go SDK
 pull:
 	${CRI} pull ${IMAGE}
 
@@ -34,9 +52,6 @@ fetch:
 	curl \
 		-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36' \
 		-o ${SPEC_FETCHED_FILE} ${SPEC_URL}
-
-fix-tags:
-	- jq '. | select(((.paths[][].tags| type=="array"), length) > 1).paths[][].tags |= [.[0]]' ${SPEC_FETCHED_FILE} | diff -d -U6 ${SPEC_FETCHED_FILE} - >  patches/01-tag-from-last-in-path.patch
 
 patch:
 	# patch is idempotent, always starting with the fetched
@@ -48,17 +63,13 @@ patch:
 		ARGS=${SPEC_PATCHED_FILE}; \
 	done
 
-patch-post:
-	# patch is idempotent, always starting with the generated files
-	for diff in $(shell find patches/post -name \*.patch | sort -n); do \
-		patch --no-backup-if-mismatch -N -t -p1 -i $$diff; \
-	done
-
 clean: clean-docs
 	rm -rf ${PACKAGE_PREFIX}
 
+gen: gen-swagger
+
 gen-openapitools:
-	${SWAGGER} generate -g go \
+	${DOCKER_OPENAPI} generate -g go \
 		--package-name ${PACKAGE_MAJOR} \
 		--model-package types \
 		--api-package models \
@@ -71,7 +82,7 @@ gen-swagger:
 	# see swaggerapi/swagger-codegen-cli-v3 config-help -l go
 	# and swaggerapi/swagger-codegen-cli-v3 generate -help
 	# bugs: https://github.com/swagger-api/swagger-codegen/issues?q=is%3Aopen+is%3Aissue+label%3A%22Client%3A+Go%22
-	${SWAGGER} generate -l go \
+	${DOCKER_SWAGGER} generate -l go \
 		--additional-properties packageName=${PACKAGE_MAJOR} \
 		--model-package types \
 		--api-package models \
@@ -80,24 +91,19 @@ gen-swagger:
 		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i /local/${SPEC_PATCHED_FILE}
 
-gen: gen-swagger
-
-validate:
-	${VALIDATE} validate \
-		--recommend \
-		-i /local/${SPEC_PATCHED_FILE}
-
-spectral:
-	spectral --help > /dev/null 2>&1 || echo "Spectral is not installed"
-	spectral lint $(SPEC_PATCHED_FILE)
-
 mod:
 	rm -f go.mod go.sum
 	go mod init github.com/${GIT_ORG}/${GIT_REPO}
 	go mod tidy
 
-test:
-	go test -v ./...
+fmt:
+	go run mvdan.cc/gofumpt@v0.3.1 -l -w $(PACKAGE_PREFIX)
+
+patch-post:
+	# patch is idempotent, always starting with the generated files
+	for diff in $(shell find patches/post -name \*.patch | sort -n); do \
+		patch --no-backup-if-mismatch -N -t -p1 -i $$diff; \
+	done
 
 clean-docs:
 	rm -rf README.md docs
@@ -114,27 +120,11 @@ move-other:
 	mv ${PACKAGE_PREFIX}/${PACKAGE_MAJOR}/api .
 	mv ${PACKAGE_PREFIX}/${PACKAGE_MAJOR}/git_push.sh .
 
-# https://github.com/OpenAPITools/openapi-generator/issues/741#issuecomment-569791780
-remove-dupe-requests: ## Removes duplicate Request structs from the generated code
-	@for struct in $$(grep -h 'type .\{1,\} struct' $(PACKAGE_MAJOR)/*.go | grep Request  | sort | uniq -c | grep -v '^      1' | awk '{print $$3}'); do \
-	  for f in $$(/bin/ls $(PACKAGE_MAJOR)/*.go); do \
-	    if grep -qF "type $${struct} struct" "$${f}"; then \
-	      if eval "test -z \$${$${struct}}"; then \
-	        echo "skipping first appearance of $${struct} in file $${f}"; \
-	        eval "export $${struct}=1"; \
-	      else \
-	        echo "removing dupe $${struct} from file $${f}"; \
-	        tr '\n' '\r' <"$${f}" | sed 's~// '"$${struct}"'.\{1,\}type '"$${struct}"' struct {[^}]\{1,\}}~~' | tr '\r' '\n' >"$${f}.tmp"; \
-	        mv -f "$${f}.tmp" "$${f}"; \
-	      fi; \
-	    fi \
-	  done \
-	done
-lint:
-	@$(GOLANGCI_LINT) run -v --no-config --fast=false --fix --disable-all --enable goimports $(PACKAGE_PREFIX)
-
-fmt:
-	go run mvdan.cc/gofumpt@v0.3.1 -l -w $(PACKAGE_PREFIX)
+test:
+	go test -v ./...
 
 stage:
 	test -d .git && git add --intent-to-add README.md docs ${PACKAGE_PREFIX} go.mod go.sum
+
+lint:
+	@$(GOLANGCI_LINT) run -v --no-config --fast=false --fix --disable-all --enable goimports $(PACKAGE_PREFIX)
