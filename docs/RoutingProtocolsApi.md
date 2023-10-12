@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**PatchConnectionRoutingProtocolByUuid**](RoutingProtocolsApi.md#PatchConnectionRoutingProtocolByUuid) | **Patch** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId} | Patch Protocol
 [**PostConnectionRoutingProtocolBgpActionByUuid**](RoutingProtocolsApi.md#PostConnectionRoutingProtocolBgpActionByUuid) | **Post** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/actions | Clear/Reset BGP
 [**ReplaceConnectionRoutingProtocolByUuid**](RoutingProtocolsApi.md#ReplaceConnectionRoutingProtocolByUuid) | **Put** /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId} | Replace Protocol
+[**ValidateRoutingProtocol**](RoutingProtocolsApi.md#ValidateRoutingProtocol) | **Post** /fabric/v4/routers/{routerId}/validate | Validate Subnet
 
 # **CreateConnectionRoutingProtocol**
 > RoutingProtocolData CreateConnectionRoutingProtocol(ctx, body, connectionId)
@@ -386,6 +387,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RoutingProtocolData**](RoutingProtocolData.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateRoutingProtocol**
+> ValidateSubnetResponse ValidateRoutingProtocol(ctx, body, routerId)
+Validate Subnet
+
+This API provides capability to validate all subnets associated with any connection in the given FCR
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**ValidateSubnetRequest**](ValidateSubnetRequest.md)|  | 
+  **routerId** | [**string**](.md)| Cloud Router UUID | 
+
+### Return type
+
+[**ValidateSubnetResponse**](ValidateSubnetResponse.md)
 
 ### Authorization
 

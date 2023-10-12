@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Catgory** | [***PriceCategory**](PriceCategory.md) |  | [optional] [default to null]
 **Connection** | [***VirtualConnectionPrice**](VirtualConnectionPrice.md) |  | [optional] [default to null]
 **IpBlock** | [***IpBlockPrice**](IpBlockPrice.md) |  | [optional] [default to null]
-**Router** | [***FabricGatewayPrice**](FabricGatewayPrice.md) |  | [optional] [default to null]
+**Router** | [***FabricCloudRouterPrice**](FabricCloudRouterPrice.md) |  | [optional] [default to null]
 **Port** | [***VirtualPortPrice**](VirtualPortPrice.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -8,7 +8,7 @@
 CURRENT_UID := $(shell id -u)
 CURRENT_GID := $(shell id -g)
 
-SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.9/swagger.yaml"
+SPEC_URL:="https://api.swaggerhub.com/apis/equinix-api/fabric/4.10/swagger.yaml"
 SPEC_FETCHED_FILE:=spec.fetched.yaml
 SPEC_PATCHED_FILE:=spec.patched.yaml
 

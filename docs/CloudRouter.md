@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **BgpIpv4RoutesCount** | **int32** | Access point used and maximum number of IPv4 BGP routes | [optional] [default to null]
 **BgpIpv6RoutesCount** | **int32** | Access point used and maximum number of IPv6 BGP routes | [optional] [default to null]
 **ConnectionsCount** | **int32** | Number of connections associated with this Access point | [optional] [default to null]
+**DistinctIpv4PrefixesCount** | **int32** | Number of distinct ipv4 routes | [optional] [default to null]
+**DistinctIpv6PrefixesCount** | **int32** | Number of distinct ipv6 routes | [optional] [default to null]
 **ChangeLog** | [***Changelog**](Changelog.md) |  | [optional] [default to null]
 **Change** | [***CloudRouterChange**](CloudRouterChange.md) |  | [optional] [default to null]
 

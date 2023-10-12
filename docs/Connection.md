@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Account** | [***SimplifiedAccount**](SimplifiedAccount.md) |  | [optional] [default to null]
 **ChangeLog** | [***Changelog**](Changelog.md) |  | [optional] [default to null]
 **Bandwidth** | **int32** | Connection bandwidth in Mbps | [default to null]
+**GeoScope** | [***GeoScopeType**](GeoScopeType.md) |  | [optional] [default to null]
 **Redundancy** | [***ConnectionRedundancy**](ConnectionRedundancy.md) |  | [optional] [default to null]
 **IsRemote** | **bool** | Connection property derived from access point locations | [optional] [default to null]
 **Direction** | [***ConnectionDirection**](ConnectionDirection.md) |  | [optional] [default to null]
